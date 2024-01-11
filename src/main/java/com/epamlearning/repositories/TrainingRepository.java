@@ -16,7 +16,8 @@ import java.util.List;
 public interface TrainingRepository extends JpaRepository<Training, Long>, BaseRepository {
 
 //    @Query(value = "SELECT tr FROM Training tr WHERE ((?1 IS NULL AND ?2 IS NULL) OR (?1 IS NOT NULL AND ?2 IS NULL AND tr.trainingDate >= ?1) OR (?1 IS NULL AND ?2 IS NOT NULL AND tr.trainingDate <= ?2) OR (tr.trainingDate BETWEEN ?1 AND ?2)) AND (?3 IS NULL OR tr.trainingType = ?3) AND (?4 IS NOT NULL AND tr.trainer = ?4 OR ?4 IS NULL)")
-    @Query(name = "findTrainingsByTrainerAndCriteria") // error here
+//    @Query(name = "findTrainingsByTrainerAndCriteria") // error here
+    @Query(value = "${findTrainingsByTrainerAndCriteria}", nativeQuery = true)
     List<Training> findTrainingsByTrainerAndCriteria(Trainer trainer, Date startDate, Date endDate, TrainingType trainingType);
 
     @Query(value = "SELECT tr FROM Training tr WHERE ((?1 IS NULL AND ?2 IS NULL) OR (?1 IS NOT NULL AND ?2 IS NULL AND tr.trainingDate >= ?1) OR (?1 IS NULL AND ?2 IS NOT NULL AND tr.trainingDate <= ?2) OR (tr.trainingDate BETWEEN ?1 AND ?2)) AND (?3 IS NULL OR tr.trainingType = ?3) AND (?4 IS NOT NULL AND tr.trainee = ?4 OR ?4 IS NULL)")

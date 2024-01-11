@@ -2,7 +2,6 @@ package com.epamlearning.services;
 
 import com.epamlearning.exceptions.NotAuthenticated;
 import com.epamlearning.exceptions.NotFoundException;
-import com.epamlearning.models.Trainee;
 import com.epamlearning.models.Trainer;
 import com.epamlearning.models.TrainingType;
 import com.epamlearning.models.User;
@@ -20,12 +19,14 @@ public class TrainerService implements BaseService<Trainer> {
 
     private final TrainerRepository trainerRepository;
     private final TraineeService traineeService;
+    private final TrainingTypeService trainingTypeService;
     private final UserService userService;
 
     @Autowired
-    public TrainerService(TrainerRepository trainerRepository, TraineeService traineeService, UserService userService) {
+    public TrainerService(TrainerRepository trainerRepository, TraineeService traineeService, TrainingTypeService trainingTypeService, UserService userService) {
         this.trainerRepository = trainerRepository;
         this.traineeService = traineeService;
+        this.trainingTypeService = trainingTypeService;
         this.userService = userService;
     }
 
@@ -126,14 +127,18 @@ public class TrainerService implements BaseService<Trainer> {
         return trainerRepository.findNotAssignedActiveTrainersByTrainee(traineeService.findById(traineeId));
     }
 
-    public Trainer createTrainer(User user, TrainingType trainingType) {
+    public Trainer createTrainer(User user, Long trainingTypeId) {
         if (user == null) {
             log.warn("User is null.");
             throw new NullPointerException("User is null.");
         }
+        if (trainingTypeId == null) {
+            log.warn("TrainingType is null.");
+            throw new NullPointerException("TrainingType is null.");
+        }
         Trainer trainer = new Trainer();
         trainer.setUser(user);
-        trainer.setSpecialization(trainingType);
+        trainer.setSpecialization(trainingTypeService.findById(trainingTypeId));
         return trainer;
     }
 }
