@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TrainingType {
+public class TrainingType implements BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

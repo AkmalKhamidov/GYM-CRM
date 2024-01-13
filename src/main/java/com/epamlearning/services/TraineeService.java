@@ -169,14 +169,6 @@ public class TraineeService implements BaseService<Trainee> {
             log.warn("User is null.");
             throw new NullPointerException("User is null.");
         }
-        if (address == null || address.isEmpty()) {
-            log.warn("Address is null.");
-            throw new NullPointerException("Address is null.");
-        }
-        if (dateOfBirth == null) {
-            log.warn("Date of birth is null.");
-            throw new NullPointerException("Date of birth is null.");
-        }
 
         Trainee trainee = new Trainee();
         trainee.setAddress(address);

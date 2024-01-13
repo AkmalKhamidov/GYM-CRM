@@ -136,9 +136,10 @@ public class TrainerService implements BaseService<Trainer> {
             log.warn("TrainingType is null.");
             throw new NullPointerException("TrainingType is null.");
         }
+        TrainingType trainingType = trainingTypeService.findById(trainingTypeId);
         Trainer trainer = new Trainer();
         trainer.setUser(user);
-        trainer.setSpecialization(trainingTypeService.findById(trainingTypeId));
+        trainer.setSpecialization(trainingType);
         return trainer;
     }
 }

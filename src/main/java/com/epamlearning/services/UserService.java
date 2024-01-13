@@ -74,17 +74,21 @@ public class UserService implements BaseService<User> {
         return userRepository.save(userToUpdate);
     }
 
-    public User updatePassword(Long id, String password) {
-        if (id == null) {
-            log.warn("ID is null.");
-            throw new NullPointerException("ID is null.");
+    public User updatePassword(String username, String oldPassword, String newPassword) {
+        if (username == null || username.isEmpty()) {
+            log.warn("Username is null.");
+            throw new NullPointerException("Username is null.");
         }
-        if (password == null || password.isEmpty()) {
-            log.warn("Password is null.");
-            throw new NullPointerException("Password is null.");
+        if (oldPassword == null || oldPassword.isEmpty()) {
+            log.warn("Old password is null.");
+            throw new NullPointerException("Old password is null.");
         }
-        User userToUpdate = findById(id);
-        userToUpdate.setPassword(password);
+        if (newPassword == null || newPassword.isEmpty()) {
+            log.warn("New password is null.");
+            throw new NullPointerException("New password is null.");
+        }
+        User userToUpdate = findByUsername(username);
+        userToUpdate.setPassword(newPassword);
         return userRepository.save(userToUpdate);
     }
 
