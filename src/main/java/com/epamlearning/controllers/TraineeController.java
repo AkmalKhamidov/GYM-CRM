@@ -1,12 +1,14 @@
 package com.epamlearning.controllers;
 
 import com.epamlearning.dtos.trainee.request.TraineeRegistrationDTO;
+import com.epamlearning.dtos.trainee.request.TraineeTrainersUpdateDTO;
 import com.epamlearning.dtos.trainee.request.TraineeUpdateDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.user.UserAuthDTO;
 import com.epamlearning.mapper.Mapper;
 import com.epamlearning.models.Trainee;
+import com.epamlearning.models.Trainer;
 import com.epamlearning.models.User;
 import com.epamlearning.services.TraineeService;
 import com.epamlearning.services.UserService;
@@ -78,6 +80,13 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
-
-
+    @PutMapping("updater/trainers")
+    public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Validated @RequestBody TraineeTrainersUpdateDTO trainersOfTraineeDTO) {
+        Trainee trainee = traineeService.findByUsername(trainersOfTraineeDTO.getUsername());
+        List<Trainer> trainers = trainersOfTraineeDTO.getTrainers().stream().map(trainer -> mapper.mapToModel(trainer, Trainer.class)).toList();
+        Trainee updatedTrainee = traineeService.updateTrainersForTrainee(trainee.getId(), trainers);
+        List<TrainerListResponseDTO> responseDTO =
+                updatedTrainee.getTrainers().stream().map(trainer -> mapper.mapToDTO(trainer, TrainerListResponseDTO.class)).toList();
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
 }

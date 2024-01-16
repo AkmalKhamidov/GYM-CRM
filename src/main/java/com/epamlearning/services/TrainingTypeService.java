@@ -2,6 +2,7 @@ package com.epamlearning.services;
 
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.models.TrainingType;
+import com.epamlearning.models.enums.TrainingTypeName;
 import com.epamlearning.repositories.TrainingTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,15 @@ public class TrainingTypeService implements BaseService<TrainingType> {
     public void deleteById(Long id) {
     }
 
+
+    public TrainingType findByTrainingTypeName(TrainingTypeName trainingTypeName) {
+        Optional<TrainingType> trainingType = Optional.ofNullable(trainingTypeRepository.findByTrainingTypeName(trainingTypeName));
+        if (trainingType.isEmpty()) {
+            log.warn("TrainingType with TrainingTypeName: {} not found.", trainingTypeName);
+            return null;
+        }
+        return trainingType.get();
+    }
     @Override
     public TrainingType findByUsername(String username) {
         return null;
