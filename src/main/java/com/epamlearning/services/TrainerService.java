@@ -123,8 +123,8 @@ public class TrainerService implements BaseService<Trainer> {
         return trainerRepository.save(trainerUpdated);
     }
 
-    public List<Trainer> findNotAssignedActiveTrainers(Long traineeId) {
-        return trainerRepository.findNotAssignedActiveTrainersByTrainee(traineeService.findById(traineeId));
+    public List<Trainer> findNotAssignedActiveTrainers(String username) {
+        return trainerRepository.findNotAssignedActiveTrainersByTrainee(traineeService.findByUsername(username));
     }
 
     public Trainer createTrainer(User user, Long trainingTypeId) {

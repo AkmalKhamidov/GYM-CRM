@@ -4,6 +4,9 @@ jdbc:
   username: akmalkhamidov
   password: 1125
 
+jwt:
+  secret: NOT SECRET
+
 hibernate:
   dialect: org.hibernate.dialect.PostgreSQLDialect
   show_sql: true

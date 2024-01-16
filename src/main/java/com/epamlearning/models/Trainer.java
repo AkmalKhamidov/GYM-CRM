@@ -31,7 +31,7 @@ public class Trainer implements BaseModel{
     @JoinColumn(name="specialization", referencedColumnName = "id")
     private TrainingType specialization;
 
-    @ManyToMany(mappedBy = "trainers")
+    @ManyToMany(mappedBy = "trainers", fetch = FetchType.EAGER)
     private List<Trainee> trainees;
 
     @Override

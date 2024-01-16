@@ -19,7 +19,7 @@ public record TraineeRegistrationDTO(
         @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters.")
         String lastName,
 
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        @DateTimeFormat(pattern = "dd-MM-yyyy")
         Date dateOfBirth,
         String address) implements BaseDTO {
 }

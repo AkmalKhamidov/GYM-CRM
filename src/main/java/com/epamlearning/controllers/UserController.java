@@ -1,8 +1,10 @@
 package com.epamlearning.controllers;
 
+import com.epamlearning.dtos.SessionDTO;
 import com.epamlearning.dtos.user.UserAuthDTO;
 import com.epamlearning.dtos.user.UserChangePasswordDTO;
 import com.epamlearning.models.User;
+import com.epamlearning.security.JWTUtil;
 import com.epamlearning.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,22 +19,26 @@ import java.util.List;
 public class UserController implements BaseController {
 
     private final UserService userService;
+    private final JWTUtil jwtUtil;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JWTUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping("/login")
-    public ResponseEntity<Long> login(UserAuthDTO userAuthDTO) {
+    public ResponseEntity<SessionDTO> login(UserAuthDTO userAuthDTO) {
         Long userId = userService.authenticate(userAuthDTO.getUsername(), userAuthDTO.getPassword());
-        return new ResponseEntity<>(userId, HttpStatus.OK);
+        String token = jwtUtil.generateToken(userAuthDTO.getUsername());
+        SessionDTO sessionDTO = new SessionDTO(jwtUtil.getExpirationDateFromToken(token), jwtUtil.getIssuedAtDateFromToken(token), token);
+        return new ResponseEntity<>(sessionDTO, HttpStatus.OK);
     }
 
     @PutMapping("/changePassword")
     public ResponseEntity<String> changePassword(@Validated @RequestBody UserChangePasswordDTO userChangePasswordDTO) {
-        System.out.println(userChangePasswordDTO.getUsername());
-        userService.updatePassword(userChangePasswordDTO.getUsername(), userChangePasswordDTO.getOldPassword(), userChangePasswordDTO.getNewPassword());
+        System.out.println(userChangePasswordDTO.username());
+        userService.updatePassword(userChangePasswordDTO.username(), userChangePasswordDTO.oldPassword(), userChangePasswordDTO.newPassword());
         return new ResponseEntity<>("Password changed successfully.", HttpStatus.OK);
     }
 

@@ -1,8 +1,19 @@
 package com.epamlearning.dtos.trainer.response;
 
-public class TrainerListResponseDTO {
-    private String username;
-    private String firstName;
-    private String lastName;
+import com.epamlearning.dtos.BaseDTO;
+import com.epamlearning.models.enums.TrainingTypeName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class TrainerListResponseDTO implements BaseDTO {
+        private String username;
+        private String firstName;
+        private String lastName;
+        private TrainingTypeName trainingTypeName;
 }

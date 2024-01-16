@@ -17,7 +17,7 @@ public class App {
         TraineeService traineeService = context.getBean(TraineeService.class);
         System.out.println(traineeService.findById(1L).getTrainers());
 
-
+        System.out.println(traineeService.findByUsername("Linda.Cole"));
 
     }
 }
