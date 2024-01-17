@@ -12,6 +12,9 @@ import com.epamlearning.models.Trainer;
 import com.epamlearning.models.User;
 import com.epamlearning.services.TraineeService;
 import com.epamlearning.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/trainee")
+@Tag(name = "Trainee controller", description = "Controller for managing trainees")
 public class TraineeController implements BaseController {
 
     private final TraineeService traineeService;
@@ -36,18 +40,20 @@ public class TraineeController implements BaseController {
         this.mapper = mapper;
     }
 
+    @Operation(summary = "Register trainee", description = "Registering trainee with default active (true)")
     @PostMapping("/register")
     public ResponseEntity<UserAuthDTO> registerTrainee(@Validated @RequestBody TraineeRegistrationRequestDTO traineeDTO) {
         User user = userService.createUser(traineeDTO.getFirstName(), traineeDTO.getLastName());
         Trainee trainee = traineeService.createTrainee(user, traineeDTO.getAddress(), traineeDTO.getDateOfBirth());
         Trainee savedTrainee = traineeService.save(trainee);
 
-        UserAuthDTO responseDTO = mapper.mapToDTO(savedTrainee, UserAuthDTO.class); //new UserAuthDTO(savedTrainee.getUser().getUsername(), savedTrainee.getUser().getPassword());
+        UserAuthDTO responseDTO = mapper.mapToDTO(savedTrainee, UserAuthDTO.class);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Get trainee profile", description = "Getting trainee profile by username")
     @GetMapping("/{username}")
-    public ResponseEntity<TraineeProfileResponseDTO> getTraineeProfile(@PathVariable("username") String username) {
+    public ResponseEntity<TraineeProfileResponseDTO> getTraineeProfile(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username) {
         Trainee trainee = traineeService.findByUsername(username);
         List<TrainerListResponseDTO> trainerListDTO =
                 trainee.getTrainers().stream().map(trainer -> mapper.mapToDTO(trainer, TrainerListResponseDTO.class)).toList();
@@ -56,6 +62,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update trainee profile", description = "Updating trainee profile by username")
     @PutMapping("/update")
     public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
         Trainee trainee = traineeService.findByUsername(traineeDTO.getUsername());
@@ -74,12 +81,14 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete trainee", description = "Deleting trainee by username")
     @DeleteMapping("/delete/{username}")
-    public ResponseEntity<String> deleteTrainee(@PathVariable("username") String username) {
+    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username) {
         traineeService.deleteByUsername(username);
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
+    @Operation(summary = "Update trainers of trainee", description = "Updating trainers of trainee by username")
     @PutMapping("/update/trainers")
     public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Validated @RequestBody UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO) {
         Trainee trainee = traineeService.findByUsername(trainersOfTraineeDTO.getUsername());
@@ -90,8 +99,10 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update trainee active", description = "Updating trainee active by username")
     @PatchMapping("/updateActive/{username}/{active}")
-    public ResponseEntity<String> updateTraineeActive(@PathVariable("username") String username, @PathVariable("active") boolean isActive) {
+    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username,
+                                                      @Parameter(description = "trainee isActive (true/false)", example = "true") @PathVariable("active") boolean isActive) {
         String resultText = isActive ? "activated" : "deactivated";
         Trainee updatedTrainee = traineeService.updateActive(traineeService.findByUsername(username).getId(), isActive);
         return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);

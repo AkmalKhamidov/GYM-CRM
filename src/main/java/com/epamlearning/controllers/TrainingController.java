@@ -13,6 +13,8 @@ import com.epamlearning.services.TraineeService;
 import com.epamlearning.services.TrainerService;
 import com.epamlearning.services.TrainingService;
 import com.epamlearning.services.TrainingTypeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/training")
+@Tag(name = "Training Controller", description = "Controller for managing trainings")
 public class TrainingController implements BaseController {
 
     private final TrainingService trainingService;
@@ -40,6 +43,7 @@ public class TrainingController implements BaseController {
         this.mapper = mapper;
     }
 
+    @Operation(summary = "Get trainee trainings", description = "Getting trainee trainings by username and optional criteria")
     @GetMapping("/by-trainee")
     public ResponseEntity<List<TraineeTrainingsResponseDTO>> getTraineeTrainings(@Validated @RequestBody TraineeTrainingsRequestDTO trainingDTO) {
         List<Training> trainings =
@@ -54,6 +58,7 @@ public class TrainingController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get trainer trainings", description = "Getting trainer trainings by username and optional criteria")
     @GetMapping("/by-trainer")
     public ResponseEntity<List<TrainerTrainingsResponseDTO>> getTrainerTrainings(@Validated @RequestBody TrainerTrainingsRequestDTO trainingDTO) {
         List<Training> trainings =
@@ -68,6 +73,7 @@ public class TrainingController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Add training", description = "Adding training with trainer training type")
     @PostMapping("/add")
     public ResponseEntity<String> addTraining(@Validated @RequestBody TrainingAddRequestDTO trainingAddDTO) {
         Trainee trainee = traineeService.findByUsername(trainingAddDTO.getTraineeUsername());

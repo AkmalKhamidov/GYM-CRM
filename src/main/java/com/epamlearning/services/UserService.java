@@ -79,7 +79,7 @@ public class UserService implements BaseService<User> {
             log.warn("Username is null.");
             throw new NullPointerException("Username is null.");
         }
-        if (oldPassword == null || oldPassword.isEmpty()) {
+        if(oldPassword == null || oldPassword.isEmpty()) {
             log.warn("Old password is null.");
             throw new NullPointerException("Old password is null.");
         }
@@ -88,6 +88,10 @@ public class UserService implements BaseService<User> {
             throw new NullPointerException("New password is null.");
         }
         User userToUpdate = findByUsername(username);
+        if(!userToUpdate.getPassword().equals(oldPassword)) {
+            log.warn("Old password is wrong.");
+            throw new NotFoundException("Old password is wrong.");
+        }
         userToUpdate.setPassword(newPassword);
         return userRepository.save(userToUpdate);
     }

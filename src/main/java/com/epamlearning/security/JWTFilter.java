@@ -17,7 +17,21 @@ import java.util.Set;
 @WebFilter(urlPatterns = "/*")
 public class JWTFilter implements Filter {
 
-    private static final Set<String> ALLOWED_PATHS = Set.of("", "/user/login", "/trainee/register", "/trainer/register", "/swagger-ui/index.html", "/swagger-ui/swagger-initializer.js", "/v3/api-docs", "/v3/api-docs/swagger-config");
+    private static final Set<String> ALLOWED_PATHS = Set.of(
+            "",
+            "/auth/login",
+            "/trainee/register",
+            "/trainer/register",
+            "/swagger-ui/index.html",
+            "/swagger-ui/swagger-initializer.js",
+            "/v3/api-docs",
+            "/v3/api-docs/swagger-config",
+            "/swagger-ui/swagger-ui-bundle.js",
+            "/swagger-ui/swagger-ui.css",
+            "/swagger-ui/index.css",
+            "/swagger-ui/swagger-ui-standalone-preset.js",
+            "/swagger-ui/favicon-32x32.png",
+            "/swagger-ui/favicon-16x16.png");
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
 
 

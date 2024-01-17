@@ -1,0 +1,543 @@
+{
+	"info": {
+		"_postman_id": "85a3f571-9d61-41c3-9183-62c8731663d8",
+		"name": "gymcrm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24263615"
+	},
+	"item": [
+		{
+			"name": "trainee",
+			"item": [
+				{
+					"name": "create trainee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Wick\",\n    \"dateOfBirth\": null,\n    \"address\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainee/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trainee profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQ4NzQwOCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQ4OTIwOH0.LGaEJh-UE0xDNQHHbVlXIXDuhm4wdTI1keAVzO1NIto",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainee/John.Wick",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"John.Wick"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update trainee profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkxpbmRhLkNvbGUiLCJpYXQiOjE3MDUzNTEwMzcsImlzcyI6ImVwYW1sZWFybmluZy5jb20iLCJleHAiOjE3MDUzNTE5Mzd9.QtVw2_groxwasOZ5t3E0XdNlI9li1BiwXpqf99l6dLg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Linda.Cole\",\n    \"firstName\": \"Linda\",\n    \"lastName\": \"Cole\",\n    \"dateOfBirth\": \"10-12-2002\",\n    \"address\": \"Baker Street 7\",\n    \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainee/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete trainee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkxpbmRhLkNvbGUiLCJpYXQiOjE3MDUzNTE5MDMsImlzcyI6ImVwYW1sZWFybmluZy5jb20iLCJleHAiOjE3MDUzNTI4MDN9.jSRuGgD_NS987-kS9SSAkSVncntjarU1TIgWG8P75uM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainee/delete/Linda.Cole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"delete",
+								"Linda.Cole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update trainee active",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQzNjMxMiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQzODExMn0.hyNHZGrZIrGhS_8PegOTzic7dhQk7lg6VWcRQRwGc_4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainee/updateActive/John.Wick/true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"updateActive",
+								"John.Wick",
+								"true"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "trainer",
+			"item": [
+				{
+					"name": "create trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Jeremy\",\n  \"lastName\": \"Cant2\",\n  \"specializationId\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainer/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trainer profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQyODg4MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQyOTc4MH0.6lEh1fGkLxGrx6q3tReQwjBPxRSN4oIA-_7-xqHZXwE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainer/Trainer.TrainerLastName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"Trainer.TrainerLastName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update trainer profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IlRyYWluZXIuVHJhaW5lckxhc3ROYW1lIiwiaWF0IjoxNzA1MzUyNjM1LCJpc3MiOiJlcGFtbGVhcm5pbmcuY29tIiwiZXhwIjoxNzA1MzUzNTM1fQ.Tn6ociZn4_XpQbuc9N52YACOEwcIjttyiUUTbxc0XY8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"Trainer.TrainerLastName\",\n    \"firstName\": \"Trainer\",\n    \"lastName\": \"TrainerLastName\",\n    \"trainingTypeName\": \"GYM_TYPE2\",\n    \"active\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainer/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "not-assigned-on-trainee",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQyMDE4NiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQyMTA4Nn0.K6m_JPRsBY_xDn-yxPj1FqOPS4G2vwUWWbIxZpsyDLI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainer/not-assigned-on-trainee/TraineeDemoFirstName.TraineeDemoLastName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"not-assigned-on-trainee",
+								"TraineeDemoFirstName.TraineeDemoLastName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update trainer active",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQzNjMxMiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQzODExMn0.hyNHZGrZIrGhS_8PegOTzic7dhQk7lg6VWcRQRwGc_4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/trainer/updateActive/John.Smith/true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"updateActive",
+								"John.Smith",
+								"true"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "training",
+			"item": [
+				{
+					"name": "get trainee trainings list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQ5Mzc1NSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQ5NTU1NX0.7o6Yslar3SQgdS7ky-1fD9AfMcSGCn-CmzX77qJeZxQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"John.Wick\",\r\n  \"dateFrom\": \"12-11-2023\",\r\n  \"dateTo\": \"18-12-2023\",\r\n  \"trainerName\": null,\r\n  \"trainingTypeName\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/training/by-trainee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"training",
+								"by-trainee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get trainer trainings list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQzMDUxNiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQzMTQxNn0.Iooxa1Y5AMMpRsLhu2UAbNoTflJxksO_fb7jDtqbcXI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"John.Smith\",\r\n  \"dateFrom\": null,\r\n  \"dateTo\": null,\r\n  \"traineeName\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/training/by-trainer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"training",
+								"by-trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add training",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQzNjMxMiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQzODExMn0.hyNHZGrZIrGhS_8PegOTzic7dhQk7lg6VWcRQRwGc_4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"traineeUsername\": \"John.Wick\",\n  \"trainerUsername\": \"John.Smith\",\n  \"trainingName\": \"John Training\",\n  \"trainingDate\": \"17-01-2024\",\n  \"trainingDuration\": 10.5\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/training/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"training",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "trainingtype",
+			"item": [
+				{
+					"name": "get all training types",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQzNjMxMiwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQzODExMn0.hyNHZGrZIrGhS_8PegOTzic7dhQk7lg6VWcRQRwGc_4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/training-type/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"training-type",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/login?username=John.Wick&password=3Zf3feLagV",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "John.Wick"
+						},
+						{
+							"key": "password",
+							"value": "3Zf3feLagV"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"James.Bond\",\n  \"oldPassword\": \"pwd\",\n  \"newPassword\": \"pwdpwd22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/changePassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJ1c2VybmFtZSI6IkpvaG4uV2ljayIsImlhdCI6MTcwNTQ5MTE1MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwNTQ5Mjk1MH0.xNywHn2gCZJzcGsVmozYjxNld3KRHSaUk8j44OoEZBU",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/swagger-ui/index.html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"swagger-ui",
+						"index.html"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

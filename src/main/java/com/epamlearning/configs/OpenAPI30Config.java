@@ -1,5 +1,8 @@
 package com.epamlearning.configs;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -24,18 +27,19 @@ import org.springframework.context.annotation.Import;
         SwaggerUiConfigProperties.class,
         SwaggerUiOAuthProperties.class,
         JacksonAutoConfiguration.class})
-public class OpenAPI30Configuration {
-    private static final String SECURITY_SCHEME_NAME_BASIC = "basicAuth";
+@OpenAPIDefinition(
+        servers = {@Server(url = "/",description = "server URL http://localhost")},
+        info = @Info(title = "GYM CRM API", version = "1.0", description = "Gym CRM API Information")
+)
+public class OpenAPI30Config {
     private static final String SECURITY_SCHEME_NAME_BEARER = "bearerAuth";
 
     @Bean
     public OpenAPI customizeOpenAPI() {
         return new OpenAPI()
                 .components(new Components()
-                        .addSecuritySchemes(SECURITY_SCHEME_NAME_BASIC, createBasicSecurityScheme())
                         .addSecuritySchemes(SECURITY_SCHEME_NAME_BEARER, createBearerSecurityScheme()))
-                .addSecurityItem(createBearerSecurityRequirement())
-                .addSecurityItem(createBasicSecurityRequirement());
+                .addSecurityItem(createBearerSecurityRequirement());
     }
 
     private SecurityScheme createBearerSecurityScheme() {
@@ -47,23 +51,10 @@ public class OpenAPI30Configuration {
                 .in(SecurityScheme.In.HEADER);
     }
 
-    private SecurityScheme createBasicSecurityScheme() {
-        return new SecurityScheme()
-                .name(SECURITY_SCHEME_NAME_BASIC)
-                .type(SecurityScheme.Type.HTTP)
-                .scheme("basic")
-                .in(SecurityScheme.In.HEADER);
-    }
-
     private SecurityRequirement createBearerSecurityRequirement() {
         SecurityRequirement requirement = new SecurityRequirement();
         requirement.addList(SECURITY_SCHEME_NAME_BEARER);
         return requirement;
     }
 
-    private SecurityRequirement createBasicSecurityRequirement() {
-        SecurityRequirement requirement = new SecurityRequirement();
-        requirement.addList(SECURITY_SCHEME_NAME_BASIC);
-        return requirement;
-    }
 }

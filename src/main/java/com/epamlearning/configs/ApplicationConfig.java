@@ -1,8 +1,5 @@
 package com.epamlearning.configs;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,10 +29,7 @@ import java.util.Properties;
 @EnableJpaRepositories("com.epamlearning.repositories")
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableWebMvc
-@OpenAPIDefinition(
-        servers = {@Server(url = "/",description = "server URL http://localhost")},
-        info = @Info(title = "Products API", version = "1.0", description = "Products Information")
-)
+
 public class ApplicationConfig implements WebMvcConfigurer  {
 
     @Value("${jdbc.driverClassName}")

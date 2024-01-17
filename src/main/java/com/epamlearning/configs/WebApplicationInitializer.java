@@ -11,20 +11,11 @@ public class WebApplicationInitializer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{ApplicationConfig.class, SwaggerConfig.class};
+        return new Class[]{ApplicationConfig.class, OpenAPI30Config.class};
     }
 
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
-//    @Override
-//    public void onStartup(ServletContext servletContext) throws ServletException {
-//
-//        FilterRegistration.Dynamic fr = servletContext.addFilter("jwtFilter", JWTFilter.class);
-//        fr.addMappingForUrlPatterns(null, true, "/*");
-//
-//        super.onStartup(servletContext);
-//    }
 }
