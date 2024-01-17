@@ -80,7 +80,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
-    @PutMapping("updater/trainers")
+    @PutMapping("/update/trainers")
     public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Validated @RequestBody TraineeTrainersUpdateDTO trainersOfTraineeDTO) {
         Trainee trainee = traineeService.findByUsername(trainersOfTraineeDTO.getUsername());
         List<Trainer> trainers = trainersOfTraineeDTO.getTrainers().stream().map(trainer -> mapper.mapToModel(trainer, Trainer.class)).toList();
@@ -88,5 +88,12 @@ public class TraineeController implements BaseController {
         List<TrainerListResponseDTO> responseDTO =
                 updatedTrainee.getTrainers().stream().map(trainer -> mapper.mapToDTO(trainer, TrainerListResponseDTO.class)).toList();
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/updateActive/{username}/{active}")
+    public ResponseEntity<String> updateTraineeActive(@PathVariable("username") String username, @PathVariable("active") boolean isActive) {
+        String resultText = isActive ? "activated" : "deactivated";
+        Trainee updatedTrainee = traineeService.updateActive(traineeService.findByUsername(username).getId(), isActive);
+        return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -144,8 +145,9 @@ public class TrainingService implements BaseService<Training> {
     }
 
     public List<Training> findByTraineeAndCriteria(String username, Date dateFrom, Date
-            dateTo, TrainingType trainingType) {
-        return trainingRepository.findTrainingsByTraineeAndCriteria(traineeService.findByUsername(username), dateFrom, dateTo, trainingType);
+            dateTo, TrainingType trainingType, String trainerName) {
+        Trainee trainee = traineeService.findByUsername(username);
+        return trainingRepository.findTrainingsByTraineeAndCriteria(trainee, dateFrom, dateTo, trainingType, trainerName);
     }
 
     public List<Training> findByTrainee(Long traineeId) {
@@ -161,20 +163,8 @@ public class TrainingService implements BaseService<Training> {
 
 
     public List<Training> findByTrainerAndCriteria(String trainerUsername, Date dateFrom, Date
-            dateTo, TrainingType trainingType) {
-        if (dateFrom == null) {
-            log.warn("DateFrom is null.");
-            throw new NullPointerException("DateFrom is null.");
-        }
-        if (dateTo == null) {
-            log.warn("DateTo is null.");
-            throw new NullPointerException("DateTo is null.");
-        }
-        if (trainingType == null) {
-            log.warn("TrainingType is null.");
-            throw new NullPointerException("TrainingType is null.");
-        }
-        return trainingRepository.findTrainingsByTrainerAndCriteria(trainerService.findByUsername(trainerUsername), dateFrom, dateTo, trainingType);
+            dateTo, TrainingType trainingType, String traineeName) {
+        return trainingRepository.findTrainingsByTrainerAndCriteria(trainerService.findByUsername(trainerUsername), dateFrom, dateTo, trainingType, traineeName);
     }
 
     public Training createTraining(String trainingName, Date trainingDate, BigDecimal trainingDuration, Trainer

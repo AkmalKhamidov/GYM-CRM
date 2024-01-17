@@ -1,8 +1,8 @@
 jdbc:
   driverClassName: org.postgresql.Driver
   url: jdbc:postgresql://localhost:5432/hibernate-app
-  username: postgres
-  password: slon123
+  username: akmalkhamidov
+  password: 1125
 
 jwt:
   secret: NOT SECRET

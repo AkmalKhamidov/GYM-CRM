@@ -9,19 +9,27 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<Training, Long>, BaseRepository {
 
-//    @Query(value = "SELECT tr FROM Training tr WHERE ((?1 IS NULL AND ?2 IS NULL) OR (?1 IS NOT NULL AND ?2 IS NULL AND tr.trainingDate >= ?1) OR (?1 IS NULL AND ?2 IS NOT NULL AND tr.trainingDate <= ?2) OR (tr.trainingDate BETWEEN ?1 AND ?2)) AND (?3 IS NULL OR tr.trainingType = ?3) AND (?4 IS NOT NULL AND tr.trainer = ?4 OR ?4 IS NULL)")
-//    @Query(name = "findTrainingsByTrainerAndCriteria") // error here
-    @Query(value = "${findTrainingsByTrainerAndCriteria}", nativeQuery = true)
-    List<Training> findTrainingsByTrainerAndCriteria(Trainer trainer, Date startDate, Date endDate, TrainingType trainingType);
+    @Query(value = "SELECT tr FROM Training tr WHERE tr.trainer = ?1 " +
+            "AND (tr.trainingDate >= COALESCE(CAST(?2 AS date), tr.trainingDate)) " +
+            "AND (tr.trainingDate <= COALESCE(CAST(?3 AS date), tr.trainingDate)) " +
+            "AND (?4 IS NULL OR tr.trainingType = ?4) " +
+            "AND (?5 IS NULL OR (tr.trainee.user.firstName = ?5 OR tr.trainee.user.lastName = ?5))")
+    List<Training> findTrainingsByTrainerAndCriteria(Trainer trainer, Date startDate, Date endDate, TrainingType trainingType, String traineeName);
 
-    @Query(value = "SELECT tr FROM Training tr WHERE ((?1 IS NULL AND ?2 IS NULL) OR (?1 IS NOT NULL AND ?2 IS NULL AND tr.trainingDate >= ?1) OR (?1 IS NULL AND ?2 IS NOT NULL AND tr.trainingDate <= ?2) OR (tr.trainingDate BETWEEN ?1 AND ?2)) AND (?3 IS NULL OR tr.trainingType = ?3) AND (?4 IS NOT NULL AND tr.trainee = ?4 OR ?4 IS NULL)")
-    List<Training> findTrainingsByTraineeAndCriteria(Trainee trainee, Date startDate, Date endDate, TrainingType trainingType);
+    @Query(value = "SELECT tr FROM Training tr WHERE tr.trainee = ?1 " +
+            "AND (tr.trainingDate >= COALESCE(CAST(?2 AS date), tr.trainingDate)) " +
+            "AND (tr.trainingDate <= COALESCE(CAST(?3 AS date), tr.trainingDate)) " +
+            "AND (?4 IS NULL OR tr.trainingType = ?4) " +
+            "AND (?5 IS NULL OR (tr.trainer.user.firstName = ?5 OR tr.trainer.user.lastName = ?5))")
+    List<Training> findTrainingsByTraineeAndCriteria(Trainee trainee, Date startDate, Date endDate, TrainingType trainingType, String trainerName);
+
 
     List<Training> findByTrainee(Trainee trainee);
 
@@ -33,6 +41,6 @@ public interface TrainingRepository extends JpaRepository<Training, Long>, BaseR
             @Param("trainee") Trainee trainee,
             @Param("trainer") Trainer trainer);
 
-//    @Query(name = "findTrainingsByTrainerAndTrainee")
+    //    @Query(name = "findTrainingsByTrainerAndTrainee")
     boolean existsTrainingByTraineeAndTrainer(Trainee trainee, Trainer trainer);
 }

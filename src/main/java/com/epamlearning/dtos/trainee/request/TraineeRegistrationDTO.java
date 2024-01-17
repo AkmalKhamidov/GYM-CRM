@@ -1,9 +1,7 @@
 package com.epamlearning.dtos.trainee.request;
 
 import com.epamlearning.dtos.BaseDTO;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -20,6 +18,7 @@ public record TraineeRegistrationDTO(
         String lastName,
 
         @DateTimeFormat(pattern = "dd-MM-yyyy")
+        @Past(message = "Date of birth cannot be in the future.")
         Date dateOfBirth,
         String address) implements BaseDTO {
 }

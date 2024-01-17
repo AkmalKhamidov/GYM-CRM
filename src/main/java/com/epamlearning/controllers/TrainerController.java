@@ -80,4 +80,11 @@ public class TrainerController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
+    @PatchMapping("/updateActive/{username}/{active}")
+    public ResponseEntity<String> updateTraineeActive(@PathVariable("username") String username, @PathVariable("active") boolean isActive) {
+        String resultText = isActive ? "activated" : "deactivated";
+        Trainer updatedTrainer = trainerService.updateActive(trainerService.findByUsername(username).getId(), isActive);
+        return new ResponseEntity<>("Trainer with username: " + username + " was " + resultText + ".", HttpStatus.OK);
+    }
+
 }
