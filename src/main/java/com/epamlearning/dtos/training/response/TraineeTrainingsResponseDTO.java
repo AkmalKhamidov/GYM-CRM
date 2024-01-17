@@ -1,14 +1,12 @@
 package com.epamlearning.dtos.training.response;
 
 import com.epamlearning.dtos.BaseDTO;
-import com.epamlearning.models.TrainingType;
 import com.epamlearning.models.enums.TrainingTypeName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Scope;
 
 import java.math.BigDecimal;
 import java.util.Date;

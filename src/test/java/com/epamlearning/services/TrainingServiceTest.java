@@ -1,28 +1,15 @@
 package com.epamlearning.services;
 
-import com.epamlearning.daos.TrainingDAOImpl;
-import com.epamlearning.exceptions.NotFoundException;
-import com.epamlearning.models.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//import com.epamlearning.daos.TrainingDAOImpl;
+
+import com.epamlearning.models.Training;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
 
 public class TrainingServiceTest {
 
-    @Mock
-    private TrainingDAOImpl trainingDAO;
+//    @Mock
+//    private TrainingDAOImpl trainingDAO;
 
     @InjectMocks
     private TrainingService trainingService;

@@ -1,9 +1,6 @@
 package com.epamlearning.dtos.trainer.request;
 
 import com.epamlearning.dtos.BaseDTO;
-import com.epamlearning.models.TrainingType;
-import com.epamlearning.models.enums.TrainingTypeName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrainerUpdateDTO implements BaseDTO {
+public class TrainerUpdateRequestDTO implements BaseDTO {
     @NotNull(message = "User first name cannot be null.")
     @NotEmpty(message = "User first name cannot be empty.")
     private String username;

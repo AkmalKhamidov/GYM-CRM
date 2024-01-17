@@ -3,14 +3,12 @@ package com.epamlearning.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Component
-@Scope(scopeName = "singleton")
 public class JWTUtil {
 
     @Value("${jwt.secret}")

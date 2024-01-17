@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,11 +70,11 @@ public class TrainingService implements BaseService<Training> {
         return null;
     }
 
-    public boolean existsTraineeAndTrainerInAnotherTraining(Long trainingId, Long traineeId, Long trainerId) {
+    public boolean notExistsTraineeAndTrainerInAnotherTraining(Long trainingId, Long traineeId, Long trainerId) {
         Training training = findById(trainingId);
         Trainee trainee = traineeService.findById(traineeId);
         Trainer trainer = trainerService.findById(trainerId);
-        return trainingRepository.existsAnotherTrainingByTraineeAndTrainer(training, trainee, trainer);
+        return !trainingRepository.existsAnotherTrainingByTraineeAndTrainer(training, trainee, trainer);
     }
 
     public boolean existsTraineeAndTrainerInTrainings(Trainee traineeId, Trainer trainerId) {
@@ -114,9 +113,7 @@ public class TrainingService implements BaseService<Training> {
             List<Trainer> traineeTrainers = new ArrayList<>(training.getTrainee().getTrainers());
             // add new trainer to list
             traineeTrainers.add(training.getTrainer());
-            if (!
-
-                    existsTraineeAndTrainerInAnotherTraining(id, trainingToUpdate.getTrainee().getId(), trainingToUpdate.getTrainer().getId())) {
+            if (notExistsTraineeAndTrainerInAnotherTraining(id, trainingToUpdate.getTrainee().getId(), trainingToUpdate.getTrainer().getId())) {
                 // distinct trainers (in case if new trainer is already in list) and remove old trainer
                 traineeTrainers.stream().filter(trainer -> trainer.getId().equals(trainingToUpdate.getTrainer().getId())).findFirst().ifPresent(traineeTrainers::remove);
             }
@@ -136,7 +133,7 @@ public class TrainingService implements BaseService<Training> {
     @Override
     public void deleteById(Long id) {
         Training training = findById(id);
-        if (!existsTraineeAndTrainerInAnotherTraining(id, training.getTrainee().getId(), training.getTrainer().getId())) {
+        if (notExistsTraineeAndTrainerInAnotherTraining(id, training.getTrainee().getId(), training.getTrainer().getId())) {
             List<Trainer> traineeTrainers = new ArrayList<>(training.getTrainee().getTrainers());
             traineeTrainers.stream().filter(trainer -> trainer.getId().equals(training.getTrainer().getId())).findFirst().ifPresent(traineeTrainers::remove);
             training.setTrainee(traineeService.updateTrainersForTrainee(training.getTrainee().getId(), traineeTrainers));

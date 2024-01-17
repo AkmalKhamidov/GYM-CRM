@@ -124,7 +124,7 @@ public class TrainerService implements BaseService<Trainer> {
     }
 
     public List<Trainer> findNotAssignedActiveTrainers(String username) {
-        return trainerRepository.findNotAssignedActiveTrainersByTrainee(traineeService.findByUsername(username));
+        return trainerRepository.findNotAssignedActiveTrainersOfTrainee(traineeService.findByUsername(username));
     }
 
     public Trainer createTrainer(User user, Long trainingTypeId) {

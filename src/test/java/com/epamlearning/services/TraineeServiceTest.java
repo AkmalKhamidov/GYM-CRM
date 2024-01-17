@@ -1,30 +1,16 @@
 package com.epamlearning.services;
 
-import com.epamlearning.daos.TraineeDAOImpl;
-import com.epamlearning.exceptions.NotAuthenticated;
-import com.epamlearning.exceptions.NotFoundException;
+//import com.epamlearning.daos.TraineeDAOImpl;
+
 import com.epamlearning.models.Trainee;
 import com.epamlearning.models.User;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
 
 class TraineeServiceTest {
 
-    @Mock
-    private TraineeDAOImpl traineeDAO;
+//    @Mock
+//    private TraineeDAOImpl traineeDAO;
 
     @Mock
     private UserService userService;

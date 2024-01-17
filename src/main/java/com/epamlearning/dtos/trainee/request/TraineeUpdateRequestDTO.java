@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -18,7 +17,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TraineeUpdateDTO implements BaseDTO {
+public class TraineeUpdateRequestDTO implements BaseDTO {
     @NotNull(message = "User first name cannot be null.")
     @NotEmpty(message = "User first name cannot be empty.")
     private String username;

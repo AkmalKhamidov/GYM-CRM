@@ -1,7 +1,6 @@
 package com.epamlearning.dtos.training.request;
 
 import com.epamlearning.dtos.BaseDTO;
-import com.epamlearning.models.enums.TrainingTypeName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -4,18 +4,26 @@ import com.epamlearning.dtos.BaseDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record TrainerRegistrationDTO(
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class TrainerRegistrationRequestDTO implements BaseDTO {
         @NotNull(message = "User first name cannot be null.")
         @NotEmpty(message = "User first name cannot be blank.")
         @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters.")
-        String firstName,
+        private String firstName;
 
         @NotNull(message = "User last name cannot be null.")
         @NotEmpty(message = "User last name cannot be blank.")
         @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters.")
-        String lastName,
+        private String lastName;
 
         @NotNull(message = "Training type cannot be null.")
-        Long specializationId) implements BaseDTO {
+        private Long specializationId;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrainerProfileDTO implements BaseDTO {
+public class TrainerProfileResponseDTO implements BaseDTO {
     private String firstName;
     private String lastName;
     private TrainingTypeName trainingTypeName;

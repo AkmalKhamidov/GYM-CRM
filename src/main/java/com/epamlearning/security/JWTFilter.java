@@ -1,33 +1,28 @@
 package com.epamlearning.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.epamlearning.services.UserService;
+import com.epamlearning.controllers.exception.ErrorResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 @Component
 @WebFilter(urlPatterns = "/*")
 public class JWTFilter implements Filter {
 
-    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-            Arrays.asList("", "/user/login", "/logout", "/trainee/register", "/trainer/register")));
+    private static final Set<String> ALLOWED_PATHS = Set.of("", "/user/login", "/trainee/register", "/trainer/register", "/swagger-ui/index.html", "/swagger-ui/swagger-initializer.js", "/v3/api-docs", "/v3/api-docs/swagger-config");
+    private static final AntPathMatcher pathMatcher = new AntPathMatcher();
+
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         // Initialization code can go here if needed
     }
 
@@ -38,8 +33,7 @@ public class JWTFilter implements Filter {
 
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        String path = request.getRequestURI().substring(request.getContextPath().length()).replaceAll("[/]+$", "");
-
+        String path = request.getRequestURI().substring(request.getContextPath().length()).replaceAll("/+$", "");
         boolean loggedIn = false;
 
         if (authHeader != null && !authHeader.isBlank() && authHeader.startsWith("Bearer ")) {
@@ -49,13 +43,35 @@ public class JWTFilter implements Filter {
                 loggedIn = true;
             }
         }
-        if(loggedIn || ALLOWED_PATHS.contains(path)){
+        if(loggedIn || isPathAllowed(path)){
             filterChain.doFilter(request, response);
         } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid access token");
+//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid access token");
+            sendErrorResponse(response, "Invalid access token");
         }
     }
 
+
+    private boolean isPathAllowed(String path) {
+        for (String allowedPath : ALLOWED_PATHS) {
+            if (pathMatcher.match(allowedPath, path)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void sendErrorResponse(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ErrorResponse errorResponse = new ErrorResponse(message);
+        String jsonError = objectMapper.writeValueAsString(errorResponse);
+
+        response.getWriter().write(jsonError);
+    }
 
     @Override
     public void destroy() {

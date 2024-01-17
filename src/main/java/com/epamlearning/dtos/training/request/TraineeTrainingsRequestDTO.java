@@ -1,7 +1,6 @@
 package com.epamlearning.dtos.training.request;
 
 import com.epamlearning.dtos.BaseDTO;
-import com.epamlearning.models.TrainingType;
 import com.epamlearning.models.enums.TrainingTypeName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Getter

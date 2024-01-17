@@ -1,15 +1,12 @@
 package com.epamlearning.controllers;
 
-import com.epamlearning.dtos.trainee.request.TraineeUpdateDTO;
 import com.epamlearning.dtos.trainee.response.TraineeListResponseDTO;
-import com.epamlearning.dtos.trainee.response.TraineeProfileDTO;
-import com.epamlearning.dtos.trainer.request.TrainerRegistrationDTO;
-import com.epamlearning.dtos.trainer.request.TrainerUpdateDTO;
+import com.epamlearning.dtos.trainer.request.TrainerRegistrationRequestDTO;
+import com.epamlearning.dtos.trainer.request.TrainerUpdateRequestDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
-import com.epamlearning.dtos.trainer.response.TrainerProfileDTO;
+import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.user.UserAuthDTO;
 import com.epamlearning.mapper.Mapper;
-import com.epamlearning.models.Trainee;
 import com.epamlearning.models.Trainer;
 import com.epamlearning.models.User;
 import com.epamlearning.services.TrainerService;
@@ -38,9 +35,9 @@ public class TrainerController implements BaseController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserAuthDTO> registerTrainer(@RequestBody TrainerRegistrationDTO trainerDTO) {
-        User user = userService.createUser(trainerDTO.firstName(), trainerDTO.lastName());
-        Trainer trainer = trainerService.createTrainer(user, trainerDTO.specializationId());
+    public ResponseEntity<UserAuthDTO> registerTrainer(@RequestBody TrainerRegistrationRequestDTO trainerDTO) {
+        User user = userService.createUser(trainerDTO.getFirstName(), trainerDTO.getLastName());
+        Trainer trainer = trainerService.createTrainer(user, trainerDTO.getSpecializationId());
         Trainer savedTrainer = trainerService.save(trainer);
 
         UserAuthDTO responseDTO = mapper.mapToDTO(savedTrainer, UserAuthDTO.class);
@@ -48,17 +45,17 @@ public class TrainerController implements BaseController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<TrainerProfileDTO> getTrainerProfile(@PathVariable("username") String username) {
+    public ResponseEntity<TrainerProfileResponseDTO> getTrainerProfile(@PathVariable("username") String username) {
         Trainer trainer = trainerService.findByUsername(username);
         List<TraineeListResponseDTO> traineeListDTO =
                 trainer.getTrainees().stream().map(trainee -> mapper.mapToDTO(trainee, TraineeListResponseDTO.class)).toList();
-        TrainerProfileDTO responseDTO = mapper.mapToDTO(trainer, TrainerProfileDTO.class);
+        TrainerProfileResponseDTO responseDTO = mapper.mapToDTO(trainer, TrainerProfileResponseDTO.class);
         responseDTO.setTraineeList(traineeListDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<TrainerProfileDTO> updateTraineeProfile(@Validated @RequestBody TrainerUpdateDTO trainerDTO) {
+    public ResponseEntity<TrainerProfileResponseDTO> updateTraineeProfile(@Validated @RequestBody TrainerUpdateRequestDTO trainerDTO) {
         Trainer trainer = trainerService.findByUsername(trainerDTO.getUsername());
         User user = trainer.getUser();
         user.setFirstName(trainerDTO.getFirstName());
@@ -68,7 +65,7 @@ public class TrainerController implements BaseController {
         Trainer savedTrainer = trainerService.save(trainer);
         List<TraineeListResponseDTO> traineeListDTO =
                 savedTrainer.getTrainees().stream().map(trainee -> mapper.mapToDTO(trainee, TraineeListResponseDTO.class)).toList();
-        TrainerProfileDTO responseDTO = mapper.mapToDTO(savedTrainer, TrainerProfileDTO.class);
+        TrainerProfileResponseDTO responseDTO = mapper.mapToDTO(savedTrainer, TrainerProfileResponseDTO.class);
         responseDTO.setTraineeList(traineeListDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }

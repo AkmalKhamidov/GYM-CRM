@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TraineeTrainersUpdateDTO implements BaseDTO {
+public class UpdateTrainersOfTraineeRequestDTO implements BaseDTO {
 
     @NotNull(message = "Username cannot be null")
     @NotEmpty(message = "Username cannot be empty")

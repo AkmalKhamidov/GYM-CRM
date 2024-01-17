@@ -1,9 +1,7 @@
 package com.epamlearning.repositories;
 
-import com.epamlearning.models.Trainee;
 import com.epamlearning.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

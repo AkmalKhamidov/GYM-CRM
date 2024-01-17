@@ -6,10 +6,8 @@ import com.epamlearning.models.Training;
 import com.epamlearning.models.TrainingType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -35,12 +33,11 @@ public interface TrainingRepository extends JpaRepository<Training, Long>, BaseR
 
     void deleteByTrainee(Trainee trainee);
 
-    @Query(value = "SELECT t FROM Training t WHERE t.trainer = :trainer and t.trainee = :trainee and t != :training")
+    @Query(value = "SELECT t FROM Training t WHERE t.trainer = ?3 and t.trainee = ?2 and t != ?1")
     boolean existsAnotherTrainingByTraineeAndTrainer(
-            @Param("training") Training training,
-            @Param("trainee") Trainee trainee,
-            @Param("trainer") Trainer trainer);
+            Training training,
+            Trainee trainee,
+            Trainer trainer);
 
-    //    @Query(name = "findTrainingsByTrainerAndTrainee")
     boolean existsTrainingByTraineeAndTrainer(Trainee trainee, Trainer trainer);
 }
