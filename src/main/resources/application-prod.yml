@@ -1,0 +1,35 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hibernate-app-prod
+    username:
+    password:
+    driverClassName: org.postgresql.Driver
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
+
+server:
+  port: 8082
+
+springdoc:
+  swagger-ui:
+    enabled: false
+
+jwt:
+  secret: N0T_S3CR3T_B3C4USE_1T_1S_S3CR3T_TH4T_1S_4LL_Y0U_N33D
+  token:
+    access:
+      expiration: 7200000 # milliseconds -> 2 hours
+    refresh:
+      expiration: 172800000 # milliseconds -> 2 days
