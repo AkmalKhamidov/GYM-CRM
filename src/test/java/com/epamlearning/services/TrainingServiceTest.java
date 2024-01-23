@@ -1,6 +1,9 @@
 package com.epamlearning.services;
 
-import com.epamlearning.entities.*;
+import com.epamlearning.entities.Trainee;
+import com.epamlearning.entities.Trainer;
+import com.epamlearning.entities.Training;
+import com.epamlearning.entities.TrainingType;
 import com.epamlearning.repositories.TrainingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,9 +16,10 @@ import org.mockito.quality.Strictness;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

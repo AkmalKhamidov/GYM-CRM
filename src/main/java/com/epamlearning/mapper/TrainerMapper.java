@@ -5,7 +5,6 @@ import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.user.UserAuthDTO;
 import com.epamlearning.entities.Trainer;
-import org.mapstruct.Mapper;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 

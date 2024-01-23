@@ -1,11 +1,11 @@
 package com.epamlearning.services;
+
 import com.epamlearning.entities.Trainee;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.TrainingType;
 import com.epamlearning.entities.User;
 import com.epamlearning.entities.enums.TrainingTypeName;
 import com.epamlearning.exceptions.NotAuthenticated;
-import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.repositories.TrainerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class TrainerServiceTest {
