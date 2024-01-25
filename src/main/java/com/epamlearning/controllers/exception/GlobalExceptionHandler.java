@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 @RestControllerAdvice("com.epamlearning.controllers")
 public class GlobalExceptionHandler {
@@ -46,6 +47,22 @@ public class GlobalExceptionHandler {
         logExceptionDetails(request, new Exception("MethodArgumentNotValidException" + errorMessage));
         return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(HandlerMethodValidationException ex, WebRequest request) {
+        String errorMessage = "Validation error(s): " + ex.getMessage();
+
+        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
+        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.BAD_REQUEST);
+    }
+
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<ErrorResponse> handleValidationExceptions(ConstraintViolationException ex, WebRequest request) {
+//        String errorMessage = "Validation error(s): " + ex.getMessage();
+//
+//        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
+//        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.BAD_REQUEST);
+//    }
 
     private void logExceptionDetails(WebRequest request, Exception ex) {
         logger.error("Exception occurred for URL: {}", request.getDescription(false));

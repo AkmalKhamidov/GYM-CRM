@@ -12,6 +12,8 @@ import com.epamlearning.services.TrainerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,9 +61,13 @@ public class TrainerController implements BaseController {
     }
 
     @Operation(summary = "Update trainer profile", description = "Updating trainer profile by username")
-    @PutMapping("/update")
-    public ResponseEntity<TrainerProfileResponseDTO> updateTraineeProfile(@Validated @RequestBody TrainerUpdateRequestDTO trainerDTO) {
-        Trainer trainer = trainerService.findByUsername(trainerDTO.getUsername());
+    @PutMapping("/{username}")
+    public ResponseEntity<TrainerProfileResponseDTO> updateTraineeProfile(@Parameter(description = "trainer username", example = "John.Smith")
+                                                                              @PathVariable("username")
+                                                                              @NotNull(message = "Username cannot be null")
+                                                                              @NotBlank(message = "Username cannot be blank") String username,
+                                                                          @Validated @RequestBody TrainerUpdateRequestDTO trainerDTO) {
+        Trainer trainer = trainerService.findByUsername(username);
         Trainer savedTrainer = trainerService.update(trainer.getId(), trainerMapper.trainerUpdateRequestDTOToTrainer(trainerDTO));
         TrainerProfileResponseDTO responseDTO = trainerMapper.trainerToTrainerProfileResponseDTO(savedTrainer);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
@@ -77,7 +83,7 @@ public class TrainerController implements BaseController {
     }
 
     @Operation(summary = "Update trainer active", description = "Update trainer active (status)")
-    @PatchMapping("/updateActive/{username}/{active}")
+    @PatchMapping("/{username}/{active}")
     public ResponseEntity<String> updateTraineeActive(@Parameter(description = "Trainer username", example = "John.Smith")
                                                       @PathVariable("username") String username,
                                                       @Parameter(description = "Trainer active (status) (true/false)", example = "true")

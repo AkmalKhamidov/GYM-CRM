@@ -22,11 +22,6 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @NoArgsConstructor
 public class TraineeUpdateRequestDTO implements BaseDTO {
 
-    @Schema(description = "Trainee username", example = "John.Wick", requiredMode = REQUIRED)
-    @NotNull(message = "User first name cannot be null.")
-    @NotEmpty(message = "User first name cannot be empty.")
-    private String username;
-
     @Schema(description = "Trainee first name", example = "John", requiredMode = REQUIRED)
     @NotNull(message = "User first name cannot be null.")
     @NotEmpty(message = "User first name cannot be empty.")

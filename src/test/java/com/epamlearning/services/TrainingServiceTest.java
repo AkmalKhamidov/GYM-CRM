@@ -109,8 +109,6 @@ public class TrainingServiceTest {
         assertThrows(NullPointerException.class, () -> trainingService.findById(null));
     }
 
-    // Similar tests for findById_NonExistentId, findAll, findByTraineeAndCriteria, findByTrainerAndCriteria, etc.
-
     @Test
     void update_ValidData_ReturnsUpdatedTraining() {
         // Arrange

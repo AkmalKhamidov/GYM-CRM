@@ -5,6 +5,7 @@ import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.user.UserAuthDTO;
 import com.epamlearning.entities.Trainer;
+import com.epamlearning.entities.enums.TrainingTypeName;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -50,10 +51,9 @@ public interface TrainerMapper {
     UserAuthDTO trainerToUserAuthDTO(Trainer trainer);
 
     @Mappings({
-            @Mapping(source = "username", target = "user.username"),
             @Mapping(source = "firstName", target = "user.firstName"),
             @Mapping(source = "lastName", target = "user.lastName"),
-            @Mapping(source = "trainingTypeName", target = "specialization.trainingTypeName"),
+            @Mapping(source = "trainingTypeName", target = "specialization.trainingTypeName", resultType = TrainingTypeName.class),
             @Mapping(source = "active", target = "user.active"),
     })
     Trainer trainerUpdateRequestDTOToTrainer(TrainerUpdateRequestDTO trainerUpdateRequestDTO);

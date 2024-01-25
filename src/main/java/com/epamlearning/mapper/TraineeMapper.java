@@ -23,9 +23,6 @@ public interface TraineeMapper {
     })
     TraineeProfileResponseDTO traineeToTraineeProfileResponseToDTO(Trainee trainee);
 
-//    @InheritInverseConfiguration(name = "traineeToTraineeProfileResponseToDTO")
-//    Trainee traineeProfileResponseDTOToTrainee(TraineeProfileResponseDTO traineeProfileResponseDTO);
-
     @Mappings({
             @Mapping(source = "user.username", target = "username"),
             @Mapping(source = "user.firstName", target = "firstName"),
@@ -33,15 +30,11 @@ public interface TraineeMapper {
     })
     TraineeListResponseDTO traineeToTraineeListResponseDTO(Trainee trainee);
 
-//    @InheritConfiguration(name = "traineeToTraineeListResponseDTO")
-//    List<TraineeListResponseDTO> traineesToTraineeListResponseDTOs(List<Trainee> trainees);
-
-
     @InheritInverseConfiguration(name = "traineeToTraineeListResponseDTO")
     Trainee traineeListDTOToTrainee(TraineeListResponseDTO traineeListResponseDTO);
 
     @Mappings({
-            @Mapping(source = "username", target = "user.username"),
+//            @Mapping(source = "username", target = "user.username"),
             @Mapping(source = "firstName", target = "user.firstName"),
             @Mapping(source = "lastName", target = "user.lastName"),
             @Mapping(source = "active", target = "user.active")

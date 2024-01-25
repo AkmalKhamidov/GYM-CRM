@@ -26,5 +26,5 @@ public class TraineeTrainingsResponseDTO implements BaseDTO {
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private BigDecimal trainingDuration;
 
-    private String trainerFirstName;
+    private String trainerFullName;
 }

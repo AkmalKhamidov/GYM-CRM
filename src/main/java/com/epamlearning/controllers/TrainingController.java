@@ -79,7 +79,7 @@ public class TrainingController implements BaseController {
     }
 
     @Operation(summary = "Add training", description = "Adding training with trainer training type")
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<String> addTraining(@Validated @RequestBody TrainingAddRequestDTO trainingAddDTO) {
         Trainee trainee = traineeService.findByUsername(trainingAddDTO.getTraineeUsername());
         Trainer trainer = trainerService.findByUsername(trainingAddDTO.getTrainerUsername());

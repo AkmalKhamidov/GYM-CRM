@@ -29,7 +29,7 @@ public class TrainingTypeController implements BaseController{
     }
 
     @Operation(summary = "Get all training types", description = "Getting all training types")
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<TrainingTypeResponseDTO>> getAllTrainingTypes() {
         List<TrainingTypeResponseDTO> responseDTO = trainingTypeMapper.trainingTypesToTrainingTypeResponseDTOs(trainingTypeService.findAll());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);

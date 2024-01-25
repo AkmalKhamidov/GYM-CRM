@@ -16,6 +16,8 @@ import com.epamlearning.services.TrainerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,25 +69,38 @@ public class TraineeController implements BaseController {
     }
 
     @Operation(summary = "Update trainee profile", description = "Updating trainee profile by username")
-    @PutMapping("/update")
-    public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
-        Trainee trainee = traineeService.findByUsername(traineeDTO.getUsername());
+    @PutMapping("{username}")
+    public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@PathVariable("username")
+                                                                            @Parameter(description = "Trainee username", example = "John.Wick")
+                                                                              @NotNull(message = "Username cannot be null")
+                                                                              @NotBlank(message = "Username cannot be blank") String username,
+                                                                          @Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
+        Trainee trainee = traineeService.findByUsername(username);
         Trainee savedTrainee = traineeService.update(trainee.getId(), traineeMapper.traineeUpdateRequestDTOToTrainee(traineeDTO));
         TraineeProfileResponseDTO responseDTO = traineeMapper.traineeToTraineeProfileResponseToDTO(savedTrainee);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @Operation(summary = "Delete trainee", description = "Deleting trainee by username")
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username) {
+    @DeleteMapping("/{username}")
+    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick")
+                                                    @PathVariable("username")
+                                                    @NotNull(message = "Username cannot be null")
+                                                    @NotBlank(message = "Username cannot be blank")
+                                                    String username) {
         traineeService.deleteByUsername(username);
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
     @Operation(summary = "Update trainers of trainee", description = "Updating trainers of trainee by username")
-    @PutMapping("/update/trainers")
-    public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Validated @RequestBody UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO) {
-        Trainee trainee = traineeService.findByUsername(trainersOfTraineeDTO.getUsername());
+    @PutMapping("{username}/trainers")
+    public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Parameter(description = "trainee username", example = "John.Wick")
+                                                                                    @PathVariable("username")
+                                                                                    @NotNull(message = "Username cannot be null")
+                                                                                    @NotBlank(message = "Username cannot be blank")
+                                                                                    String username,
+                                                                                @Validated @RequestBody UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO) {
+        Trainee trainee = traineeService.findByUsername(username);
         List<Trainer> trainers = trainersOfTraineeDTO.getTrainers().stream().map(trainer -> trainerService.findByUsername(trainer.getUsername())).toList();
         Trainee updatedTrainee = traineeService.updateTrainersForTrainee(trainee.getId(), trainers);
         List<TrainerListResponseDTO> responseDTO = trainerMapper.trainersToTrainerListResponseDTOs(updatedTrainee.getTrainers());
@@ -93,9 +108,15 @@ public class TraineeController implements BaseController {
     }
 
     @Operation(summary = "Update trainee active", description = "Updating trainee active by username")
-    @PatchMapping("/updateActive/{username}/{active}")
-    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username,
-                                                      @Parameter(description = "trainee isActive (true/false)", example = "true") @PathVariable("active") boolean isActive) {
+    @PatchMapping("/{username}/{active}")
+    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick")
+                                                          @PathVariable("username")
+                                                          @NotNull(message = "Username cannot be null")
+                                                          @NotBlank(message = "Username cannot be blank")
+                                                          String username,
+                                                      @Parameter(description = "trainee isActive (true/false)", example = "true")
+                                                      @PathVariable("active")
+                                                      boolean isActive) {
         String resultText = isActive ? "activated" : "deactivated";
         Trainee updatedTrainee = traineeService.updateActive(traineeService.findByUsername(username).getId(), isActive);
         return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);

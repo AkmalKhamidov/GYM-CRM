@@ -18,7 +18,7 @@ public interface TrainingMapper {
 
     @Mappings({
             @Mapping(source = "trainingType.trainingTypeName", target = "trainingTypeName"),
-            @Mapping(source = "trainer.user.firstName", target = "trainerFirstName")
+            @Mapping(expression = "java(training.getTrainer().getUser().getFirstName() + ' ' + training.getTrainer().getUser().getLastName())", target = "trainerFullName")
     })
     TraineeTrainingsResponseDTO trainingToTraineeTrainingsResponseDTO(Training training);
 
