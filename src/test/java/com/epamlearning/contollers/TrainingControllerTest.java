@@ -120,7 +120,7 @@ public class TrainingControllerTest {
         requestDTO.setTraineeUsername("TraineeUser");
         requestDTO.setTrainerUsername("TrainerUser");
         requestDTO.setTrainingName("Java Basics");
-        requestDTO.setTrainingDate(LocalDate.of(2024, Month.JANUARY, 23));
+        requestDTO.setTrainingDate(LocalDate.of(2024, Month.FEBRUARY, 28));
         requestDTO.setTrainingDuration(BigDecimal.valueOf(10));
 
         Trainee trainee = new Trainee();
@@ -148,7 +148,7 @@ public class TrainingControllerTest {
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.post("/training/add")
+        mockMvc.perform(MockMvcRequestBuilders.post("/training/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())

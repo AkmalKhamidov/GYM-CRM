@@ -2,10 +2,12 @@ package com.epamlearning.controllers.exception;
 
 import com.epamlearning.exceptions.NotAuthenticated;
 import com.epamlearning.exceptions.NotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,7 +47,7 @@ public class GlobalExceptionHandler {
             errorMessage.append(fieldError.getDefaultMessage()).append("; ");
         });
         logExceptionDetails(request, new Exception("MethodArgumentNotValidException" + errorMessage));
-        return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(HandlerMethodValidationException.class)
@@ -56,13 +58,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    public ResponseEntity<ErrorResponse> handleValidationExceptions(ConstraintViolationException ex, WebRequest request) {
-//        String errorMessage = "Validation error(s): " + ex.getMessage();
-//
-//        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
-//        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(ConstraintViolationException ex, WebRequest request) {
+        String errorMessage = "Validation error(s): " + ex.getMessage();
+
+        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
+        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.BAD_REQUEST);
+    }
 
     private void logExceptionDetails(WebRequest request, Exception ex) {
         logger.error("Exception occurred for URL: {}", request.getDescription(false));

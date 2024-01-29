@@ -33,7 +33,6 @@ public class TrainingServiceTest {
 
     @Mock
     private TrainerService trainerService;
-
     @InjectMocks
     private TrainingService trainingService;
 

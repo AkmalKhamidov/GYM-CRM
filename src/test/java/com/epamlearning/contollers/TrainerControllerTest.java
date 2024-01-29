@@ -103,9 +103,10 @@ public class TrainerControllerTest {
 
     @Test
     void updateTraineeProfile_shouldReturnUpdatedTrainerProfile() throws Exception {
+        String usernameToUpdate = "John.Doe";
         // Arrange
         TrainerUpdateRequestDTO updateRequestDTO = new TrainerUpdateRequestDTO();
-        updateRequestDTO.setUsername("John.Doe");
+//        updateRequestDTO.setUsername("John.Doe");
         updateRequestDTO.setFirstName("John");
         updateRequestDTO.setLastName("Doe");
 
@@ -116,14 +117,14 @@ public class TrainerControllerTest {
         updatedTrainer.setUser(user);
         updatedTrainer.setId(1L);
 
-        when(trainerService.findByUsername(updateRequestDTO.getUsername())).thenReturn(updatedTrainer); // Set up your trainer object here
+        when(trainerService.findByUsername(usernameToUpdate)).thenReturn(updatedTrainer); // Set up your trainer object here
         when(trainerService.update(anyLong(), any())).thenReturn(updatedTrainer);
         when(trainerMapper.trainerToTrainerProfileResponseDTO(any()))
                 .thenReturn(new TrainerProfileResponseDTO(updateRequestDTO.getFirstName(), updateRequestDTO.getLastName(), null,
         true, null));
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.put("/trainer/update")
+        mockMvc.perform(MockMvcRequestBuilders.put("/trainer/"+usernameToUpdate)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(updateRequestDTO)))
                 .andExpect(status().isOk())
@@ -169,7 +170,7 @@ public class TrainerControllerTest {
         when(trainerService.findByUsername(username)).thenReturn(trainer); // Set up your trainer object here
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.patch("/trainer/updateActive/" + username + "/" + isActive)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/trainer/" + username + "/" + isActive)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(username)))

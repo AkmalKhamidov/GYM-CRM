@@ -50,7 +50,7 @@ public class TrainingTypeControllerTest {
         when(trainingTypeMapper.trainingTypesToTrainingTypeResponseDTOs(anyList())).thenReturn(expectedResponseDTO);
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/training-type/all")
+        mockMvc.perform(MockMvcRequestBuilders.get("/training-type/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(expectedResponseDTO.size()));
@@ -58,13 +58,5 @@ public class TrainingTypeControllerTest {
         // Verify
         verify(trainingTypeService, times(1)).findAll();
         verify(trainingTypeMapper, times(1)).trainingTypesToTrainingTypeResponseDTOs(anyList());
-    }
-
-    private static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

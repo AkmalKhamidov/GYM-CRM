@@ -117,9 +117,10 @@ public class TraineeControllerTest {
 
     @Test
     void updateTraineeProfile_shouldReturnUpdatedTraineeProfile() throws Exception {
+        String usernameToUpdate = "John.Doe";
+
         // Arrange
         TraineeUpdateRequestDTO updateRequestDTO = new TraineeUpdateRequestDTO();
-        updateRequestDTO.setUsername("John.Doe");
         updateRequestDTO.setFirstName("John");
         updateRequestDTO.setLastName("Doe");
         updateRequestDTO.setActive(true);
@@ -131,13 +132,13 @@ public class TraineeControllerTest {
         user.setActive(updateRequestDTO.isActive());
         updatedTrainee.setUser(user);
         updatedTrainee.setId(1L);
-        when(traineeService.findByUsername(updateRequestDTO.getUsername())).thenReturn(updatedTrainee); // Set up your trainee object here
+        when(traineeService.findByUsername(usernameToUpdate)).thenReturn(updatedTrainee); // Set up your trainee object here
         when(traineeService.update(1L, updatedTrainee)).thenReturn(updatedTrainee);
         when(traineeMapper.traineeToTraineeProfileResponseToDTO(any()))
                 .thenReturn(new TraineeProfileResponseDTO(updateRequestDTO.getFirstName(), updateRequestDTO.getLastName(), updateRequestDTO.getDateOfBirth(), updateRequestDTO.getAddress(), updateRequestDTO.isActive(), null));
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.put("/trainee/update")
+        mockMvc.perform(MockMvcRequestBuilders.put("/trainee/" + usernameToUpdate)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(updateRequestDTO)))
                 .andExpect(status().isOk())
@@ -153,11 +154,12 @@ public class TraineeControllerTest {
 
     @Test
     void deleteTrainee_shouldReturnOk() throws Exception {
+        String usernameToDelete = "John.Doe";
         // Arrange
         doNothing().when(traineeService).deleteByUsername(anyString());
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.delete("/trainee/delete/John.Doe")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/trainee/"+usernameToDelete)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("John.Doe")));
@@ -170,9 +172,8 @@ public class TraineeControllerTest {
     void updateTrainersOfTrainee_shouldReturnUpdatedTrainersList() throws Exception {
         // Arrange
         UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO = new UpdateTrainersOfTraineeRequestDTO();
-        trainersOfTraineeDTO.setUsername("John.Doe");
         trainersOfTraineeDTO.setTrainers(List.of(new TrainerUsernameRequestDTO("John.Smith"))); // Set up your trainer objects here
-
+        String usernameParameter = "John.Doe";
         Trainee trainee = new Trainee();
         trainee.setId(1L);
         User user = new User();
@@ -187,13 +188,13 @@ public class TraineeControllerTest {
         user1.setUsername("John.Smith");
         trainer.setUser(user1);
 
-        when(traineeService.findByUsername(trainersOfTraineeDTO.getUsername())).thenReturn(trainee); // Set up your trainee object here
+        when(traineeService.findByUsername(usernameParameter)).thenReturn(trainee); // Set up your trainee object here
         when(trainerService.findByUsername(trainersOfTraineeDTO.getTrainers().get(0).getUsername())).thenReturn(trainer); // Set up your trainer object here
         when(traineeService.updateTrainersForTrainee(anyLong(), anyList())).thenReturn(trainee); // Set up your updated trainee object here
         when(trainerMapper.trainersToTrainerListResponseDTOs(anyList())).thenReturn(expectedResponseDTO);
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.put("/trainee/update/trainers")
+        mockMvc.perform(MockMvcRequestBuilders.put("/trainee/" + usernameParameter + "/trainers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(trainersOfTraineeDTO)))
                 .andExpect(status().isOk())
@@ -218,7 +219,7 @@ public class TraineeControllerTest {
         when(traineeService.findByUsername(username)).thenReturn(trainee); // Set up your trainee object here
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.patch("/trainee/updateActive/" + username + "/" + isActive)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/trainee/" + username + "/" + isActive)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(username)))

@@ -1,6 +1,7 @@
 package com.epamlearning.dtos.training.request;
 
 import com.epamlearning.dtos.BaseDTO;
+import com.epamlearning.utils.ValidDateFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
@@ -37,6 +38,7 @@ public class TrainingAddRequestDTO implements BaseDTO {
     private String trainingName;
 
     @Schema(description = "Training date (FUTURE/PRESENT DATE)", example = "2024-01-26", requiredMode = REQUIRED)
+    @ValidDateFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Training date cannot be null")
     @FutureOrPresent(message = "Training date cannot be in the past")
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -48,5 +50,4 @@ public class TrainingAddRequestDTO implements BaseDTO {
     @Min(value = 5, message = "Training type must be greater than 5")
     @Max(value = 100, message = "Training type must be less than 100")
     private BigDecimal trainingDuration;
-
 }
