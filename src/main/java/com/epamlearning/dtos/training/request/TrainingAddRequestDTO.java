@@ -38,7 +38,7 @@ public class TrainingAddRequestDTO implements BaseDTO {
     private String trainingName;
 
     @Schema(description = "Training date (FUTURE/PRESENT DATE)", example = "2024-01-26", requiredMode = REQUIRED)
-    @ValidDateFormat(pattern = "yyyy-MM-dd")
+//    @ValidDateFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Training date cannot be null")
     @FutureOrPresent(message = "Training date cannot be in the past")
     @JsonFormat(pattern = "yyyy-MM-dd")
