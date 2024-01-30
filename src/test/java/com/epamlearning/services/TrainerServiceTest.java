@@ -76,8 +76,6 @@ public class TrainerServiceTest {
         assertEquals(sampleTrainer, result);
     }
 
-    // Similar tests for findById_NullId, findById_NonExistentId, findAll, findByUsername, etc.
-
     @Test
     void save_ValidTrainer_ReturnsSavedTrainer() {
         // Arrange
