@@ -10,6 +10,9 @@ import com.epamlearning.security.JWTUtil;
 import com.epamlearning.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +26,16 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
 
     private final JWTUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
     private final LoginAttemptServiceImpl loginAttemptService;
-    private final AuthorizationServiceImpl authService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(JWTUtil jwtUtil, LoginAttemptServiceImpl loginAttemptService, AuthorizationServiceImpl authService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(JWTUtil jwtUtil, AuthenticationManager authenticationManager, LoginAttemptServiceImpl loginAttemptService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
         this.loginAttemptService = loginAttemptService;
-        this.authService = authService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -52,7 +55,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(String username, String oldPassword, String newPassword) {
-        authService.authorizeUser(username);
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
             throw new NullPointerException("Username is null.");
@@ -85,19 +87,18 @@ public class UserServiceImpl implements UserService {
             log.warn("Password is null.");
             throw new NullPointerException("Password is null.");
         }
-
-        User user = findByUsername(username);
         if(loginAttemptService.isBlocked(username)) {
             log.warn("User is blocked.");
             throw new NotAuthenticated("User is blocked.");
         }
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             loginAttemptService.loginSucceeded(username);
             return generateTokens(username);
-        } else {
+        } catch (BadCredentialsException ignored){
             loginAttemptService.loginFailed(username);
             log.warn("Wrong password. Username: {} ", username);
-            throw new NotAuthenticated("Wrong password. Username: " + username);
+            throw new NotAuthenticated("Wrong username and password");
         }
     }
 

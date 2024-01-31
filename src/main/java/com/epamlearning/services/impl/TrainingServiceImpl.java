@@ -7,15 +7,12 @@ import com.epamlearning.entities.Trainee;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.Training;
 import com.epamlearning.entities.TrainingType;
-import com.epamlearning.exceptions.NotAuthorized;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainingMapper;
 import com.epamlearning.repositories.TrainingRepository;
 import com.epamlearning.services.TrainingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -172,21 +169,21 @@ public class TrainingServiceImpl implements TrainingService {
             throw new NullPointerException("TrainingDuration is null.");
         }
 
-//         Check if the authenticated user has the necessary roles
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isTrainer = authentication.getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_TRAINER"));
-        boolean isTrainee = authentication.getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_TRAINEE"));
-
-        // Check if the roles allow the operation
-        if ((isTrainee && !isTrainer) || (!isTrainee && isTrainer)) {
-            String authenticatedUsername = authentication.getName();
-            if ((isTrainee && !traineeUsername.equals(authenticatedUsername)) ||
-                    (isTrainer && !trainerUsername.equals(authenticatedUsername))) {
-                throw new NotAuthorized("Access denied");
-            }
-        }
+////         Check if the authenticated user has the necessary roles
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        boolean isTrainer = authentication.getAuthorities().stream()
+//                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_TRAINER"));
+//        boolean isTrainee = authentication.getAuthorities().stream()
+//                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_TRAINEE"));
+//
+//        // Check if the roles allow the operation
+//        if ((isTrainee && !isTrainer) || (!isTrainee && isTrainer)) {
+//            String authenticatedUsername = authentication.getName();
+//            if ((isTrainee && !traineeUsername.equals(authenticatedUsername)) ||
+//                    (isTrainer && !trainerUsername.equals(authenticatedUsername))) {
+//                throw new NotAuthorized("Access denied");
+//            }
+//        }
 
         Trainer trainer = trainerService.findByValidatedUsername(trainerUsername);
         Trainee trainee = traineeService.findByValidatedUsername(traineeUsername);

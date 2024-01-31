@@ -39,34 +39,31 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader == null || authHeader.isBlank() || !authHeader.startsWith("Bearer")) {
-            filterChain.doFilter(request, response);
-        } else {
+        if (authHeader != null  && authHeader.startsWith("Bearer")) {
+            if(authHeader.isBlank()) {
+                sendErrorResponse(response, "Token is blank.");
+            }
             String token = authHeader.substring(7);
             try {
                 if (jwtUtil.validateToken(token)) {
                     UserDetails foundUser = userDetailsService.loadUserByUsername(jwtUtil.extractUsername(token));
-                    updateContext(foundUser, request);
-                    filterChain.doFilter(request, response);
+                    UsernamePasswordAuthenticationToken authToken =
+                            new UsernamePasswordAuthenticationToken(foundUser,null, foundUser.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             } catch (ExpiredJwtException e) {
+                sendErrorResponse(response, "Token expired.");
                 log.info(e.getMessage());
             }
         }
-    }
-
-
-    private void updateContext(UserDetails foundUser, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(foundUser, null, foundUser.getAuthorities());
-        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authToken);
+        filterChain.doFilter(request, response);
     }
 
     private void sendErrorResponse(HttpServletResponse response, String message) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ErrorResponse errorResponse = new ErrorResponse(message);

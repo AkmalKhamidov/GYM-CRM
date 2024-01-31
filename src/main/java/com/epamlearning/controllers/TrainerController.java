@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,7 @@ public class TrainerController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Get trainer profile", description = "Getting trainer profile by username")
     @GetMapping("/{username}")
     public ResponseEntity<TrainerProfileResponseDTO> getTrainerProfile(@Parameter(description = "trainer username", example = "John.Smith")
@@ -58,6 +60,7 @@ public class TrainerController implements BaseController {
         return new ResponseEntity<>(trainerServiceImpl.findByUsername(username), HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Update trainer profile", description = "Updating trainer profile by username")
     @PutMapping("/{username}")
     public ResponseEntity<TrainerProfileResponseDTO> updateTraineeProfile(@Parameter(description = "trainer username", example = "John.Smith")
@@ -68,6 +71,7 @@ public class TrainerController implements BaseController {
         return new ResponseEntity<>(trainerServiceImpl.update(username, trainerDTO), HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Update trainer active", description = "Update trainer active (status)")
     @PatchMapping("/{username}/{active}")
     public ResponseEntity<String> updateTraineeActive(@Parameter(description = "Trainer username", example = "John.Smith")
@@ -79,6 +83,7 @@ public class TrainerController implements BaseController {
         return new ResponseEntity<>("Trainer with username: " + username + " was " + resultText + ".", HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Get trainer trainings", description = "Getting trainer trainings by username and optional criteria")
     @GetMapping("{username}/trainings")
     public ResponseEntity<List<TrainerTrainingsResponseDTO>> getTrainerTrainings(@Parameter(description = "trainer username", example = "John.Smith")

@@ -9,7 +9,6 @@ import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.dtos.trainer.request.TrainerUsernameRequestDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
-import com.epamlearning.services.impl.AuthorizationServiceImpl;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +38,6 @@ public class TraineeControllerTest {
     @Mock
     private UserEngagementMetrics metrics;
 
-    @Mock
-    private AuthorizationServiceImpl authorizationService;
     @InjectMocks
     private TraineeController traineeController;
 
@@ -146,7 +143,6 @@ public class TraineeControllerTest {
     void updateTraineeActive_shouldReturnOk() throws Exception {
         String username = "John.Doe";
         boolean isActive = true;
-        doNothing().when(authorizationService).authorizeUser(username);
 
         mockMvc.perform(patch("/api/v1/trainee/" + username + "/" + isActive)
                         .contentType(MediaType.APPLICATION_JSON))

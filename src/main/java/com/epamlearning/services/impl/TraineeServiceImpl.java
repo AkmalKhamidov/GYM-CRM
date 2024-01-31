@@ -13,7 +13,6 @@ import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TraineeMapper;
 import com.epamlearning.mapper.TrainerMapper;
-import com.epamlearning.repositories.RoleRepository;
 import com.epamlearning.repositories.TraineeRepository;
 import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TraineeService;
@@ -36,7 +35,6 @@ import java.util.Set;
 public class TraineeServiceImpl implements TraineeService {
 
     private final TraineeMapper traineeMapper;
-    private final AuthorizationServiceImpl authService;
     private final TrainerMapper trainerMapper;
     private final TraineeRepository traineeRepository;
     private final UserServiceImpl userService;
@@ -46,14 +44,12 @@ public class TraineeServiceImpl implements TraineeService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public TraineeServiceImpl(TraineeMapper traineeMapper,
-                              AuthorizationServiceImpl authService, TrainerMapper trainerMapper,
+    public TraineeServiceImpl(TraineeMapper traineeMapper, TrainerMapper trainerMapper,
                               TraineeRepository traineeRepository,
                               UserServiceImpl userService,
                               @Lazy TrainerServiceImpl trainerService,
                               @Lazy TrainingServiceImpl trainingService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.traineeMapper = traineeMapper;
-        this.authService = authService;
         this.trainerMapper = trainerMapper;
         this.traineeRepository = traineeRepository;
         this.userService = userService;
@@ -70,7 +66,6 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     public TraineeProfileResponseDTO findByUsername(String username) {
-        authService.authorizeUser(username);
         return traineeMapper.traineeToTraineeProfileResponseToDTO(findByValidatedUsername(username));
     }
 
@@ -92,7 +87,6 @@ public class TraineeServiceImpl implements TraineeService {
     @Override
     @Transactional
     public TraineeProfileResponseDTO update(String username, TraineeUpdateRequestDTO dto) {
-        authService.authorizeUser(username);
         userService.userNullVerification(dto);
         Trainee traineeToUpdate = findByValidatedUsername(username);
         traineeToUpdate.setDateOfBirth(dto.getDateOfBirth());
@@ -108,7 +102,6 @@ public class TraineeServiceImpl implements TraineeService {
     @Override
     @Transactional
     public void deleteByUsername(String username) {
-        authService.authorizeUser(username);
         Trainee trainee = findByValidatedUsername(username);
         trainingService.deleteTrainingsByTraineeUsername(trainee.getUser().getUsername());
         traineeRepository.delete(trainee);
@@ -118,7 +111,6 @@ public class TraineeServiceImpl implements TraineeService {
     @Override
     @Transactional
     public TraineeProfileResponseDTO updateActive(String username, boolean active) {
-        authService.authorizeUser(username);
         Trainee traineeUpdated = findByValidatedUsername(username);
         traineeUpdated.getUser().setActive(active);
         log.info("Trainee with username: {} was {}.", username, active ? "activated" : "deactivated");
@@ -127,7 +119,6 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Transactional
     public Trainee updateTrainersForTrainee(String username, List<Trainer> trainers) {
-        authService.authorizeUser(username);
         Trainee traineeToUpdate = findByValidatedUsername(username);
         traineeToUpdate.getTrainers().clear();
         traineeToUpdate.getTrainers().addAll(trainers);
@@ -139,7 +130,6 @@ public class TraineeServiceImpl implements TraineeService {
     @Override
     @Transactional
     public List<TrainerListResponseDTO> updateTrainersForTrainee(String username, UpdateTrainersOfTraineeRequestDTO dto) {
-        authService.authorizeUser(username);
 
         Trainee traineeToUpdate = findByValidatedUsername(username);
         List<Trainer> trainers = dto.getTrainers().stream().map(trainer -> trainerService.findByValidatedUsername(trainer.getUsername())).toList();

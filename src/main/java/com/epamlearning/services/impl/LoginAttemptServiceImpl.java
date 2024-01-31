@@ -44,9 +44,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService
         List<LoginAttempt> attempts = loginAttemptRepository.findByUsername(username);
         if (attempts.size() >= MAX_ATTEMPTS && attempts.size() % MAX_ATTEMPTS == 0) {
             LocalDateTime lastAttemptTime = attempts.get(attempts.size() - 1).getTimestamp();
-            if (lastAttemptTime.plusMinutes(TimeUnit.MILLISECONDS.toMinutes(LOCK_DURATION)).isAfter(LocalDateTime.now())) {
-                return true;
-            }
+            return lastAttemptTime.plusMinutes(TimeUnit.MILLISECONDS.toMinutes(LOCK_DURATION)).isAfter(LocalDateTime.now());
         }
         return false;
     }

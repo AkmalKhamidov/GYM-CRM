@@ -56,35 +56,33 @@ public class SecurityConfig {
                                         "/api/v1/trainee/register",
                                         "/api/v1/trainer/register"
                                 ).permitAll()
-                                .requestMatchers("/api/v1/training/**", "/api/v1/auth/change-password").hasAnyRole("TRAINEE", "TRAINER")
+                                .requestMatchers("/api/v1/training/**", "/api/v1/auth/change-password", "api/v1/auth/logout").hasAnyRole("TRAINEE", "TRAINER")
                                 .requestMatchers("/api/v1/trainee/**").hasRole("TRAINEE")
                                 .requestMatchers("/api/v1/trainer/**").hasRole("TRAINER")
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
                         .authenticationEntryPoint((request, response, authException) -> {
-                            response.setContentType("application/json");
+                            response.setContentType("application/json; charset=UTF-8");
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             String errorMessage = authException.getMessage();
                             String timestamp = String.valueOf(System.currentTimeMillis());
                             String jsonResponse = "{ \"message\": \"" + errorMessage + "\", \"timestamp\": \"" + timestamp + "\" }";
-                            response.getOutputStream().print(jsonResponse);
+                            response.getWriter().write(jsonResponse);
                         })
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            response.setContentType("application/json");
+                            response.setContentType("application/json;  charset=UTF-8");
                             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             String errorMessage = accessDeniedException.getMessage();
                             String timestamp = String.valueOf(System.currentTimeMillis());
                             String jsonResponse = "{ \"message\": \"" + errorMessage + "\", \"timestamp\": \"" + timestamp + "\" }";
-                            response.getOutputStream().print(jsonResponse);
-                        }))
+                            response.getWriter().write(jsonResponse);
+                        })
+                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)
-                .logout(logout -> logout
-                        .logoutUrl("/api/v1/auth/logout")
-                )
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .build();
     }
@@ -93,7 +91,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -109,7 +106,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(14);
+        return new BCryptPasswordEncoder();
     }
 
 }

@@ -4,15 +4,16 @@ import com.epamlearning.dtos.trainer.request.TrainerUpdateRequestDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
-import com.epamlearning.entities.Trainee;
-import com.epamlearning.entities.Trainer;
-import com.epamlearning.entities.TrainingType;
-import com.epamlearning.entities.User;
+import com.epamlearning.entities.*;
+import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.entities.enums.TrainingTypeName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainerMapper;
 import com.epamlearning.repositories.TrainerRepository;
-import com.epamlearning.services.impl.*;
+import com.epamlearning.services.impl.TraineeServiceImpl;
+import com.epamlearning.services.impl.TrainerServiceImpl;
+import com.epamlearning.services.impl.TrainingTypeServiceImpl;
+import com.epamlearning.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +46,10 @@ public class TrainerServiceImplTest {
     private TrainerMapper trainerMapper;
 
     @Mock
-    private AuthorizationServiceImpl authService;
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private RoleService roleService;
 
     @Mock
     private TrainingTypeServiceImpl trainingTypeServiceImpl;
@@ -245,8 +250,12 @@ public class TrainerServiceImplTest {
         trainingType.setTrainingTypeName(TrainingTypeName.GYM_TYPE);
         TrainerRegistrationResponseDTO trainerRegistrationResponseDTO = new TrainerRegistrationResponseDTO();
         trainerRegistrationResponseDTO.setUsername("sampleUsername");
+        Role role = new Role();
+        role.setId(2L);
+        role.setName(RoleName.ROLE_TRAINER);
         when(userServiceImpl.createUser(firstName, lastName)).thenReturn(sampleTrainer.getUser());
         when(trainerRepository.save(any(Trainer.class))).thenReturn(sampleTrainer);
+        when(roleService.findByRoleName(any())).thenReturn(role);
         when(trainingTypeServiceImpl.findById(1L)).thenReturn(trainingType);
         when(trainerMapper.trainerToTrainerRegistrationResponseDTO(sampleTrainer)).thenReturn(trainerRegistrationResponseDTO);
         // Act

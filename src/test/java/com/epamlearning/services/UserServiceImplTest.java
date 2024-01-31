@@ -2,20 +2,19 @@ package com.epamlearning.services;
 
 import com.epamlearning.dtos.SessionDTO;
 import com.epamlearning.entities.User;
+import com.epamlearning.exceptions.NotAuthenticated;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.repositories.UserRepository;
 import com.epamlearning.security.JWTUtil;
-import com.epamlearning.services.impl.AuthorizationServiceImpl;
+import com.epamlearning.services.impl.LoginAttemptServiceImpl;
 import com.epamlearning.services.impl.UserServiceImpl;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
@@ -29,17 +28,17 @@ import static org.mockito.Mockito.*;
 public class UserServiceImplTest {
 
     @Mock
-    private LoginAttemptService loginAttemptService;
+    private LoginAttemptServiceImpl loginAttemptService;
     @Mock
     private UserRepository userRepository;
-
-    @Mock
-    private AuthorizationServiceImpl authService;
 
     @Mock
     private JWTUtil jwtUtil;
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private AuthenticationManager authenticationManager;
     @InjectMocks
     private UserServiceImpl userServiceImpl;
 
@@ -123,7 +122,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testAuthenticate_SuccessfulAuthentication() {
+    void authenticate_SuccessfulAuthentication() {
         // Given
         String username = "testUser";
         String password = "testPassword";
@@ -146,8 +145,6 @@ public class UserServiceImplTest {
         assertNotNull(sessionDTO);
         assertEquals(accessToken, sessionDTO.accessToken());
         assertEquals(refreshToken, sessionDTO.refreshToken());
-        verify(userRepository, times(1)).findByUsername(username);
-        verify(passwordEncoder, times(1)).matches(password, encodedPassword);
         verify(jwtUtil, times(1)).generateAccessToken(username);
         verify(jwtUtil, times(1)).generateRefreshToken(username);
     }
@@ -163,9 +160,9 @@ public class UserServiceImplTest {
         when(userRepository.findByUsername(username)).thenReturn(Optional.of(user));
         when(loginAttemptService.isBlocked(username)).thenReturn(false);
         when(passwordEncoder.matches(password, user.getPassword())).thenReturn(false);
-
+        when(authenticationManager.authenticate(any())).thenThrow(BadCredentialsException.class);
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> userServiceImpl.authenticate(username, password));
+        assertThrows(NotAuthenticated.class, () -> userServiceImpl.authenticate(username, password));
     }
 
     @Test

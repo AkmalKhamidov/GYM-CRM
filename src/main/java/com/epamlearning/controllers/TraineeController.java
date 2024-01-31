@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +60,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Get trainee profile", description = "Getting trainee profile by username")
     @GetMapping("/{username}")
     public ResponseEntity<TraineeProfileResponseDTO> getTraineeProfile(@Parameter(description = "trainee username", example = "John.Wick")
@@ -66,6 +68,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(traineeService.findByUsername(username), HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Update trainee profile", description = "Updating trainee profile by username")
     @PutMapping("/{username}")
     public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@PathVariable("username")
@@ -75,7 +78,7 @@ public class TraineeController implements BaseController {
                                                                           @Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
         return new ResponseEntity<>(traineeService.update(username, traineeDTO), HttpStatus.OK);
     }
-
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Get all not assigned trainers on trainee", description = "Getting all active trainers not assigned on trainee (trainee username)")
     @GetMapping("/{username}/not-assigned-trainers")
     public ResponseEntity<List<TrainerListResponseDTO>> getNotAssignedTrainers(@Parameter(description = "trainee username", example = "John.Wick")
@@ -83,6 +86,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(trainerService.findNotAssignedActiveTrainers(username), HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username")
     @Operation(summary = "Delete trainee", description = "Deleting trainee by username")
     @DeleteMapping("/{username}")
     public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick")
@@ -94,6 +98,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Update trainers of trainee", description = "Updating trainers of trainee by username")
     @PutMapping("/{username}/trainers")
     public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Parameter(description = "trainee username", example = "John.Wick")
@@ -105,6 +110,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>(traineeService.updateTrainersForTrainee(username, trainersOfTraineeDTO), HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username")
     @Operation(summary = "Update trainee active", description = "Updating trainee active by username")
     @PatchMapping("/{username}/{active}")
     public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick")
@@ -120,6 +126,7 @@ public class TraineeController implements BaseController {
         return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);
     }
 
+    @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Get trainee trainings", description = "Getting trainee trainings by username and optional criteria")
     @GetMapping("{username}/trainings")
     public ResponseEntity<List<TraineeTrainingsResponseDTO>> getTraineeTrainings(@Parameter(description = "trainee username", example = "John.Wick")

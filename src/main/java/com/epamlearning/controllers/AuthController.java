@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -37,10 +38,8 @@ public class AuthController implements BaseController {
 
     @Operation(summary = "Login", description = "Login with username and password. Token will be generated and returned. Token expiration time is 30 minutes.")
     @PostMapping("/login")
-    public ResponseEntity<SessionDTO> login(@Validated @RequestBody UserAuthDTO userAuthDTO, HttpServletResponse response) {
+    public ResponseEntity<SessionDTO> login(@Validated @RequestBody UserAuthDTO userAuthDTO) {
         SessionDTO responseDTO = userServiceImpl.authenticate(userAuthDTO.getUsername(), userAuthDTO.getPassword());
-        Cookie cookie = new Cookie("access-token", responseDTO.accessToken());
-        response.addCookie(cookie);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
@@ -56,6 +55,7 @@ public class AuthController implements BaseController {
         }
     }
 
+    @PreAuthorize("principal.username == #userChangePasswordDTO.username and principal.enabled == true")
     @Operation(summary = "Change password", description = "Change password for logged in user. Username and old password must be provided.")
     @PutMapping("/change-password")
     public ResponseEntity<String> changePassword(@Validated @RequestBody UserChangePasswordDTO userChangePasswordDTO) {
@@ -70,7 +70,7 @@ public class AuthController implements BaseController {
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
-        // Clear client-side cookies
+        // Clear client-side cookies. If exists.
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {

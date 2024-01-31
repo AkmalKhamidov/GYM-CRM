@@ -34,17 +34,15 @@ public class TrainerServiceImpl implements TrainerService {
 
     private final TrainerRepository trainerRepository;
     private final TraineeServiceImpl traineeServiceImpl;
-    private final AuthorizationServiceImpl authService;
     private final TrainingTypeServiceImpl trainingTypeServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
     @Autowired
-    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, AuthorizationServiceImpl authService, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.trainerMapper = trainerMapper;
         this.trainerRepository = trainerRepository;
         this.traineeServiceImpl = traineeServiceImpl;
-        this.authService = authService;
         this.trainingTypeServiceImpl = trainingTypeServiceImpl;
         this.userServiceImpl = userServiceImpl;
         this.passwordEncoder = passwordEncoder;
@@ -53,7 +51,6 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public TrainerProfileResponseDTO findByUsername(String username) {
-        authService.authorizeUser(username);
         return trainerMapper.trainerToTrainerProfileResponseDTO(findByValidatedUsername(username));
     }
 
@@ -74,7 +71,6 @@ public class TrainerServiceImpl implements TrainerService {
     @Transactional
     @Override
     public TrainerProfileResponseDTO update(String username, TrainerUpdateRequestDTO dto) {
-        authService.authorizeUser(username);
         userServiceImpl.userNullVerification(dto);
         Trainer trainerToUpdate = findByValidatedUsername(username);
         trainerToUpdate.getUser().setFirstName(dto.getFirstName());
@@ -88,24 +84,9 @@ public class TrainerServiceImpl implements TrainerService {
         return trainerMapper.trainersToTrainerProfileResponseDTOs(trainerRepository.findAll());
     }
 
-    public Long authenticate(String username, String password) {
-        if (password == null || password.isEmpty()) {
-            log.warn("Password is null.");
-            throw new NullPointerException("Password is null.");
-        }
-        Trainer trainer = findByValidatedUsername(username);
-        if (trainer.getUser().getPassword().equals(password)) {
-            return trainer.getId();
-        } else {
-            log.warn("Wrong password. Username: {} ", username);
-            throw new NotAuthenticated("Wrong password. Username: " + username);
-        }
-    }
-
     @Transactional
     @Override
     public TrainerProfileResponseDTO updateActive(String username, boolean active) {
-        authService.authorizeUser(username);
         Trainer trainerUpdated = findByValidatedUsername(username);
         trainerUpdated.getUser().setActive(active);
         return trainerMapper.trainerToTrainerProfileResponseDTO(trainerRepository.save(trainerUpdated));
@@ -113,7 +94,6 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public List<TrainerListResponseDTO> findNotAssignedActiveTrainers(String username) {
-        authService.authorizeUser(username);
         return trainerMapper.trainersToTrainerListResponseDTOs(
                 trainerRepository.findNotAssignedActiveTrainersOfTrainee(
                         traineeServiceImpl.findByValidatedUsername(username)

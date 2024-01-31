@@ -38,20 +38,18 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
-        logExceptionDetails(request, ex);
-        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
+//        logExceptionDetails(request, ex);
+//        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
         BindingResult result = ex.getBindingResult();
         StringBuilder errorMessage = new StringBuilder("Validation error(s): ");
 
-        result.getFieldErrors().forEach(fieldError -> {
-            errorMessage.append(fieldError.getDefaultMessage()).append("; ");
-        });
+        result.getFieldErrors().forEach(fieldError -> errorMessage.append(fieldError.getDefaultMessage()).append("; "));
         logExceptionDetails(request, new Exception("MethodArgumentNotValidException" + errorMessage));
         return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.UNPROCESSABLE_ENTITY);
     }

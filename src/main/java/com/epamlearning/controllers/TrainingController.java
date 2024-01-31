@@ -3,12 +3,12 @@ package com.epamlearning.controllers;
 import com.epamlearning.actuator.metrics.UserEngagementMetrics;
 import com.epamlearning.dtos.training.request.TrainingAddRequestDTO;
 import com.epamlearning.services.impl.TrainingServiceImpl;
-import com.epamlearning.services.impl.TrainingTypeServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,18 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainingController implements BaseController {
 
     private final TrainingServiceImpl trainingServiceImpl;
-    private final TrainingTypeServiceImpl trainingTypeServiceImpl;
     private final UserEngagementMetrics metrics;
 
     @Autowired
-    public TrainingController(TrainingServiceImpl trainingServiceImpl, TrainingTypeServiceImpl trainingTypeServiceImpl, UserEngagementMetrics metrics) {
+    public TrainingController(TrainingServiceImpl trainingServiceImpl, UserEngagementMetrics metrics) {
         this.trainingServiceImpl = trainingServiceImpl;
-        this.trainingTypeServiceImpl = trainingTypeServiceImpl;
         this.metrics = metrics;
     }
 
 
-
+    @PreAuthorize("hasAnyRole('ROLE_TRAINEE', 'ROLE_TRAINER') and " +
+            "((hasRole('ROLE_TRAINEE') and not hasRole('ROLE_TRAINER') and " +
+            "#trainingAddDTO.traineeUsername == authentication.principal.username) or " +
+            "(hasRole('ROLE_TRAINER') and not hasRole('ROLE_TRAINEE') and " +
+            "#trainingAddDTO.trainerUsername == authentication.principal.username)) and " +
+            "authentication.principal.enabled == true")
     @Operation(summary = "Add training", description = "Adding training with trainer training type")
     @PostMapping
     public ResponseEntity<String> addTraining(@Validated @RequestBody TrainingAddRequestDTO trainingAddDTO) {

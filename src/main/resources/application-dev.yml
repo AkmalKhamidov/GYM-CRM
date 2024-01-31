@@ -4,11 +4,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
   datasource:
     url: jdbc:postgresql://localhost:5432/hibernate-app
-    username: postgres
-    password: slon123
+    username:
+    password:
     driverClassName: org.postgresql.Driver
+
 
 management:
   endpoints:
@@ -20,7 +22,7 @@ management:
       enabled: true
 
 server:
-  port: 8084
+  port: 8083
 
 springdoc:
   swagger-ui:

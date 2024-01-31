@@ -3,13 +3,13 @@ package com.epamlearning.services;
 import com.epamlearning.dtos.trainee.request.TraineeUpdateRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
+import com.epamlearning.entities.Role;
 import com.epamlearning.entities.Trainee;
 import com.epamlearning.entities.User;
-import com.epamlearning.exceptions.NotAuthenticated;
+import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TraineeMapper;
 import com.epamlearning.repositories.TraineeRepository;
-import com.epamlearning.services.impl.AuthorizationServiceImpl;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.epamlearning.services.impl.TrainingServiceImpl;
 import com.epamlearning.services.impl.UserServiceImpl;
@@ -52,8 +52,6 @@ public class TraineeServiceImplTest {
     @Mock
     private TrainingServiceImpl trainingServiceImpl;
 
-    @Mock
-    private AuthorizationServiceImpl authService;
     @InjectMocks
     private TraineeServiceImpl traineeServiceImpl;
 
@@ -177,7 +175,11 @@ public class TraineeServiceImplTest {
         Date dateOfBirth = new Date();
         TraineeRegistrationResponseDTO traineeRegistrationResponseDTO = new TraineeRegistrationResponseDTO();
         traineeRegistrationResponseDTO.setUsername("sampleUsername");
+        Role role = new Role();
+        role.setId(1L);
+        role.setName(RoleName.ROLE_TRAINEE);
         when(userServiceImpl.createUser(firstName, lastName)).thenReturn(sampleTrainee.getUser());
+        when(roleService.findByRoleName(any())).thenReturn(role);
         when(traineeRepository.save(any(Trainee.class))).thenReturn(sampleTrainee);
         when(traineeMapper.traineeToTraineeRegistrationResponseDTO(sampleTrainee)).thenReturn(traineeRegistrationResponseDTO);
         // Act
@@ -193,7 +195,6 @@ public class TraineeServiceImplTest {
     void deleteByUsername_ValidUsername_DeletesTrainee() {
         // Arrange
         String usernameToDelete = sampleTrainee.getUser().getUsername();
-        doNothing().when(authService).authorizeUser(usernameToDelete);
         when(traineeRepository.findTraineeByUserUsername(usernameToDelete)).thenReturn(Optional.of(sampleTrainee));
 
         // Act
@@ -203,17 +204,5 @@ public class TraineeServiceImplTest {
         verify(trainingServiceImpl, times(1)).deleteTrainingsByTraineeUsername(any());
         verify(traineeRepository, times(1)).delete(any());
     }
-
-    @Test
-    void deleteByUsername_UnauthorizedUser_ThrowsNotAuthenticatedException() {
-        String usernameToDelete = sampleTrainee.getUser().getUsername();
-
-        // Arrange
-        doThrow(new NotAuthenticated("Unauthorized")).when(authService).authorizeUser(usernameToDelete);
-
-        // Act & Assert
-        assertThrows(NotAuthenticated.class, () -> traineeServiceImpl.deleteByUsername(usernameToDelete));
-    }
-
 
 }
