@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
 @Getter
 @Setter
-public class User implements BaseModel{
+public class User implements BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,11 +28,17 @@ public class User implements BaseModel{
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password",  nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 
     public User(String firstName, String lastName, String username, String password, boolean isActive) {
         this.firstName = firstName;

@@ -5,17 +5,20 @@ import com.epamlearning.dtos.trainee.request.TraineeRegistrationRequestDTO;
 import com.epamlearning.dtos.trainee.request.TraineeUpdateRequestDTO;
 import com.epamlearning.dtos.trainee.request.UpdateTrainersOfTraineeRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
+import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
-import com.epamlearning.dtos.user.UserAuthDTO;
-import com.epamlearning.entities.Trainee;
-import com.epamlearning.entities.Trainer;
-import com.epamlearning.mapper.TraineeMapper;
-import com.epamlearning.mapper.TrainerMapper;
-import com.epamlearning.services.TraineeService;
-import com.epamlearning.services.TrainerService;
+import com.epamlearning.dtos.training.request.TraineeTrainingsRequestDTO;
+import com.epamlearning.dtos.training.response.TraineeTrainingsResponseDTO;
+import com.epamlearning.services.impl.TraineeServiceImpl;
+import com.epamlearning.services.impl.TrainerServiceImpl;
+import com.epamlearning.services.impl.TrainingServiceImpl;
+import com.epamlearning.services.impl.TrainingTypeServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,35 +28,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/trainee")
+@RequestMapping("api/v1/trainee")
 @Tag(name = "Trainee controller", description = "Controller for managing trainees")
 public class TraineeController implements BaseController {
 
-    private final TraineeMapper traineeMapper;
-    private final TrainerMapper trainerMapper;
-    private final TraineeService traineeService;
-    private final TrainerService trainerService;
+    private final TraineeServiceImpl traineeService;
+    private final TrainingServiceImpl trainingService;
+    private final TrainingTypeServiceImpl trainingTypeService;
+    private final TrainerServiceImpl trainerService;
     private final UserEngagementMetrics metrics;
 
     @Autowired
-    public TraineeController(TraineeMapper traineeMapper, TrainerMapper trainerMapper, TraineeService traineeService,
-                             TrainerService trainerService, UserEngagementMetrics metrics) {
-        this.traineeMapper = traineeMapper;
-        this.trainerMapper = trainerMapper;
+    public TraineeController(TraineeServiceImpl traineeService, TrainingServiceImpl trainingService, TrainingTypeServiceImpl trainingTypeService, TrainerServiceImpl trainerService, UserEngagementMetrics metrics) {
         this.traineeService = traineeService;
+        this.trainingService = trainingService;
+        this.trainingTypeService = trainingTypeService;
         this.trainerService = trainerService;
         this.metrics = metrics;
     }
 
     @Operation(summary = "Register trainee", description = "Registering trainee with default active (true)")
     @PostMapping("/register")
-    public ResponseEntity<UserAuthDTO> registerTrainee(@Validated @RequestBody TraineeRegistrationRequestDTO traineeDTO) {
-        Trainee trainee = traineeService.createTrainee(traineeDTO.getFirstName(), traineeDTO.getLastName(), traineeDTO.getAddress(), traineeDTO.getDateOfBirth());
-        Trainee savedTrainee = traineeService.save(trainee);
-
+    public ResponseEntity<TraineeRegistrationResponseDTO> registerTrainee(@Validated @RequestBody TraineeRegistrationRequestDTO traineeDTO) {
+        TraineeRegistrationResponseDTO responseDTO =  traineeService.createTrainee(
+                traineeDTO.getFirstName(),
+                traineeDTO.getLastName(),
+                traineeDTO.getAddress(),
+                traineeDTO.getDateOfBirth());
         metrics.registerNewTrainee();
-
-        UserAuthDTO responseDTO = traineeMapper.traineeToUserAuthDTO(savedTrainee);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
@@ -61,43 +63,80 @@ public class TraineeController implements BaseController {
     @GetMapping("/{username}")
     public ResponseEntity<TraineeProfileResponseDTO> getTraineeProfile(@Parameter(description = "trainee username", example = "John.Wick")
                                                                            @PathVariable("username") String username) {
-        Trainee trainee = traineeService.findByUsername(username);
-        TraineeProfileResponseDTO responseDTO = traineeMapper.traineeToTraineeProfileResponseToDTO(trainee);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(traineeService.findByUsername(username), HttpStatus.OK);
     }
 
     @Operation(summary = "Update trainee profile", description = "Updating trainee profile by username")
-    @PutMapping("/update")
-    public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
-        Trainee trainee = traineeService.findByUsername(traineeDTO.getUsername());
-        Trainee savedTrainee = traineeService.update(trainee.getId(), traineeMapper.traineeUpdateRequestDTOToTrainee(traineeDTO));
-        TraineeProfileResponseDTO responseDTO = traineeMapper.traineeToTraineeProfileResponseToDTO(savedTrainee);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    @PutMapping("/{username}")
+    public ResponseEntity<TraineeProfileResponseDTO> updateTraineeProfile(@PathVariable("username")
+                                                                            @Parameter(description = "Trainee username", example = "John.Wick")
+                                                                              @NotNull(message = "Username cannot be null")
+                                                                              @NotBlank(message = "Username cannot be blank") String username,
+                                                                          @Validated @RequestBody TraineeUpdateRequestDTO traineeDTO) {
+        return new ResponseEntity<>(traineeService.update(username, traineeDTO), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get all not assigned trainers on trainee", description = "Getting all active trainers not assigned on trainee (trainee username)")
+    @GetMapping("/{username}/not-assigned-trainers")
+    public ResponseEntity<List<TrainerListResponseDTO>> getNotAssignedTrainers(@Parameter(description = "trainee username", example = "John.Wick")
+                                                                               @PathVariable("username") String username) {
+        return new ResponseEntity<>(trainerService.findNotAssignedActiveTrainers(username), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete trainee", description = "Deleting trainee by username")
-    @DeleteMapping("/delete/{username}")
-    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username) {
+    @DeleteMapping("/{username}")
+    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick")
+                                                    @PathVariable("username")
+                                                    @NotNull(message = "Username cannot be null")
+                                                    @NotBlank(message = "Username cannot be blank")
+                                                    String username) {
         traineeService.deleteByUsername(username);
         return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
     }
 
     @Operation(summary = "Update trainers of trainee", description = "Updating trainers of trainee by username")
-    @PutMapping("/update/trainers")
-    public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Validated @RequestBody UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO) {
-        Trainee trainee = traineeService.findByUsername(trainersOfTraineeDTO.getUsername());
-        List<Trainer> trainers = trainersOfTraineeDTO.getTrainers().stream().map(trainer -> trainerService.findByUsername(trainer.getUsername())).toList();
-        Trainee updatedTrainee = traineeService.updateTrainersForTrainee(trainee.getId(), trainers);
-        List<TrainerListResponseDTO> responseDTO = trainerMapper.trainersToTrainerListResponseDTOs(updatedTrainee.getTrainers());
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    @PutMapping("/{username}/trainers")
+    public ResponseEntity<List<TrainerListResponseDTO>> updateTrainersOfTrainee(@Parameter(description = "trainee username", example = "John.Wick")
+                                                                                @PathVariable("username")
+                                                                                @NotNull(message = "Username cannot be null")
+                                                                                @NotBlank(message = "Username cannot be blank")
+                                                                                String username,
+                                                                                @Validated @RequestBody UpdateTrainersOfTraineeRequestDTO trainersOfTraineeDTO) {
+        return new ResponseEntity<>(traineeService.updateTrainersForTrainee(username, trainersOfTraineeDTO), HttpStatus.OK);
     }
 
     @Operation(summary = "Update trainee active", description = "Updating trainee active by username")
-    @PatchMapping("/updateActive/{username}/{active}")
-    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick") @PathVariable("username") String username,
-                                                      @Parameter(description = "trainee isActive (true/false)", example = "true") @PathVariable("active") boolean isActive) {
+    @PatchMapping("/{username}/{active}")
+    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick")
+                                                          @PathVariable("username")
+                                                          @NotNull(message = "Username cannot be null")
+                                                          @NotBlank(message = "Username cannot be blank")
+                                                          String username,
+                                                      @Parameter(description = "trainee isActive (true/false)", example = "true")
+                                                      @PathVariable("active")
+                                                      boolean isActive) {
         String resultText = isActive ? "activated" : "deactivated";
-        Trainee updatedTrainee = traineeService.updateActive(traineeService.findByUsername(username).getId(), isActive);
+        traineeService.updateActive(username, isActive);
         return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);
     }
+
+    @Operation(summary = "Get trainee trainings", description = "Getting trainee trainings by username and optional criteria")
+    @GetMapping("{username}/trainings")
+    public ResponseEntity<List<TraineeTrainingsResponseDTO>> getTraineeTrainings(@Parameter(description = "trainee username", example = "John.Wick")
+                                                                                     @PathVariable("username")
+                                                                                     @NotNull(message = "Username cannot be null")
+                                                                                     @NotBlank(message = "Username cannot be blank")
+                                                                                     String username,
+                                                                                 @Validated TraineeTrainingsRequestDTO trainingDTO) {
+        List<TraineeTrainingsResponseDTO> responseDTO =
+                trainingService.findByTraineeAndCriteria(
+                        username,
+                        trainingDTO.getDateFrom(),
+                        trainingDTO.getDateTo(),
+                        trainingTypeService.findByTrainingTypeName(trainingDTO.getTrainingTypeName()),
+                        StringUtils.trimToNull(trainingDTO.getTrainerName())
+                );
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
 }

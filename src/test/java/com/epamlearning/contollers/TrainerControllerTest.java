@@ -4,13 +4,12 @@ import com.epamlearning.actuator.metrics.UserEngagementMetrics;
 import com.epamlearning.controllers.TrainerController;
 import com.epamlearning.dtos.trainer.request.TrainerRegistrationRequestDTO;
 import com.epamlearning.dtos.trainer.request.TrainerUpdateRequestDTO;
-import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
-import com.epamlearning.dtos.user.UserAuthDTO;
-import com.epamlearning.entities.Trainer;
-import com.epamlearning.entities.User;
-import com.epamlearning.mapper.TrainerMapper;
-import com.epamlearning.services.TrainerService;
+import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
+import com.epamlearning.dtos.training.request.TrainerTrainingsRequestDTO;
+import com.epamlearning.dtos.training.response.TrainerTrainingsResponseDTO;
+import com.epamlearning.services.impl.TrainerServiceImpl;
+import com.epamlearning.services.impl.TrainingServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,27 +18,25 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Collections;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class TrainerControllerTest {
 
     @Mock
-    private TrainerMapper trainerMapper;
+    private TrainerServiceImpl trainerService;
+
+    @Mock
+    private TrainingServiceImpl trainingService;
 
     @Mock
     private UserEngagementMetrics metrics;
-
-    @Mock
-    private TrainerService trainerService;
 
     @InjectMocks
     private TrainerController trainerController;
@@ -54,129 +51,101 @@ public class TrainerControllerTest {
 
     @Test
     void registerTrainer_shouldReturnCreated() throws Exception {
-        // Arrange
         TrainerRegistrationRequestDTO requestDTO = new TrainerRegistrationRequestDTO();
         requestDTO.setFirstName("John");
         requestDTO.setLastName("Doe");
         requestDTO.setSpecializationId(1L);
 
-        Trainer trainer = new Trainer(); // Set up your trainer object here
+        TrainerRegistrationResponseDTO responseDTO = new TrainerRegistrationResponseDTO();
+        responseDTO.setUsername("John.Doe");
 
-        when(trainerService.createTrainer(any(), any(), any())).thenReturn(trainer);
-        when(trainerService.save(any())).thenReturn(trainer);
-        when(trainerMapper.trainerToUserAuthDTO(any())).thenReturn(new UserAuthDTO("John.Doe", "password"));
+        when(trainerService.createTrainer(requestDTO.getFirstName(), requestDTO.getLastName(), requestDTO.getSpecializationId()))
+                .thenReturn(responseDTO);
 
-        // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.post("/trainer/register")
+        mockMvc.perform(post("/api/v1/trainer/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.username").value("John.Doe"))
-                .andExpect(jsonPath("$.password").value("password"));
+                .andExpect(jsonPath("$.username").value(responseDTO.getUsername()));
 
-        // Verify
-        verify(trainerService, times(1)).save(any());
+        verify(trainerService, times(1)).createTrainer(requestDTO.getFirstName(), requestDTO.getLastName(), requestDTO.getSpecializationId());
     }
 
     @Test
     void getTrainerProfile_shouldReturnTrainerProfile() throws Exception {
-        // Arrange
-        TrainerProfileResponseDTO expectedResponseDTO = new TrainerProfileResponseDTO();
-        expectedResponseDTO.setFirstName("John");
-        expectedResponseDTO.setLastName("Doe");
-        expectedResponseDTO.setActive(true);
-
-        when(trainerService.findByUsername(anyString())).thenReturn(new Trainer()); // Set up your trainer object here
-        when(trainerMapper.trainerToTrainerProfileResponseDTO(any())).thenReturn(expectedResponseDTO);
-
-        // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/trainer/John.Doe")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value(expectedResponseDTO.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(expectedResponseDTO.getLastName()))
-                .andExpect(jsonPath("$.active").value(expectedResponseDTO.isActive()));
-
-        // Verify
-        verify(trainerService, times(1)).findByUsername(anyString());
-    }
-
-    @Test
-    void updateTraineeProfile_shouldReturnUpdatedTrainerProfile() throws Exception {
-        // Arrange
-        TrainerUpdateRequestDTO updateRequestDTO = new TrainerUpdateRequestDTO();
-        updateRequestDTO.setUsername("John.Doe");
-        updateRequestDTO.setFirstName("John");
-        updateRequestDTO.setLastName("Doe");
-
-        Trainer updatedTrainer = new Trainer();
-        User user = new User();
-        user.setFirstName(updateRequestDTO.getFirstName());
-        user.setLastName(updateRequestDTO.getLastName());
-        updatedTrainer.setUser(user);
-        updatedTrainer.setId(1L);
-
-        when(trainerService.findByUsername(updateRequestDTO.getUsername())).thenReturn(updatedTrainer); // Set up your trainer object here
-        when(trainerService.update(anyLong(), any())).thenReturn(updatedTrainer);
-        when(trainerMapper.trainerToTrainerProfileResponseDTO(any()))
-                .thenReturn(new TrainerProfileResponseDTO(updateRequestDTO.getFirstName(), updateRequestDTO.getLastName(), null,
-        true, null));
-
-        // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.put("/trainer/update")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(updateRequestDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value(updateRequestDTO.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(updateRequestDTO.getLastName()))
-                .andExpect(jsonPath("$.active").value(true));
-
-        // Verify
-        verify(trainerService, times(1)).findByUsername(anyString());
-        verify(trainerService, times(1)).update(anyLong(), any());
-    }
-
-    @Test
-    void getNotAssignedTrainers_shouldReturnNotAssignedTrainers() throws Exception {
-        // Arrange
-        String traineeUsername = "John.Doe";
-        List<TrainerListResponseDTO> expectedResponseDTO = Collections.singletonList(new TrainerListResponseDTO());
-
-        when(trainerService.findNotAssignedActiveTrainers(anyString())).thenReturn(Collections.emptyList()); // Set up your trainers object here
-        when(trainerMapper.trainersToTrainerListResponseDTOs(anyList())).thenReturn(expectedResponseDTO);
-
-        // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/trainer/not-assigned-on-trainee/" + traineeUsername)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(expectedResponseDTO.size()));
-
-        // Verify
-        verify(trainerService, times(1)).findNotAssignedActiveTrainers(anyString());
-    }
-
-    @Test
-    void updateTraineeActive_shouldReturnOk() throws Exception {
-        // Arrange
-        boolean isActive = true;
+        String firstName = "John";
+        String lastName = "Doe";
         String username = "John.Doe";
-        Trainer trainer = new Trainer();
-        User user = new User();
-        user.setUsername(username);
-        user.setActive(true);
-        trainer.setUser(user);
-        trainer.setId(1L);
-        when(trainerService.findByUsername(username)).thenReturn(trainer); // Set up your trainer object here
+        TrainerProfileResponseDTO responseDTO = new TrainerProfileResponseDTO();
+        responseDTO.setFirstName(firstName);
+        responseDTO.setLastName(lastName);
 
-        // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.patch("/trainer/updateActive/" + username + "/" + isActive)
-                        .contentType(MediaType.APPLICATION_JSON))
+        when(trainerService.findByUsername(username)).thenReturn(responseDTO);
+
+        mockMvc.perform(get("/api/v1/trainer/{username}", username))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(username)))
-                .andExpect(content().string(containsString("Trainer with username: " + username +" was activated.")));
+                .andExpect(jsonPath("$.firstName").value(responseDTO.getFirstName()))
+                .andExpect(jsonPath("$.lastName").value(responseDTO.getLastName()))
+        ;
 
-        // Verify
-        verify(trainerService, times(1)).updateActive(anyLong(), anyBoolean());
+        verify(trainerService, times(1)).findByUsername(username);
+    }
+
+    @Test
+    void updateTrainerProfile_shouldReturnUpdatedTrainerProfile() throws Exception {
+        String username = "John";
+        TrainerUpdateRequestDTO requestDTO = new TrainerUpdateRequestDTO();
+        requestDTO.setFirstName("John");
+        requestDTO.setLastName("Doe");
+        requestDTO.setActive(true);
+
+        TrainerProfileResponseDTO responseDTO = new TrainerProfileResponseDTO();
+        responseDTO.setFirstName(requestDTO.getFirstName());
+        responseDTO.setLastName(requestDTO.getLastName());
+        responseDTO.setActive(requestDTO.isActive());
+
+        when(trainerService.update(username, requestDTO)).thenReturn(responseDTO);
+
+        mockMvc.perform(put("/api/v1/trainer/{username}", username)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(requestDTO)))
+                .andExpect(status().isOk());
+
+        verify(trainerService, times(1)).update(anyString(), any());
+    }
+
+    @Test
+    void updateTrainerActive_shouldReturnOk() throws Exception {
+        String username = "John";
+        boolean isActive = true;
+
+        mockMvc.perform(patch("/api/v1/trainer/{username}/{active}", username, isActive))
+                .andExpect(status().isOk());
+
+        verify(trainerService, times(1)).updateActive(username, isActive);
+    }
+
+    @Test
+    void getTrainerTrainings_shouldReturnTrainerTrainings() throws Exception {
+        String username = "John";
+        TrainerTrainingsRequestDTO requestDTO = new TrainerTrainingsRequestDTO();
+        requestDTO.setDateFrom(LocalDate.from(LocalDate.now()));
+        requestDTO.setDateTo(LocalDate.of(2023, Month.FEBRUARY, 20));
+        requestDTO.setTraineeName("Alice");
+
+        List<TrainerTrainingsResponseDTO> responseDTOList = List.of(new TrainerTrainingsResponseDTO());
+
+        when(trainingService.findByTrainerAndCriteria(username, requestDTO.getDateFrom(), requestDTO.getDateTo(), null, requestDTO.getTraineeName()))
+                .thenReturn(responseDTOList);
+
+        mockMvc.perform(get("/api/v1/trainer/{username}/trainings", username)
+                        .param("dateFrom", String.valueOf(requestDTO.getDateFrom()))
+                        .param("dateTo", String.valueOf(requestDTO.getDateTo()))
+                        .param("traineeName", requestDTO.getTraineeName()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+
+        verify(trainingService, times(1)).findByTrainerAndCriteria(username, requestDTO.getDateFrom(), requestDTO.getDateTo(), null, requestDTO.getTraineeName());
     }
 
     // Helper method to convert objects to JSON string

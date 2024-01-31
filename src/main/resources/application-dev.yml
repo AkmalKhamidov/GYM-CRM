@@ -20,7 +20,7 @@ management:
       enabled: true
 
 server:
-  port: 8081
+  port: 8083
 
 springdoc:
   swagger-ui:
@@ -33,3 +33,7 @@ jwt:
       expiration: 7200000 # milliseconds -> 2 hours
     refresh:
       expiration: 172800000 # milliseconds -> 2 days
+
+login_attempts:
+    max_attempts: 3
+    lock_duration: 300000 # milliseconds -> 5 minutes

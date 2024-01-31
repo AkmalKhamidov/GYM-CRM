@@ -22,8 +22,10 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.2.2'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.1'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    testImplementation 'junit:junit:4.13.1'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.12.3'
@@ -40,6 +42,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '6.2.1'
 }
 
 tasks.named('test') {

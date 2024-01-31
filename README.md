@@ -1,12 +1,16 @@
-# GYM CRM - SPRING BOOT REST APPLICATION
+# GYM CRM - SPRING SECURITY
 Epam Learning - Spring Boot REST. GymCRM Project.
 
 This project is a Gym Customer Relationship Management (CRM) system implemented using the Spring framework. It provides functionality to manage trainees, trainers, and training sessions.
 
-Project: Spring Boot, JWT Authentication (JJWT), Swagger v3.0 (OpenAPI), Gradle (Groovy DSL)
+Project: Spring Boot, JWT Authentication (JJWT), Swagger v3.0 (OpenAPI), Gradle (Groovy DSL), Spring Security
 
 ## Swagger:
-dev: http://localhost:8081/swagger-ui.html
+dev: http://localhost:8083/swagger-ui.html
+
+## Roles:
+- TRAINEE
+- TRAINER
 
 ## Project Structure
 
@@ -15,7 +19,7 @@ The project is structured into the following packages:
 - **configs**: Contains configuration classes for Spring.
 - **controllers**: Contains REST controllers for Trainee, Trainer, and Training entities.
 - **dto**: Data transfer objects (DTOs) for Trainee, Trainer, and Training entities.
-- **exceptions**: Custom exceptions, such as `NotFoundException`, `NotAuthenticated`.
+- **exceptions**: Custom exceptions, such as `NotFoundException`, `NotAuthenticated`, `NotAuthorized`.
 - **mapper**: Mapper classes for Trainee, Trainer, and Training entities. Used MapStruct.
 - **models**: Entity classes representing the domain model.
 - **repositories**: Repository interfaces for Trainee, Trainer, and Training entities.
@@ -41,3 +45,4 @@ Added Spring Boot Metrics by using prometheus for monitoring and managing the ap
 
 ## Configuration
 `OpenAPI30Config` - configuration for Swagger v3.0 (OpenAPI).
+`SecurityConfig` - configuration for Spring Security.

@@ -3,7 +3,7 @@ package com.epamlearning.contollers;
 import com.epamlearning.controllers.TrainingTypeController;
 import com.epamlearning.dtos.trainingtype.response.TrainingTypeResponseDTO;
 import com.epamlearning.mapper.TrainingTypeMapper;
-import com.epamlearning.services.TrainingTypeService;
+import com.epamlearning.services.impl.TrainingTypeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TrainingTypeControllerTest {
 
     @Mock
-    private TrainingTypeService trainingTypeService;
+    private TrainingTypeServiceImpl trainingTypeServiceImpl;
 
     @Mock
     private TrainingTypeMapper trainingTypeMapper;
@@ -46,18 +46,16 @@ public class TrainingTypeControllerTest {
         // Arrange
         List<TrainingTypeResponseDTO> expectedResponseDTO = Collections.singletonList(new TrainingTypeResponseDTO());
 
-        when(trainingTypeService.findAll()).thenReturn(Collections.emptyList()); // Set up your training types object here
-        when(trainingTypeMapper.trainingTypesToTrainingTypeResponseDTOs(anyList())).thenReturn(expectedResponseDTO);
+        when(trainingTypeServiceImpl.findAll()).thenReturn(expectedResponseDTO);
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/training-type/all")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/training-type")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(expectedResponseDTO.size()));
 
         // Verify
-        verify(trainingTypeService, times(1)).findAll();
-        verify(trainingTypeMapper, times(1)).trainingTypesToTrainingTypeResponseDTOs(anyList());
+        verify(trainingTypeServiceImpl, times(1)).findAll();
     }
 
     private static String asJsonString(final Object obj) {

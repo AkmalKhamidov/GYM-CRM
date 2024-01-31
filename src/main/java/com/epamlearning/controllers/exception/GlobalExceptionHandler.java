@@ -1,6 +1,7 @@
 package com.epamlearning.controllers.exception;
 
 import com.epamlearning.exceptions.NotAuthenticated;
+import com.epamlearning.exceptions.NotAuthorized;
 import com.epamlearning.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 @RestControllerAdvice("com.epamlearning.controllers")
 public class GlobalExceptionHandler {
@@ -29,6 +31,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(NotAuthorized.class)
+    public ResponseEntity<ErrorResponse> handleNotAuthorizedException(NotAuthorized ex, WebRequest request) {
+        logExceptionDetails(request, ex);
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.FORBIDDEN);
+    }
+
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
         logExceptionDetails(request, ex);
@@ -44,7 +53,15 @@ public class GlobalExceptionHandler {
             errorMessage.append(fieldError.getDefaultMessage()).append("; ");
         });
         logExceptionDetails(request, new Exception("MethodArgumentNotValidException" + errorMessage));
-        return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(HandlerMethodValidationException ex, WebRequest request) {
+        String errorMessage = "Validation error(s): " + ex.getMessage();
+
+        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
+        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     private void logExceptionDetails(WebRequest request, Exception ex) {

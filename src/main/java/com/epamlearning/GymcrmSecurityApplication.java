@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class GymcrmBootApplication {
+public class GymcrmSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GymcrmBootApplication.class, args);
+        SpringApplication.run(GymcrmSecurityApplication.class, args);
     }
 }
