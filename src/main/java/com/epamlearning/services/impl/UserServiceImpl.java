@@ -116,7 +116,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUsername(generateUserName(firstName, lastName));
-        user.setPassword(passwordEncoder.encode(generateRandomPassword()));
+        user.setPassword(generateRandomPassword());
         user.setActive(true);
         return user;
     }

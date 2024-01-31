@@ -6,8 +6,8 @@ spring:
       ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost:5432/hibernate-app
-    username:
-    password:
+    username: postgres
+    password: slon123
     driverClassName: org.postgresql.Driver
 
 management:
@@ -20,7 +20,7 @@ management:
       enabled: true
 
 server:
-  port: 8083
+  port: 8084
 
 springdoc:
   swagger-ui:

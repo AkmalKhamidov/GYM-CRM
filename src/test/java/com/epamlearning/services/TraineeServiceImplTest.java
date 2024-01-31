@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -43,6 +44,11 @@ public class TraineeServiceImplTest {
     @Mock
     private UserServiceImpl userServiceImpl;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private RoleService roleService;
     @Mock
     private TrainingServiceImpl trainingServiceImpl;
 

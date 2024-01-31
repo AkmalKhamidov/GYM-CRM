@@ -4,21 +4,26 @@ import com.epamlearning.dtos.trainer.request.TrainerUpdateRequestDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
+import com.epamlearning.entities.Role;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.TrainingType;
 import com.epamlearning.entities.User;
+import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotAuthenticated;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainerMapper;
 import com.epamlearning.repositories.TrainerRepository;
+import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TrainerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -32,15 +37,18 @@ public class TrainerServiceImpl implements TrainerService {
     private final AuthorizationServiceImpl authService;
     private final TrainingTypeServiceImpl trainingTypeServiceImpl;
     private final UserServiceImpl userServiceImpl;
-
+    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
     @Autowired
-    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, AuthorizationServiceImpl authService, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl) {
+    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, AuthorizationServiceImpl authService, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.trainerMapper = trainerMapper;
         this.trainerRepository = trainerRepository;
         this.traineeServiceImpl = traineeServiceImpl;
         this.authService = authService;
         this.trainingTypeServiceImpl = trainingTypeServiceImpl;
         this.userServiceImpl = userServiceImpl;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -121,10 +129,15 @@ public class TrainerServiceImpl implements TrainerService {
             throw new NullPointerException("TrainingType is null.");
         }
         User user = userServiceImpl.createUser(firstName, lastName);
+        String initialPassword = user.getPassword();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         TrainingType trainingType = trainingTypeServiceImpl.findById(trainingTypeId);
+        Role role_trainer = roleService.findByRoleName(RoleName.ROLE_TRAINER);
+        user.setRoles(Set.of(role_trainer));
         Trainer trainer = new Trainer();
         trainer.setUser(user);
         trainer.setSpecialization(trainingType);
-        return trainerMapper.trainerToTrainerRegistrationResponseDTO(trainerRepository.save(trainer));
+        trainerRepository.save(trainer);
+        return new TrainerRegistrationResponseDTO(user.getUsername(), initialPassword);
     }
 }

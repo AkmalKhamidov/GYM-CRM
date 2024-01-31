@@ -5,23 +5,29 @@ import com.epamlearning.dtos.trainee.request.UpdateTrainersOfTraineeRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
+import com.epamlearning.entities.Role;
 import com.epamlearning.entities.Trainee;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.User;
+import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TraineeMapper;
 import com.epamlearning.mapper.TrainerMapper;
+import com.epamlearning.repositories.RoleRepository;
 import com.epamlearning.repositories.TraineeRepository;
+import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TraineeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Service
@@ -36,6 +42,8 @@ public class TraineeServiceImpl implements TraineeService {
     private final UserServiceImpl userService;
     private final TrainerServiceImpl trainerService;
     private final TrainingServiceImpl trainingService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public TraineeServiceImpl(TraineeMapper traineeMapper,
@@ -43,7 +51,7 @@ public class TraineeServiceImpl implements TraineeService {
                               TraineeRepository traineeRepository,
                               UserServiceImpl userService,
                               @Lazy TrainerServiceImpl trainerService,
-                              @Lazy TrainingServiceImpl trainingService) {
+                              @Lazy TrainingServiceImpl trainingService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.traineeMapper = traineeMapper;
         this.authService = authService;
         this.trainerMapper = trainerMapper;
@@ -51,6 +59,8 @@ public class TraineeServiceImpl implements TraineeService {
         this.userService = userService;
         this.trainerService = trainerService;
         this.trainingService = trainingService;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -154,11 +164,16 @@ public class TraineeServiceImpl implements TraineeService {
     @Transactional
     public TraineeRegistrationResponseDTO createTrainee(String firstName, String lastName, String address, Date dateOfBirth) {
         User user = userService.createUser(firstName, lastName);
+        String initialPassword = user.getPassword();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role role_trainee = roleService.findByRoleName(RoleName.ROLE_TRAINEE);
+        user.setRoles(Set.of(role_trainee));
         Trainee trainee = new Trainee();
         trainee.setAddress(address);
         trainee.setDateOfBirth(dateOfBirth);
         trainee.setUser(user);
-        return traineeMapper.traineeToTraineeRegistrationResponseDTO(traineeRepository.save(trainee));
+        traineeRepository.save(trainee);
+        return new TraineeRegistrationResponseDTO(user.getUsername(), initialPassword);
     }
 
 }
