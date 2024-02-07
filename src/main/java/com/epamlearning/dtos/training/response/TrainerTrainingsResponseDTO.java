@@ -3,13 +3,12 @@ package com.epamlearning.dtos.training.response;
 import com.epamlearning.dtos.BaseDTO;
 import com.epamlearning.entities.enums.TrainingTypeName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 @Getter
 @Setter

@@ -4,12 +4,11 @@ import com.epamlearning.entities.Trainee;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.Training;
 import com.epamlearning.entities.TrainingType;
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<Training, Long>, BaseRepository {

@@ -5,7 +5,6 @@ import com.epamlearning.dtos.trainee.request.UpdateTrainersOfTraineeRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
-
 import java.util.Date;
 import java.util.List;
 

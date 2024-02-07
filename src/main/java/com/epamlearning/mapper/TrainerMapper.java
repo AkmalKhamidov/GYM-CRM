@@ -7,10 +7,13 @@ import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
 import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.enums.TrainingTypeName;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-
 import java.util.List;
+import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {TrainerMapperHelper.class})
 public interface TrainerMapper {

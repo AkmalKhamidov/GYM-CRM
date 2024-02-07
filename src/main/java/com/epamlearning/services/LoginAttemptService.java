@@ -5,5 +5,4 @@ public interface LoginAttemptService extends BaseService{
     boolean isBlocked(String username);
 
     void loginSucceeded(String username);
-
 }

@@ -11,7 +11,6 @@ spring:
     password:
     driverClassName: org.postgresql.Driver
 
-
 management:
   endpoints:
     web:
@@ -22,17 +21,21 @@ management:
       enabled: true
 
 server:
-  port: 8083
+  port: 8082
 
 springdoc:
   swagger-ui:
     enabled: true
 
+cors:
+  allowed-origins: "http://localhost:8081/swagger-ui"
+
+
 jwt:
   secret: N0T_S3CR3T_B3C4USE_1T_1S_S3CR3T_TH4T_1S_4LL_Y0U_N33D
   token:
     access:
-      expiration: 7200000 # milliseconds -> 2 hours
+      expiration: 6000 # milliseconds -> 2 hours
     refresh:
       expiration: 172800000 # milliseconds -> 2 days
 

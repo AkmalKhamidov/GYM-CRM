@@ -1,12 +1,19 @@
 package com.epamlearning.security;
 
+import com.epamlearning.controllers.exception.ErrorResponse;
 import com.epamlearning.services.impl.UserDetailsServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -22,91 +29,95 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @Slf4j
 public class SecurityConfig {
 
-    private final JWTFilter jwtFilter;
-    private final UserDetailsServiceImpl userDetailsService;
+  private final JWTFilter jwtFilter;
+  @Value("${server.servlet.context-path:''}")
+  private String contextPath;
+
+  @Value("${cors.allowed-origins}")
+  private List<String> list;
+  private final UserDetailsServiceImpl userDetailsService;
+
+  ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @Autowired
-    public SecurityConfig(JWTFilter jwtFilter, UserDetailsServiceImpl userDetailsService) {
-        this.jwtFilter = jwtFilter;
-        this.userDetailsService = userDetailsService;
-    }
+  @Autowired
+  public SecurityConfig(JWTFilter jwtFilter, UserDetailsServiceImpl userDetailsService) {
+    this.jwtFilter = jwtFilter;
+    this.userDetailsService = userDetailsService;
+  }
 
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers(
-                                        "/swagger-ui/**",
-                                        "/swagger-ui.html",
-                                        "/v3/api-docs/**",
-                                        "/api/v1/auth/login",
-                                        "/api/v1/auth/refresh",
-                                        "/api/v1/trainee/register",
-                                        "/api/v1/trainer/register"
-                                ).permitAll()
-                                .requestMatchers("/api/v1/training/**", "/api/v1/auth/change-password", "api/v1/auth/logout").hasAnyRole("TRAINEE", "TRAINER")
-                                .requestMatchers("/api/v1/trainee/**").hasRole("TRAINEE")
-                                .requestMatchers("/api/v1/trainer/**").hasRole("TRAINER")
-                                .anyRequest().authenticated()
-                )
-                .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.setContentType("application/json; charset=UTF-8");
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            String errorMessage = authException.getMessage();
-                            String timestamp = String.valueOf(System.currentTimeMillis());
-                            String jsonResponse = "{ \"message\": \"" + errorMessage + "\", \"timestamp\": \"" + timestamp + "\" }";
-                            response.getWriter().write(jsonResponse);
-                        })
-                        .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            response.setContentType("application/json;  charset=UTF-8");
-                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                            String errorMessage = accessDeniedException.getMessage();
-                            String timestamp = String.valueOf(System.currentTimeMillis());
-                            String jsonResponse = "{ \"message\": \"" + errorMessage + "\", \"timestamp\": \"" + timestamp + "\" }";
-                            response.getWriter().write(jsonResponse);
-                        })
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .userDetailsService(userDetailsService)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .build();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .authorizeHttpRequests(authorizeRequests ->
+            authorizeRequests
+                .requestMatchers(
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**",
+                    "/auth/login",
+                    contextPath +"/auth/refresh",
+                    contextPath + "/trainee/register",
+                    contextPath + "/trainer/register"
+                ).permitAll()
+                .requestMatchers(contextPath + "/training/**",
+                    contextPath + "/auth/change-password",
+                    contextPath + "/auth/logout").hasAnyRole("TRAINEE", "TRAINER")
+                .requestMatchers(contextPath + "/trainee/**").hasRole("TRAINEE")
+                .requestMatchers(contextPath + "/trainer/**").hasRole("TRAINER")
+                .anyRequest().authenticated()
+        )
+        .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
+            .authenticationEntryPoint((request, response, authException) -> {
+              response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+              response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+              objectMapper.writeValue(response.getWriter(),
+                  new ErrorResponse(authException.getMessage()));
+            })
+            .accessDeniedHandler((request, response, accessDeniedException) -> {
+              response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+              response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+              objectMapper.writeValue(response.getWriter(),
+                  new ErrorResponse(accessDeniedException.getMessage()));
+            })
+        )
+        .sessionManagement(
+            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .csrf(AbstractHttpConfigurer::disable)
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        .userDetailsService(userDetailsService)
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .build();
+  }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:8081/swagger-ui"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-        configuration.setAllowedHeaders(Arrays.asList(HttpHeaders.CONTENT_TYPE, HttpHeaders.AUTHORIZATION));
+  @Bean
+  public AuthenticationManager authenticationManager(
+      AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(list);
+    configuration.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(), HttpMethod.POST.name()));
+    configuration.setAllowedHeaders(Arrays.asList(HttpHeaders.CONTENT_TYPE, HttpHeaders.AUTHORIZATION));
 
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
 }

@@ -9,8 +9,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +20,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
-
 @Component
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/api/v1/*")
 @Slf4j
 public class JWTFilter extends OncePerRequestFilter {
 
@@ -42,6 +42,7 @@ public class JWTFilter extends OncePerRequestFilter {
         if (authHeader != null  && authHeader.startsWith("Bearer")) {
             if(authHeader.isBlank()) {
                 sendErrorResponse(response, "Token is blank.");
+                return;
             }
             String token = authHeader.substring(7);
             try {
@@ -55,13 +56,14 @@ public class JWTFilter extends OncePerRequestFilter {
             } catch (ExpiredJwtException e) {
                 sendErrorResponse(response, "Token expired.");
                 log.info(e.getMessage());
+                return;
             }
         }
         filterChain.doFilter(request, response);
     }
 
     private void sendErrorResponse(HttpServletResponse response, String message) throws IOException {
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 

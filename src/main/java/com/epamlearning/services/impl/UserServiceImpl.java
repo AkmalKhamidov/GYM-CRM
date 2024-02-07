@@ -8,6 +8,9 @@ import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.repositories.UserRepository;
 import com.epamlearning.security.JWTUtil;
 import com.epamlearning.services.UserService;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +18,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
 
 @Service
 @Slf4j
@@ -43,7 +41,7 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
-            throw new NullPointerException("Username is null.");
+            throw new NotFoundException("Username is null.");
         }
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
@@ -57,15 +55,15 @@ public class UserServiceImpl implements UserService {
     public void updatePassword(String username, String oldPassword, String newPassword) {
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
-            throw new NullPointerException("Username is null.");
+            throw new NotFoundException("Username is null.");
         }
         if(oldPassword == null || oldPassword.isEmpty()) {
             log.warn("Old password is null.");
-            throw new NullPointerException("Old password is null.");
+            throw new NotFoundException("Old password is null.");
         }
         if (newPassword == null || newPassword.isEmpty()) {
             log.warn("New password is null.");
-            throw new NullPointerException("New password is null.");
+            throw new NotFoundException("New password is null.");
         }
         User userToUpdate = findByUsername(username);
         if(!passwordEncoder.matches(oldPassword, userToUpdate.getPassword())) {
@@ -77,15 +75,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public SessionDTO authenticate(String username, String password) {
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
-            throw new NullPointerException("Username is null.");
+            throw new NotFoundException("Username is null.");
         }
         if (password == null || password.isEmpty()) {
             log.warn("Password is null.");
-            throw new NullPointerException("Password is null.");
+            throw new NotFoundException("Password is null.");
         }
         if(loginAttemptService.isBlocked(username)) {
             log.warn("User is blocked.");
@@ -95,7 +92,7 @@ public class UserServiceImpl implements UserService {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             loginAttemptService.loginSucceeded(username);
             return generateTokens(username);
-        } catch (BadCredentialsException ignored){
+        } catch (BadCredentialsException e){
             loginAttemptService.loginFailed(username);
             log.warn("Wrong password. Username: {} ", username);
             throw new NotAuthenticated("Wrong username and password");
@@ -106,11 +103,11 @@ public class UserServiceImpl implements UserService {
 
         if (firstName == null || firstName.isEmpty()) {
             log.warn("First name is null.");
-            throw new NullPointerException("First name is null.");
+            throw new NotFoundException("First name is null.");
         }
         if (lastName == null || lastName.isEmpty()) {
             log.warn("Last name is null.");
-            throw new NullPointerException("Last name is null.");
+            throw new NotFoundException("Last name is null.");
         }
 
         User user = new User();
@@ -150,15 +147,15 @@ public class UserServiceImpl implements UserService {
     public void userNullVerification(ProfileDTO dto) {
         if (dto == null) {
             log.warn("ProfileDTO is null.");
-            throw new NullPointerException("ProfileDTO is null.");
+            throw new NotFoundException("ProfileDTO is null.");
         }
         if (dto.getFirstName() == null || dto.getFirstName().isEmpty()) {
             log.warn("ProfileDTO: First name is null.");
-            throw new NullPointerException("ProfileDTO: First name is null.");
+            throw new NotFoundException("ProfileDTO: First name is null.");
         }
         if (dto.getLastName() == null || dto.getLastName().isEmpty()) {
             log.warn("ProfileDTO: Last name is null.");
-            throw new NullPointerException("ProfileDTO: Last name is null.");
+            throw new NotFoundException("ProfileDTO: Last name is null.");
         }
     }
 

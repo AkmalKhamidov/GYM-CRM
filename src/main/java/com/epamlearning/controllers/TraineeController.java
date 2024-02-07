@@ -18,18 +18,25 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/trainee")
+@RequestMapping("${server.servlet.context-path}/trainee")
 @Tag(name = "Trainee controller", description = "Controller for managing trainees")
 public class TraineeController implements BaseController {
 
@@ -89,13 +96,13 @@ public class TraineeController implements BaseController {
     @PreAuthorize("#username == authentication.principal.username")
     @Operation(summary = "Delete trainee", description = "Deleting trainee by username")
     @DeleteMapping("/{username}")
-    public ResponseEntity<String> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick")
+    public ResponseEntity<Void> deleteTrainee(@Parameter(description = "trainee username", example = "John.Wick")
                                                     @PathVariable("username")
                                                     @NotNull(message = "Username cannot be null")
                                                     @NotBlank(message = "Username cannot be blank")
                                                     String username) {
         traineeService.deleteByUsername(username);
-        return new ResponseEntity<>("Trainee with username: " + username + " was deleted.", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
@@ -113,7 +120,7 @@ public class TraineeController implements BaseController {
     @PreAuthorize("#username == authentication.principal.username")
     @Operation(summary = "Update trainee active", description = "Updating trainee active by username")
     @PatchMapping("/{username}/{active}")
-    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick")
+    public ResponseEntity<Void> updateTraineeActive(@Parameter(description = "trainee username", example = "John.Wick")
                                                           @PathVariable("username")
                                                           @NotNull(message = "Username cannot be null")
                                                           @NotBlank(message = "Username cannot be blank")
@@ -123,7 +130,7 @@ public class TraineeController implements BaseController {
                                                       boolean isActive) {
         String resultText = isActive ? "activated" : "deactivated";
         traineeService.updateActive(username, isActive);
-        return new ResponseEntity<>("Trainee with username: " + username + " was " + resultText + ".", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")

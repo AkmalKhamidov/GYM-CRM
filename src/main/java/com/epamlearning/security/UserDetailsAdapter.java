@@ -1,12 +1,11 @@
 package com.epamlearning.security;
 
 import com.epamlearning.entities.User;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 @AllArgsConstructor
 public class UserDetailsAdapter implements UserDetails {

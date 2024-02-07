@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/training")
+@RequestMapping("${server.servlet.context-path}/training")
 @Tag(name = "Training Controller", description = "Controller for managing trainings")
 public class TrainingController implements BaseController {
 
@@ -38,7 +38,7 @@ public class TrainingController implements BaseController {
             "authentication.principal.enabled == true")
     @Operation(summary = "Add training", description = "Adding training with trainer training type")
     @PostMapping
-    public ResponseEntity<String> addTraining(@Validated @RequestBody TrainingAddRequestDTO trainingAddDTO) {
+    public ResponseEntity<Void> addTraining(@Validated @RequestBody TrainingAddRequestDTO trainingAddDTO) {
         trainingServiceImpl.createTraining(
                 trainingAddDTO.getTrainingName(),
                 trainingAddDTO.getTrainingDate(),
@@ -47,7 +47,7 @@ public class TrainingController implements BaseController {
                 trainingAddDTO.getTraineeUsername()
         );
         metrics.registerNewTraining();
-        return new ResponseEntity<>("Training added successfully.", HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

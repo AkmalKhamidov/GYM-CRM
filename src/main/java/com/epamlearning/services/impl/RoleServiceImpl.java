@@ -5,11 +5,10 @@ import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.repositories.RoleRepository;
 import com.epamlearning.services.RoleService;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -26,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
     public Role findByRoleName(RoleName name) {
         if(name == null) {
             log.warn("RoleName is null.");
-            throw new NullPointerException("RoleName is null.");
+            throw new NotFoundException("RoleName is null.");
         }
         Optional<Role> optionalRole = roleRepository.findByName(name);
         if (optionalRole.isEmpty()) {

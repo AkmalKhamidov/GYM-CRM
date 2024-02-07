@@ -3,12 +3,11 @@ package com.epamlearning.dtos.trainer.response;
 import com.epamlearning.dtos.BaseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeListResponseDTO;
 import com.epamlearning.entities.enums.TrainingTypeName;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

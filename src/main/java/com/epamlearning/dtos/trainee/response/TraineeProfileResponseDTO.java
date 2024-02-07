@@ -3,13 +3,12 @@ package com.epamlearning.dtos.trainee.response;
 import com.epamlearning.dtos.BaseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

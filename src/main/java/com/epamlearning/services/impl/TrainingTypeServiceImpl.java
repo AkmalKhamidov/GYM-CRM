@@ -7,12 +7,11 @@ import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainingTypeMapper;
 import com.epamlearning.repositories.TrainingTypeRepository;
 import com.epamlearning.services.TrainingTypeService;
+import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,8 +29,8 @@ public class TrainingTypeServiceImpl implements TrainingTypeService {
     @Override
     public TrainingType findById(Long id) {
         if(id == null) {
-            log.warn("ID is null.");
-            throw new NullPointerException("ID is null.");
+            log.warn("Training type ID is null.");
+            throw new NotFoundException("Training type ID is null.");
         }
         Optional<TrainingType> trainingType = trainingTypeRepository.findById(id);
         if (trainingType.isEmpty()) {

@@ -16,17 +16,16 @@ import com.epamlearning.mapper.TrainerMapper;
 import com.epamlearning.repositories.TraineeRepository;
 import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TraineeService;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -73,7 +72,7 @@ public class TraineeServiceImpl implements TraineeService {
 
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
-            throw new NullPointerException("Username is null.");
+            throw new NotFoundException("Username is null.");
         }
 
         Optional<Trainee> trainee = traineeRepository.findTraineeByUserUsername(username);

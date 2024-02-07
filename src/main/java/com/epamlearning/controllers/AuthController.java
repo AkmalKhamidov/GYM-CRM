@@ -20,10 +20,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/auth")
+@RequestMapping("${server.servlet.context-path}/auth")
 @Tag(name = "Auth Controller", description = "Controller for managing authentication")
 public class AuthController implements BaseController {
 
@@ -58,14 +62,14 @@ public class AuthController implements BaseController {
     @PreAuthorize("principal.username == #userChangePasswordDTO.username and principal.enabled == true")
     @Operation(summary = "Change password", description = "Change password for logged in user. Username and old password must be provided.")
     @PutMapping("/change-password")
-    public ResponseEntity<String> changePassword(@Validated @RequestBody UserChangePasswordDTO userChangePasswordDTO) {
+    public ResponseEntity<Void> changePassword(@Validated @RequestBody UserChangePasswordDTO userChangePasswordDTO) {
         userServiceImpl.updatePassword(userChangePasswordDTO.username(), userChangePasswordDTO.oldPassword(), userChangePasswordDTO.newPassword());
-        return new ResponseEntity<>("Password changed successfully.", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Operation(summary = "Logout", description = "Logout the currently authenticated user.")
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
@@ -80,7 +84,7 @@ public class AuthController implements BaseController {
                 response.addCookie(cookie);
             }
         }
-        return new ResponseEntity<>("Logout successful.", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

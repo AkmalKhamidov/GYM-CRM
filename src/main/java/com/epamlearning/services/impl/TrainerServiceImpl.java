@@ -9,21 +9,19 @@ import com.epamlearning.entities.Trainer;
 import com.epamlearning.entities.TrainingType;
 import com.epamlearning.entities.User;
 import com.epamlearning.entities.enums.RoleName;
-import com.epamlearning.exceptions.NotAuthenticated;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainerMapper;
 import com.epamlearning.repositories.TrainerRepository;
 import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TrainerService;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Slf4j
@@ -57,7 +55,7 @@ public class TrainerServiceImpl implements TrainerService {
     public Trainer findByValidatedUsername(String username) {
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
-            throw new NullPointerException("Username is null.");
+            throw new NotFoundException("Username is null.");
         }
 
         Optional<Trainer> trainer = trainerRepository.findTrainerByUserUsername(username);
@@ -106,7 +104,7 @@ public class TrainerServiceImpl implements TrainerService {
     public TrainerRegistrationResponseDTO createTrainer(String firstName, String lastName, Long trainingTypeId) {
         if (trainingTypeId == null) {
             log.warn("TrainingType is null.");
-            throw new NullPointerException("TrainingType is null.");
+            throw new NotFoundException("TrainingType is null.");
         }
         User user = userServiceImpl.createUser(firstName, lastName);
         String initialPassword = user.getPassword();

@@ -5,10 +5,13 @@ import com.epamlearning.dtos.trainee.response.TraineeListResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.entities.Trainee;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-
 import java.util.List;
+import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {TrainerMapper.class})
 public interface TraineeMapper {

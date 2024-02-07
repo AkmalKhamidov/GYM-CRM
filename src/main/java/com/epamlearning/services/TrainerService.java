@@ -4,7 +4,6 @@ import com.epamlearning.dtos.trainer.request.TrainerUpdateRequestDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerProfileResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
-
 import java.util.List;
 
 public interface TrainerService extends BaseService{

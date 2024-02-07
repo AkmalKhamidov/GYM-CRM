@@ -1,5 +1,9 @@
 package com.epamlearning.actuator.healthchecks;
 
+import java.sql.DatabaseMetaData;
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
@@ -7,11 +11,6 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @Endpoint(id = "database")

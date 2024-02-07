@@ -1,14 +1,30 @@
 package com.epamlearning.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.epamlearning.dtos.training.response.TraineeTrainingsResponseDTO;
 import com.epamlearning.dtos.training.response.TrainerTrainingsResponseDTO;
-import com.epamlearning.entities.*;
+import com.epamlearning.entities.Trainee;
+import com.epamlearning.entities.Trainer;
+import com.epamlearning.entities.Training;
+import com.epamlearning.entities.TrainingType;
+import com.epamlearning.entities.User;
 import com.epamlearning.entities.enums.TrainingTypeName;
 import com.epamlearning.mapper.TrainingMapper;
 import com.epamlearning.repositories.TrainingRepository;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.epamlearning.services.impl.TrainerServiceImpl;
 import com.epamlearning.services.impl.TrainingServiceImpl;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,16 +34,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 //@MockitoSettings(strictness = Strictness.LENIENT)

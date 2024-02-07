@@ -1,5 +1,15 @@
 package com.epamlearning.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.epamlearning.dtos.SessionDTO;
 import com.epamlearning.entities.User;
 import com.epamlearning.exceptions.NotAuthenticated;
@@ -8,6 +18,8 @@ import com.epamlearning.repositories.UserRepository;
 import com.epamlearning.security.JWTUtil;
 import com.epamlearning.services.impl.LoginAttemptServiceImpl;
 import com.epamlearning.services.impl.UserServiceImpl;
+import java.util.Date;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,14 +28,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Date;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
 
 public class UserServiceImplTest {
 
@@ -48,9 +52,9 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void findByUsername_NullUsername_ThrowsNullPointerException() {
+    void findByUsername_NullUsername_ThrowsNotFoundException() {
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> userServiceImpl.findByUsername(null));
+        assertThrows(NotFoundException.class, () -> userServiceImpl.findByUsername(null));
     }
 
     @Test
@@ -88,9 +92,9 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void updatePassword_NullUsername_ThrowsNullPointerException() {
+    void updatePassword_NullUsername_ThrowsNotFoundException() {
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> userServiceImpl.updatePassword(null, "oldPassword", "newPassword"));
+        assertThrows(NotFoundException.class, () -> userServiceImpl.updatePassword(null, "oldPassword", "newPassword"));
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.epamlearning.services;
 import com.epamlearning.dtos.training.response.TraineeTrainingsResponseDTO;
 import com.epamlearning.dtos.training.response.TrainerTrainingsResponseDTO;
 import com.epamlearning.entities.TrainingType;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;

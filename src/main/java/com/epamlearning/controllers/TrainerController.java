@@ -14,19 +14,25 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("api/v1/trainer")
+@RequestMapping("${server.servlet.context-path}/trainer")
 @Tag(name = "Trainer Controller", description = "Controller for managing trainers")
 public class TrainerController implements BaseController {
 
@@ -74,13 +80,12 @@ public class TrainerController implements BaseController {
     @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")
     @Operation(summary = "Update trainer active", description = "Update trainer active (status)")
     @PatchMapping("/{username}/{active}")
-    public ResponseEntity<String> updateTraineeActive(@Parameter(description = "Trainer username", example = "John.Smith")
+    public ResponseEntity<Void> updateTraineeActive(@Parameter(description = "Trainer username", example = "John.Smith")
                                                       @PathVariable("username") String username,
                                                       @Parameter(description = "Trainer active (status) (true/false)", example = "true")
                                                       @PathVariable("active") boolean isActive) {
-        String resultText = isActive ? "activated" : "deactivated";
         trainerServiceImpl.updateActive(username, isActive);
-        return new ResponseEntity<>("Trainer with username: " + username + " was " + resultText + ".", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("#username == authentication.principal.username and principal.enabled == true")

@@ -1,10 +1,18 @@
 package com.epamlearning.contollers;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.epamlearning.controllers.TrainingTypeController;
 import com.epamlearning.dtos.trainingtype.response.TrainingTypeResponseDTO;
 import com.epamlearning.mapper.TrainingTypeMapper;
 import com.epamlearning.services.impl.TrainingTypeServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,13 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.Collections;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class TrainingTypeControllerTest {
 
@@ -38,7 +39,9 @@ public class TrainingTypeControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(trainingTypeController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(trainingTypeController)
+            .addPlaceholderValue("server.servlet.context-path", "")
+            .build();
     }
 
     @Test
@@ -49,7 +52,7 @@ public class TrainingTypeControllerTest {
         when(trainingTypeServiceImpl.findAll()).thenReturn(expectedResponseDTO);
 
         // Act & Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/training-type")
+        mockMvc.perform(MockMvcRequestBuilders.get("/training-type")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(expectedResponseDTO.size()));

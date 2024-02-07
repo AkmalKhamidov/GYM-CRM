@@ -1,5 +1,13 @@
 package com.epamlearning.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.epamlearning.dtos.trainee.request.TraineeUpdateRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
@@ -13,6 +21,10 @@ import com.epamlearning.repositories.TraineeRepository;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.epamlearning.services.impl.TrainingServiceImpl;
 import com.epamlearning.services.impl.UserServiceImpl;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,15 +34,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -106,15 +109,15 @@ public class TraineeServiceImplTest {
     }
 
     @Test
-    void findByUsername_NullUsername_ThrowsNullPointerException() {
+    void findByUsername_NullUsername_ThrowsNotFoundException() {
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> traineeServiceImpl.findByUsername(null));
+        assertThrows(NotFoundException.class, () -> traineeServiceImpl.findByUsername(null));
     }
 
     @Test
-    void findByUsername_EmptyUsername_ThrowsNullPointerException() {
+    void findByUsername_EmptyUsername_ThrowsNotFoundException() {
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> traineeServiceImpl.findByUsername(""));
+        assertThrows(NotFoundException.class, () -> traineeServiceImpl.findByUsername(""));
     }
 
     @Test
