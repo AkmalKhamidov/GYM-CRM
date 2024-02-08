@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("${server.servlet.context-path}/trainer")
+@RequestMapping("/trainer")
 @Tag(name = "Trainer Controller", description = "Controller for managing trainers")
 public class TrainerController implements BaseController {
 

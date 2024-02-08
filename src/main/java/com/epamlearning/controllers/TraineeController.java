@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("${server.servlet.context-path}/trainee")
+@RequestMapping("/trainee")
 @Tag(name = "Trainee controller", description = "Controller for managing trainees")
 public class TraineeController implements BaseController {
 

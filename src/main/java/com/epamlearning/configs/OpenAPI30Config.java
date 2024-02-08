@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        servers = {@Server(url = "/",description = "server URL http://localhost")},
+        servers = {@Server(url = "/api/v1",description = "server URL http://localhost")},
         info = @Info(title = "GYM CRM API", version = "1.0", description = "Gym CRM API Information")
 )
 public class OpenAPI30Config {

@@ -36,8 +36,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
   private final JWTFilter jwtFilter;
-  @Value("${server.servlet.context-path:''}")
-  private String contextPath;
 
   @Value("${cors.allowed-origins}")
   private List<String> list;
@@ -63,15 +61,15 @@ public class SecurityConfig {
                     "/swagger-ui.html",
                     "/v3/api-docs/**",
                     "/auth/login",
-                    contextPath +"/auth/refresh",
-                    contextPath + "/trainee/register",
-                    contextPath + "/trainer/register"
+                    "/auth/refresh",
+                    "/trainee/register",
+                    "/trainer/register"
                 ).permitAll()
-                .requestMatchers(contextPath + "/training/**",
-                    contextPath + "/auth/change-password",
-                    contextPath + "/auth/logout").hasAnyRole("TRAINEE", "TRAINER")
-                .requestMatchers(contextPath + "/trainee/**").hasRole("TRAINEE")
-                .requestMatchers(contextPath + "/trainer/**").hasRole("TRAINER")
+                .requestMatchers("/training/**",
+                    "/auth/change-password",
+                    "/auth/logout").hasAnyRole("TRAINEE", "TRAINER")
+                .requestMatchers("/trainee/**").hasRole("TRAINEE")
+                .requestMatchers("/trainer/**").hasRole("TRAINER")
                 .anyRequest().authenticated()
         )
         .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer

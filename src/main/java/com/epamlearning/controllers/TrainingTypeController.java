@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("${server.servlet.context-path}/training-type")
+@RequestMapping("/training-type")
 @Tag(name = "Training Type Controller", description = "Controller for managing training types")
 public class TrainingTypeController implements BaseController{
 

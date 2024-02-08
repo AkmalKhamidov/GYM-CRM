@@ -48,7 +48,6 @@ public class AuthControllerTest {
   void setUp() {
     MockitoAnnotations.openMocks(this);
     mockMvc = MockMvcBuilders.standaloneSetup(authController)
-        .addPlaceholderValue("server.servlet.context-path", "")
         .build();
   }
 

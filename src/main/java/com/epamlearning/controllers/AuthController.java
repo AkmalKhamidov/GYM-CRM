@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("${server.servlet.context-path}/auth")
+@RequestMapping("/auth")
 @Tag(name = "Auth Controller", description = "Controller for managing authentication")
 public class AuthController implements BaseController {
 

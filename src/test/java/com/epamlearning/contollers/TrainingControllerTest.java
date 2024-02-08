@@ -54,7 +54,6 @@ class TrainingControllerTest {
   void setUp() {
     MockitoAnnotations.openMocks(this);
     mockMvc = MockMvcBuilders.standaloneSetup(trainingController)
-        .addPlaceholderValue("server.servlet.context-path", "")
         .build();
   }
 
