@@ -1,0 +1,810 @@
+2024-02-18 17:47:46.199 INFO  [restartedMain] logging - Application started
+2024-02-18 17:47:55.079 INFO  [http-nio-8082-exec-2] logging - ===== Transaction Started: =====
+2024-02-18 17:47:55.079 INFO  [http-nio-8082-exec-2] logging - Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c
+2024-02-18 17:47:55.079 INFO  [http-nio-8082-exec-2] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-18 17:47:55.079 INFO  [http-nio-8082-exec-2] logging - Method: POST
+2024-02-18 17:47:55.080 INFO  [http-nio-8082-exec-2] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@28517739
+2024-02-18 17:47:55.080 INFO  [http-nio-8082-exec-2] logging - Parameters: org.apache.catalina.util.ParameterMap@7ba12a37
+2024-02-18 17:47:55.080 INFO  [http-nio-8082-exec-2] logging - Request body: [com.epamlearning.dtos.user.UserAuthDTO@d064d33]
+2024-02-18 17:47:55.080 INFO  [http-nio-8082-exec-2] logging - Query String: null
+2024-02-18 17:47:55.080 INFO  [http-nio-8082-exec-2] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 17:47:55.081 INFO  [http-nio-8082-exec-2] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-18 17:47:55.081 INFO  [http-nio-8082-exec-2] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c) ===
+2024-02-18 17:47:55.081 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:47:55.081 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:47:55.081 INFO  [http-nio-8082-exec-2] logging - password: new password
+2024-02-18 17:47:55.090 INFO  [http-nio-8082-exec-2] logging - === Service method boolean isBlocked started (Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c) ===
+2024-02-18 17:47:55.090 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:47:55.090 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:47:55.158 INFO  [http-nio-8082-exec-2] logging - Result: false
+2024-02-18 17:47:55.158 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:47:55.299 INFO  [http-nio-8082-exec-2] logging - === Service method boolean isBlocked started (Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c) ===
+2024-02-18 17:47:55.299 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:47:55.299 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:47:55.301 INFO  [http-nio-8082-exec-2] logging - Result: false
+2024-02-18 17:47:55.301 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:47:55.503 INFO  [http-nio-8082-exec-2] logging - === Service method void loginSucceeded started (Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c) ===
+2024-02-18 17:47:55.503 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:47:55.503 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:47:55.514 INFO  [http-nio-8082-exec-2] logging - Result: null
+2024-02-18 17:47:55.514 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:47:55.586 INFO  [http-nio-8082-exec-2] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 19:47:55 UZT 2024, accessTokenIssuedAt=Sun Feb 18 17:47:55 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImU2ZTMzMGViLTk3OGYtNGE3Yy1iOTkwLTQ1MGFkMjBmMWVlMyIsImlhdCI6MTcwODI2MDQ3NSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2NzY3NX0.ReutzoEcXAS8xdDBjqevDaj10eGNGiazVldWu-JLJnvJH0slt4joCON1UTycbk7zeUVKJ25QfPnmmbVL-JPf0Q, refreshTokenExpiry=Tue Feb 20 17:47:55 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 17:47:55 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjI1YTQ3MmRmLTU5ZjctNGQyMy04Mjg4LTdlNGMzNmNhMDU5OSIsImlhdCI6MTcwODI2MDQ3NSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzMzI3NX0.4UOANykNcfxTypm7Jac1nidTxMGFpkx0Dk1o7aCnqHmVvOTq0X9queDgXaRZ6EQLtdCHO1m_NpD4FSfTZwW9qQ]
+2024-02-18 17:47:55.588 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:47:55.588 INFO  [http-nio-8082-exec-2] logging - Transaction Id: 253271de-f82c-4f04-bf03-c1b00b92a95c
+2024-02-18 17:47:55.588 INFO  [http-nio-8082-exec-2] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 19:47:55 UZT 2024, accessTokenIssuedAt=Sun Feb 18 17:47:55 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImU2ZTMzMGViLTk3OGYtNGE3Yy1iOTkwLTQ1MGFkMjBmMWVlMyIsImlhdCI6MTcwODI2MDQ3NSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2NzY3NX0.ReutzoEcXAS8xdDBjqevDaj10eGNGiazVldWu-JLJnvJH0slt4joCON1UTycbk7zeUVKJ25QfPnmmbVL-JPf0Q, refreshTokenExpiry=Tue Feb 20 17:47:55 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 17:47:55 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjI1YTQ3MmRmLTU5ZjctNGQyMy04Mjg4LTdlNGMzNmNhMDU5OSIsImlhdCI6MTcwODI2MDQ3NSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzMzI3NX0.4UOANykNcfxTypm7Jac1nidTxMGFpkx0Dk1o7aCnqHmVvOTq0X9queDgXaRZ6EQLtdCHO1m_NpD4FSfTZwW9qQ],[]>
+2024-02-18 17:47:55.589 INFO  [http-nio-8082-exec-2] logging - ===== Transaction Ended =====
+2024-02-18 17:49:01.434 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: 66ce8aca-2006-4dcd-80b6-3eb17a4d41f3) ===
+2024-02-18 17:49:01.435 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 17:49:01.435 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 17:49:01.441 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 17:49:01.441 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 17:54:09.346 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 17:54:28.255 INFO  [restartedMain] logging - Application started
+2024-02-18 17:54:52.071 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 077a4f6c-dcc3-4a08-8f8d-a16b2b2f3e10) ===
+2024-02-18 17:54:52.071 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 17:54:52.071 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 17:54:52.145 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 17:54:52.145 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 17:55:00.464 INFO  [http-nio-8082-exec-2] logging - === Service method boolean isBlocked started (Transaction Id: 1e426ad0-2676-44b8-9dba-4d8342e70432) ===
+2024-02-18 17:55:00.464 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:55:00.464 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:55:00.467 INFO  [http-nio-8082-exec-2] logging - Result: false
+2024-02-18 17:55:00.467 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:55:00.477 INFO  [http-nio-8082-exec-2] logging - ===== Transaction Started: =====
+2024-02-18 17:55:00.477 INFO  [http-nio-8082-exec-2] logging - Transaction Id: c01a89bb-21c5-4a38-bac0-646a8d24869b
+2024-02-18 17:55:00.478 INFO  [http-nio-8082-exec-2] logging - Request URL: http://localhost:8082/api/v1/trainee/John.Sena
+2024-02-18 17:55:00.478 INFO  [http-nio-8082-exec-2] logging - Method: GET
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@7a075959
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - Parameters: org.apache.catalina.util.ParameterMap@5874185b
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - Request body: [John.Sena]
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - Query String: null
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 17:55:00.479 INFO  [http-nio-8082-exec-2] logging - Controller: com.epamlearning.controllers.TraineeController.getTraineeProfile
+2024-02-18 17:55:00.480 INFO  [http-nio-8082-exec-2] logging - === Service method class com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO findByUsername started (Transaction Id: c01a89bb-21c5-4a38-bac0-646a8d24869b) ===
+2024-02-18 17:55:00.480 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 17:55:00.480 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 17:55:00.505 INFO  [http-nio-8082-exec-2] logging - Result: com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@6fd8dc55
+2024-02-18 17:55:00.505 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 17:55:00.506 INFO  [http-nio-8082-exec-2] logging - Transaction Id: c01a89bb-21c5-4a38-bac0-646a8d24869b
+2024-02-18 17:55:00.506 INFO  [http-nio-8082-exec-2] logging - Response: <200 OK OK,com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@6fd8dc55,[]>
+2024-02-18 17:55:00.506 INFO  [http-nio-8082-exec-2] logging - ===== Transaction Ended =====
+2024-02-18 17:55:48.913 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 17:56:07.833 INFO  [restartedMain] logging - Application started
+2024-02-18 17:56:13.827 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 4cfe1bf7-9b96-4646-8240-5ad78b99224a) ===
+2024-02-18 17:56:13.828 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 17:56:13.828 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 17:56:14.085 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 17:56:14.086 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 17:56:14.301 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 17:56:14.301 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 8c9b7ffb-b4d5-4502-8466-8df20b5ad19e
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/trainee/John.Sena
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Method: GET
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@7069c5de
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@5f715b29
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Request body: [John.Sena]
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 17:56:14.302 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TraineeController.getTraineeProfile
+2024-02-18 17:56:14.303 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO findByUsername started (Transaction Id: 8c9b7ffb-b4d5-4502-8466-8df20b5ad19e) ===
+2024-02-18 17:56:14.303 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 17:56:14.303 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 17:56:14.322 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@3fa4fc32
+2024-02-18 17:56:14.322 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 17:56:14.323 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 8c9b7ffb-b4d5-4502-8466-8df20b5ad19e
+2024-02-18 17:56:14.323 INFO  [http-nio-8082-exec-1] logging - Response: <200 OK OK,com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@3fa4fc32,[]>
+2024-02-18 17:56:14.323 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 17:56:26.640 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: 3834fd80-937f-49ed-9d71-3c36e707a2f9) ===
+2024-02-18 17:56:26.641 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 17:56:26.641 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 17:56:26.646 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 17:56:26.646 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 17:56:52.611 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 17:57:13.613 INFO  [restartedMain] logging - Application started
+2024-02-18 17:57:16.716 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 816fedfb-3238-4e12-9a8e-3860bbf417e9) ===
+2024-02-18 17:57:16.716 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 17:57:16.716 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 17:57:16.784 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 17:57:16.784 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:01:02.669 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:01:21.812 INFO  [restartedMain] logging - Application started
+2024-02-18 18:01:48.681 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: a26fa3b5-2b90-4fc2-97b6-e4ef605737fd) ===
+2024-02-18 18:01:48.681 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:01:48.681 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:01:48.748 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:01:48.748 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:01:48.841 ERROR [http-nio-8082-exec-1] logging - Transaction ID: null
+2024-02-18 18:01:48.841 ERROR [http-nio-8082-exec-1] logging - Exception occurred for URL: uri=/api/v1/trainee/John.asd
+2024-02-18 18:01:48.841 ERROR [http-nio-8082-exec-1] logging - Exception message: Access Denied
+2024-02-18 18:03:51.032 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:04:09.417 INFO  [restartedMain] logging - Application started
+2024-02-18 18:04:30.314 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: e7733421-2e9e-44e0-89bc-f76afe8e5dd1) ===
+2024-02-18 18:04:30.314 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:04:30.314 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:04:30.445 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:04:30.446 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:04:30.560 ERROR [http-nio-8082-exec-1] logging - Transaction ID: null
+2024-02-18 18:04:30.560 ERROR [http-nio-8082-exec-1] logging - Exception occurred for URL: uri=/api/v1/trainee/John.asd
+2024-02-18 18:04:30.560 ERROR [http-nio-8082-exec-1] logging - Exception message: Access Denied
+2024-02-18 18:05:15.949 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:05:32.796 INFO  [restartedMain] logging - Application started
+2024-02-18 18:05:35.822 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 6015de4b-552a-4cf6-8552-6fe202973921) ===
+2024-02-18 18:05:35.823 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:05:35.823 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:05:35.879 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:05:35.879 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:05:35.986 ERROR [http-nio-8082-exec-1] logging - Transaction ID: null
+2024-02-18 18:05:35.986 ERROR [http-nio-8082-exec-1] logging - Exception occurred for URL: uri=/api/v1/trainee/John.asd;client=0:0:0:0:0:0:0:1;user=John.Sena
+2024-02-18 18:05:35.986 ERROR [http-nio-8082-exec-1] logging - Exception message: Access Denied
+2024-02-18 18:14:30.193 INFO  [http-nio-8082-exec-2] logging - === Service method boolean isBlocked started (Transaction Id: 9efb89be-b738-4712-8854-b393d7bb6a18) ===
+2024-02-18 18:14:30.193 INFO  [http-nio-8082-exec-2] logging - Parameters: 
+2024-02-18 18:14:30.193 INFO  [http-nio-8082-exec-2] logging - username: John.Sena
+2024-02-18 18:14:30.209 INFO  [http-nio-8082-exec-2] logging - Result: false
+2024-02-18 18:14:30.210 INFO  [http-nio-8082-exec-2] logging - === Service method end ===
+2024-02-18 18:14:30.222 ERROR [http-nio-8082-exec-2] logging - Transaction ID: null
+2024-02-18 18:14:30.222 ERROR [http-nio-8082-exec-2] logging - Exception occurred for URL: uri=/api/v1/trainee/John.asd;client=0:0:0:0:0:0:0:1;user=John.Sena
+2024-02-18 18:14:30.222 ERROR [http-nio-8082-exec-2] logging - Exception message: Access Denied
+2024-02-18 18:14:38.776 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: 658b3843-eaf0-4e6a-b5a6-94fc46b01188) ===
+2024-02-18 18:14:38.776 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:14:38.776 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:14:38.792 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 18:14:38.792 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:14:38.801 ERROR [http-nio-8082-exec-3] logging - Transaction ID: null
+2024-02-18 18:14:38.801 ERROR [http-nio-8082-exec-3] logging - Exception occurred for URL: uri=/api/v1/trainee/John.asd;client=0:0:0:0:0:0:0:1;user=John.Sena
+2024-02-18 18:14:38.801 ERROR [http-nio-8082-exec-3] logging - Exception message: Access Denied
+2024-02-18 18:14:59.065 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 18:14:59.065 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@66d222f9
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@5aa42c60
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.user.UserAuthDTO@23b20e0a]
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd) ===
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:14:59.066 INFO  [http-nio-8082-exec-1] logging - password: new password
+2024-02-18 18:14:59.068 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd) ===
+2024-02-18 18:14:59.068 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:14:59.068 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:14:59.071 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:14:59.071 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:14:59.212 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd) ===
+2024-02-18 18:14:59.212 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:14:59.212 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:14:59.214 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:14:59.214 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:14:59.356 INFO  [http-nio-8082-exec-1] logging - === Service method void loginSucceeded started (Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd) ===
+2024-02-18 18:14:59.356 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:14:59.356 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:14:59.370 INFO  [http-nio-8082-exec-1] logging - Result: null
+2024-02-18 18:14:59.370 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:14:59.389 INFO  [http-nio-8082-exec-1] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 20:14:59 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:14:59 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjY1MGM0OTU5LTNhMTQtNDM1Zi05YjY1LTYwZjMzYWI2OGM5YyIsImlhdCI6MTcwODI2MjA5OSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2OTI5OX0.VbJYFBKBcU01S4K0gg5rsliI9gMiDKPBwpB6dI-UG-hhaK6hswY1tBkYfWksORMuE1sorDgjmZTZHsvE9HDLtQ, refreshTokenExpiry=Tue Feb 20 18:14:59 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:14:59 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImRiOWU5MjU0LTJhNDctNGU4Mi05YzQ4LTE4OTFlZjUyMjI5YSIsImlhdCI6MTcwODI2MjA5OSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNDg5OX0.qh9W7u3Ltrh24cH0BeQEonqKL3HWCo9cjynhANtYR8VjmBgGMufOvz0q0rT4eO2iAcLTqUn2eNe4deTVX0_BiA]
+2024-02-18 18:14:59.392 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:14:59.393 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 60c163a0-7f29-4d2b-8602-156c173e5edd
+2024-02-18 18:14:59.393 INFO  [http-nio-8082-exec-1] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 20:14:59 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:14:59 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjY1MGM0OTU5LTNhMTQtNDM1Zi05YjY1LTYwZjMzYWI2OGM5YyIsImlhdCI6MTcwODI2MjA5OSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2OTI5OX0.VbJYFBKBcU01S4K0gg5rsliI9gMiDKPBwpB6dI-UG-hhaK6hswY1tBkYfWksORMuE1sorDgjmZTZHsvE9HDLtQ, refreshTokenExpiry=Tue Feb 20 18:14:59 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:14:59 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImRiOWU5MjU0LTJhNDctNGU4Mi05YzQ4LTE4OTFlZjUyMjI5YSIsImlhdCI6MTcwODI2MjA5OSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNDg5OX0.qh9W7u3Ltrh24cH0BeQEonqKL3HWCo9cjynhANtYR8VjmBgGMufOvz0q0rT4eO2iAcLTqUn2eNe4deTVX0_BiA],[]>
+2024-02-18 18:14:59.394 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 18:15:11.791 INFO  [http-nio-8082-exec-7] logging - === Service method boolean isBlocked started (Transaction Id: 3a4aea5d-af9b-4dbe-8054-505f8dfd49e8) ===
+2024-02-18 18:15:11.791 INFO  [http-nio-8082-exec-7] logging - Parameters: 
+2024-02-18 18:15:11.791 INFO  [http-nio-8082-exec-7] logging - username: John.Sena
+2024-02-18 18:15:11.793 INFO  [http-nio-8082-exec-7] logging - Result: false
+2024-02-18 18:15:11.793 INFO  [http-nio-8082-exec-7] logging - === Service method end ===
+2024-02-18 18:15:11.805 INFO  [http-nio-8082-exec-7] logging - ===== Transaction Started: =====
+2024-02-18 18:15:11.805 INFO  [http-nio-8082-exec-7] logging - Transaction Id: e3506789-57e7-4ac9-869d-b9cc6caf00ff
+2024-02-18 18:15:11.805 INFO  [http-nio-8082-exec-7] logging - Request URL: http://localhost:8082/api/v1/trainee/John.Sena
+2024-02-18 18:15:11.805 INFO  [http-nio-8082-exec-7] logging - Method: GET
+2024-02-18 18:15:11.805 INFO  [http-nio-8082-exec-7] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@616df486
+2024-02-18 18:15:11.806 INFO  [http-nio-8082-exec-7] logging - Parameters: org.apache.catalina.util.ParameterMap@17c263fb
+2024-02-18 18:15:11.806 INFO  [http-nio-8082-exec-7] logging - Request body: [John.Sena]
+2024-02-18 18:15:11.806 INFO  [http-nio-8082-exec-7] logging - Query String: null
+2024-02-18 18:15:11.806 INFO  [http-nio-8082-exec-7] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 18:15:11.806 INFO  [http-nio-8082-exec-7] logging - Controller: com.epamlearning.controllers.TraineeController.getTraineeProfile
+2024-02-18 18:15:11.807 INFO  [http-nio-8082-exec-7] logging - === Service method class com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO findByUsername started (Transaction Id: e3506789-57e7-4ac9-869d-b9cc6caf00ff) ===
+2024-02-18 18:15:11.807 INFO  [http-nio-8082-exec-7] logging - Parameters: 
+2024-02-18 18:15:11.807 INFO  [http-nio-8082-exec-7] logging - username: John.Sena
+2024-02-18 18:15:11.858 INFO  [http-nio-8082-exec-7] logging - Result: com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@7c0df9ba
+2024-02-18 18:15:11.858 INFO  [http-nio-8082-exec-7] logging - === Service method end ===
+2024-02-18 18:15:11.859 INFO  [http-nio-8082-exec-7] logging - Transaction Id: e3506789-57e7-4ac9-869d-b9cc6caf00ff
+2024-02-18 18:15:11.859 INFO  [http-nio-8082-exec-7] logging - Response: <200 OK OK,com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@7c0df9ba,[]>
+2024-02-18 18:15:11.859 INFO  [http-nio-8082-exec-7] logging - ===== Transaction Ended =====
+2024-02-18 18:15:15.338 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: fd70949f-dd9d-4c74-bfca-cd543e9de926) ===
+2024-02-18 18:15:15.338 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:15:15.338 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:15:15.344 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 18:15:15.344 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:15:15.356 ERROR [http-nio-8082-exec-3] logging - Transaction ID: null
+2024-02-18 18:15:15.356 ERROR [http-nio-8082-exec-3] logging - Exception occurred for URL: uri=/api/v1/trainee/John.221;client=0:0:0:0:0:0:0:1;user=John.Sena
+2024-02-18 18:15:15.356 ERROR [http-nio-8082-exec-3] logging - Exception message: Access Denied
+2024-02-18 18:15:31.135 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:15:48.533 INFO  [restartedMain] logging - Application started
+2024-02-18 18:15:56.122 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 3f48ef6a-fcf3-46e0-8c03-059a428a87c3) ===
+2024-02-18 18:15:56.123 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:15:56.123 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:15:56.185 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:15:56.185 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Started: =====
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Method: POST
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@73a52021
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Parameters: org.apache.catalina.util.ParameterMap@325099c8
+2024-02-18 18:16:23.080 INFO  [http-nio-8082-exec-8] logging - Request body: [com.epamlearning.dtos.user.UserAuthDTO@99a3dd5]
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - Query String: null
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a) ===
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-18 18:16:23.081 INFO  [http-nio-8082-exec-8] logging - password: new password
+2024-02-18 18:16:23.083 INFO  [http-nio-8082-exec-8] logging - === Service method boolean isBlocked started (Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a) ===
+2024-02-18 18:16:23.083 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 18:16:23.083 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-18 18:16:23.099 INFO  [http-nio-8082-exec-8] logging - Result: false
+2024-02-18 18:16:23.099 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 18:16:23.244 INFO  [http-nio-8082-exec-8] logging - === Service method boolean isBlocked started (Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a) ===
+2024-02-18 18:16:23.244 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 18:16:23.244 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-18 18:16:23.245 INFO  [http-nio-8082-exec-8] logging - Result: false
+2024-02-18 18:16:23.246 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 18:16:23.386 INFO  [http-nio-8082-exec-8] logging - === Service method void loginSucceeded started (Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a) ===
+2024-02-18 18:16:23.386 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 18:16:23.386 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-18 18:16:23.399 INFO  [http-nio-8082-exec-8] logging - Result: null
+2024-02-18 18:16:23.399 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 18:16:23.422 INFO  [http-nio-8082-exec-8] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 20:16:23 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:16:23 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6Ijk1YTczMDFiLTFhYWEtNDUzNy1hNDBlLTVhMWNmNTg5NGFlYyIsImlhdCI6MTcwODI2MjE4MywiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2OTM4M30.-qaG616MJ-F_S5SedUodwKYAFX09mBMQUHbHtVRW8QS-rXB8_Jp51vKvVmUik_EYL1-G2j1hBNtFAKjFXwNgiw, refreshTokenExpiry=Tue Feb 20 18:16:23 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:16:23 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjJmOGIwODkwLTdiYzEtNDc3NC1hNGJmLWE0YTIzOTEzMmE2NyIsImlhdCI6MTcwODI2MjE4MywiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNDk4M30.h_9mYjwZXWCT-ue-fPkVmmmPlcCuke3BSHnl8aMCegL_ON3d0cD7omFaue8V63nrVsCZBpDq2UbjlqGm8BelDA]
+2024-02-18 18:16:23.427 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 18:16:23.429 INFO  [http-nio-8082-exec-8] logging - Transaction Id: d7e121dd-2c72-4dc2-895b-dc224dbba13a
+2024-02-18 18:16:23.429 INFO  [http-nio-8082-exec-8] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 20:16:23 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:16:23 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6Ijk1YTczMDFiLTFhYWEtNDUzNy1hNDBlLTVhMWNmNTg5NGFlYyIsImlhdCI6MTcwODI2MjE4MywiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI2OTM4M30.-qaG616MJ-F_S5SedUodwKYAFX09mBMQUHbHtVRW8QS-rXB8_Jp51vKvVmUik_EYL1-G2j1hBNtFAKjFXwNgiw, refreshTokenExpiry=Tue Feb 20 18:16:23 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:16:23 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjJmOGIwODkwLTdiYzEtNDc3NC1hNGJmLWE0YTIzOTEzMmE2NyIsImlhdCI6MTcwODI2MjE4MywiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNDk4M30.h_9mYjwZXWCT-ue-fPkVmmmPlcCuke3BSHnl8aMCegL_ON3d0cD7omFaue8V63nrVsCZBpDq2UbjlqGm8BelDA],[]>
+2024-02-18 18:16:23.430 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Ended =====
+2024-02-18 18:16:55.437 INFO  [http-nio-8082-exec-10] logging - === Service method boolean isBlocked started (Transaction Id: b133f67e-2b2e-4907-842f-6d48f894739a) ===
+2024-02-18 18:16:55.438 INFO  [http-nio-8082-exec-10] logging - Parameters: 
+2024-02-18 18:16:55.438 INFO  [http-nio-8082-exec-10] logging - username: John.Sena
+2024-02-18 18:16:55.443 INFO  [http-nio-8082-exec-10] logging - Result: false
+2024-02-18 18:16:55.443 INFO  [http-nio-8082-exec-10] logging - === Service method end ===
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - ===== Transaction Started: =====
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Transaction Id: e1fe9e72-288c-4e0a-a61b-829b64a412b2
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Request URL: http://localhost:8082/api/v1/trainee/John.Sena
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Method: GET
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@10246b7c
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Parameters: org.apache.catalina.util.ParameterMap@48919299
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Request body: [John.Sena]
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Query String: null
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 18:16:55.456 INFO  [http-nio-8082-exec-10] logging - Controller: com.epamlearning.controllers.TraineeController.getTraineeProfile
+2024-02-18 18:16:55.457 INFO  [http-nio-8082-exec-10] logging - === Service method class com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO findByUsername started (Transaction Id: e1fe9e72-288c-4e0a-a61b-829b64a412b2) ===
+2024-02-18 18:16:55.457 INFO  [http-nio-8082-exec-10] logging - Parameters: 
+2024-02-18 18:16:55.457 INFO  [http-nio-8082-exec-10] logging - username: John.Sena
+2024-02-18 18:16:55.499 INFO  [http-nio-8082-exec-10] logging - Result: com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@25305da9
+2024-02-18 18:16:55.499 INFO  [http-nio-8082-exec-10] logging - === Service method end ===
+2024-02-18 18:16:55.499 INFO  [http-nio-8082-exec-10] logging - Transaction Id: e1fe9e72-288c-4e0a-a61b-829b64a412b2
+2024-02-18 18:16:55.499 INFO  [http-nio-8082-exec-10] logging - Response: <200 OK OK,com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO@25305da9,[]>
+2024-02-18 18:16:55.499 INFO  [http-nio-8082-exec-10] logging - ===== Transaction Ended =====
+2024-02-18 18:16:57.715 INFO  [http-nio-8082-exec-9] logging - === Service method boolean isBlocked started (Transaction Id: 575d6bee-4f3b-4adb-98e5-a425e224cf06) ===
+2024-02-18 18:16:57.715 INFO  [http-nio-8082-exec-9] logging - Parameters: 
+2024-02-18 18:16:57.716 INFO  [http-nio-8082-exec-9] logging - username: John.Sena
+2024-02-18 18:16:57.717 INFO  [http-nio-8082-exec-9] logging - Result: false
+2024-02-18 18:16:57.717 INFO  [http-nio-8082-exec-9] logging - === Service method end ===
+2024-02-18 18:17:26.293 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:17:43.269 INFO  [restartedMain] logging - Application started
+2024-02-18 18:18:04.921 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: a45c3ae3-7d1d-4ff6-846a-85f1c69227f7) ===
+2024-02-18 18:18:04.921 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:18:04.921 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:18:04.984 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:18:04.984 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:19:03.873 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:19:21.722 INFO  [restartedMain] logging - Application started
+2024-02-18 18:19:23.685 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 59286910-ba69-43e9-a22b-3cd6cb979d45) ===
+2024-02-18 18:19:23.685 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 18:19:23.686 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 18:19:23.752 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 18:19:23.752 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 18:37:42.612 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:38:14.568 INFO  [restartedMain] logging - Application started
+2024-02-18 18:38:50.761 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:39:03.673 INFO  [restartedMain] logging - Application started
+2024-02-18 18:41:08.896 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:41:21.785 INFO  [restartedMain] logging - Application started
+2024-02-18 18:51:56.124 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:52:10.995 INFO  [restartedMain] logging - Application started
+2024-02-18 18:52:11.178 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 18:52:23.964 INFO  [restartedMain] logging - Application started
+2024-02-18 18:56:34.373 ERROR [http-nio-8082-exec-1] logging - Unauthorized request: Full authentication is required to access this resource
+2024-02-18 18:56:50.698 INFO  [http-nio-8082-exec-3] logging - ===== Transaction Started: =====
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Method: POST
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@4a2d7b6f
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@591a2f94
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Request body: [com.epamlearning.dtos.user.UserAuthDTO@5bcc39c2]
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - Query String: null
+2024-02-18 18:56:50.699 INFO  [http-nio-8082-exec-3] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 18:56:50.700 INFO  [http-nio-8082-exec-3] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-18 18:56:50.700 INFO  [http-nio-8082-exec-3] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa) ===
+2024-02-18 18:56:50.700 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:56:50.700 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:56:50.700 INFO  [http-nio-8082-exec-3] logging - password: new password
+2024-02-18 18:56:50.716 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa) ===
+2024-02-18 18:56:50.716 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:56:50.716 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:56:50.762 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 18:56:50.762 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:56:50.850 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa) ===
+2024-02-18 18:56:50.850 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:56:50.850 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:56:50.851 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 18:56:50.851 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:56:50.979 INFO  [http-nio-8082-exec-3] logging - === Service method void loginSucceeded started (Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa) ===
+2024-02-18 18:56:50.979 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 18:56:50.979 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 18:56:50.986 INFO  [http-nio-8082-exec-3] logging - Result: null
+2024-02-18 18:56:50.986 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:56:51.032 INFO  [http-nio-8082-exec-3] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 20:56:51 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:56:51 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjIyYzk0ZTZmLTAxZDAtNDJkYi1iN2VhLWI0MzM4OTZmNjFmNCIsImlhdCI6MTcwODI2NDYxMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI3MTgxMX0.cKJfRiWtS2HyjSJXqhPHPyR4xq9bSsGO1osc1uz8ONrh4HkcGrkKN-cCfeMWzKRbskdQEwTccwSguPAV5HxFDw, refreshTokenExpiry=Tue Feb 20 18:56:51 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:56:51 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImNjYjQ1MWEyLWI1MDEtNDE0NS04NzVhLTM3NzA4NTUyNjExNCIsImlhdCI6MTcwODI2NDYxMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNzQxMX0.kUf9pVDDg8YFlx24T7fV_hf7EWyOsygn8eqwfYJ0d99P3_4Gf5-SfveawRZ_MoW7lmnny6HvbpTaBRLNt6oNiA]
+2024-02-18 18:56:51.034 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 18:56:51.035 INFO  [http-nio-8082-exec-3] logging - Transaction Id: fc6342f2-b5c3-405d-aafa-bbcff2243faa
+2024-02-18 18:56:51.035 INFO  [http-nio-8082-exec-3] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 20:56:51 UZT 2024, accessTokenIssuedAt=Sun Feb 18 18:56:51 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjIyYzk0ZTZmLTAxZDAtNDJkYi1iN2VhLWI0MzM4OTZmNjFmNCIsImlhdCI6MTcwODI2NDYxMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI3MTgxMX0.cKJfRiWtS2HyjSJXqhPHPyR4xq9bSsGO1osc1uz8ONrh4HkcGrkKN-cCfeMWzKRbskdQEwTccwSguPAV5HxFDw, refreshTokenExpiry=Tue Feb 20 18:56:51 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 18:56:51 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImNjYjQ1MWEyLWI1MDEtNDE0NS04NzVhLTM3NzA4NTUyNjExNCIsImlhdCI6MTcwODI2NDYxMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQzNzQxMX0.kUf9pVDDg8YFlx24T7fV_hf7EWyOsygn8eqwfYJ0d99P3_4Gf5-SfveawRZ_MoW7lmnny6HvbpTaBRLNt6oNiA],[]>
+2024-02-18 18:56:51.035 INFO  [http-nio-8082-exec-3] logging - ===== Transaction Ended =====
+2024-02-18 18:56:59.344 INFO  [http-nio-8082-exec-5] logging - === Service method boolean isBlocked started (Transaction Id: d5c57aa5-269c-459b-a076-dca75868ecdb) ===
+2024-02-18 18:56:59.345 INFO  [http-nio-8082-exec-5] logging - Parameters: 
+2024-02-18 18:56:59.345 INFO  [http-nio-8082-exec-5] logging - username: John.Sena
+2024-02-18 18:56:59.347 INFO  [http-nio-8082-exec-5] logging - Result: false
+2024-02-18 18:56:59.347 INFO  [http-nio-8082-exec-5] logging - === Service method end ===
+2024-02-18 18:56:59.378 ERROR [http-nio-8082-exec-5] logging - Unauthorized request: Access Denied
+2024-02-18 19:25:19.761 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 19:25:32.808 INFO  [restartedMain] logging - Application started
+2024-02-18 19:25:41.333 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 8cc907c7-c57f-4787-bbde-7a81cb851308) ===
+2024-02-18 19:25:41.333 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 19:25:41.334 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 19:25:41.378 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 19:25:41.378 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 19:25:41.452 ERROR [http-nio-8082-exec-1] logging - Forbidden request: Access Denied, 032e2879-7777-4e97-a8b9-68446ca0453f
+2024-02-18 19:28:45.013 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 19:28:58.869 INFO  [restartedMain] logging - Application started
+2024-02-18 19:29:17.609 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 761c74e5-22e1-44ff-93d4-a1e5d103328b) ===
+2024-02-18 19:29:17.609 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 19:29:17.609 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 19:29:17.664 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 19:29:17.664 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 19:29:17.746 ERROR [http-nio-8082-exec-1] logging - Forbidden request: Message: Access Denied, URL: http://localhost:8082/api/v1/trainee/John.Wick, Method: GET, Client: John.Sena 0:0:0:0:0:0:0:1, Transaction ID: 74d5c021-c422-42f2-93ee-ed14c2de8d7c
+2024-02-18 19:29:40.126 ERROR [http-nio-8082-exec-3] logging - Unauthorized request: Message: Full authentication is required to access this resource, URL: http://localhost:8082/api/v1/trainee/John.Wick, Method: GET, Client: null 0:0:0:0:0:0:0:1, Transaction ID: 69dadadd-b6a7-4715-8c3d-5fa9656a6094
+2024-02-18 19:40:56.869 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 19:41:13.296 INFO  [restartedMain] logging - Application started
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - ===== Transaction Started: =====
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Method: POST
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@48cc4bdd
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Parameters: org.apache.catalina.util.ParameterMap@5a776aef
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Request body: [com.epamlearning.dtos.user.UserAuthDTO@216e9dbe]
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - Query String: null
+2024-02-18 19:41:30.489 INFO  [http-nio-8082-exec-6] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:41:30.490 INFO  [http-nio-8082-exec-6] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-18 19:41:30.490 INFO  [http-nio-8082-exec-6] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec) ===
+2024-02-18 19:41:30.490 INFO  [http-nio-8082-exec-6] logging - Parameters: 
+2024-02-18 19:41:30.490 INFO  [http-nio-8082-exec-6] logging - username: John.Sena
+2024-02-18 19:41:30.490 INFO  [http-nio-8082-exec-6] logging - password: new password
+2024-02-18 19:41:30.510 INFO  [http-nio-8082-exec-6] logging - === Service method boolean isBlocked started (Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec) ===
+2024-02-18 19:41:30.510 INFO  [http-nio-8082-exec-6] logging - Parameters: 
+2024-02-18 19:41:30.510 INFO  [http-nio-8082-exec-6] logging - username: John.Sena
+2024-02-18 19:41:30.560 INFO  [http-nio-8082-exec-6] logging - Result: false
+2024-02-18 19:41:30.560 INFO  [http-nio-8082-exec-6] logging - === Service method end ===
+2024-02-18 19:41:30.649 INFO  [http-nio-8082-exec-6] logging - === Service method boolean isBlocked started (Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec) ===
+2024-02-18 19:41:30.649 INFO  [http-nio-8082-exec-6] logging - Parameters: 
+2024-02-18 19:41:30.649 INFO  [http-nio-8082-exec-6] logging - username: John.Sena
+2024-02-18 19:41:30.650 INFO  [http-nio-8082-exec-6] logging - Result: false
+2024-02-18 19:41:30.650 INFO  [http-nio-8082-exec-6] logging - === Service method end ===
+2024-02-18 19:41:30.778 INFO  [http-nio-8082-exec-6] logging - === Service method void loginSucceeded started (Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec) ===
+2024-02-18 19:41:30.778 INFO  [http-nio-8082-exec-6] logging - Parameters: 
+2024-02-18 19:41:30.778 INFO  [http-nio-8082-exec-6] logging - username: John.Sena
+2024-02-18 19:41:30.785 INFO  [http-nio-8082-exec-6] logging - Result: null
+2024-02-18 19:41:30.785 INFO  [http-nio-8082-exec-6] logging - === Service method end ===
+2024-02-18 19:41:30.831 INFO  [http-nio-8082-exec-6] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 21:41:30 UZT 2024, accessTokenIssuedAt=Sun Feb 18 19:41:30 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImI2NmQ4OTZlLTllOWItNGE4Zi1hZDViLTVkNWQyZDFmNGJmNiIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI3NDQ5MH0.9HibC8hojtb4xfOLYzyiMeUkjP1_GyzR28z9yQRMjelVLeibz5oD9eqm7fswNSBBzngCJt4cMt6dKdv-p9Fogw, refreshTokenExpiry=Tue Feb 20 19:41:30 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 19:41:30 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImM5NDc2ZDBjLTQwMTctNDZkZi05ZDJiLTY5MDZmNTE4MmNhYSIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0MDA5MH0.b0EZqKayCKbYqphszwEac3OGvoPKYMdn-mnZwPzZpQwNINf_uSdTaRgSZya64YtjEargAF5rqN0sPSGKqyGqGw]
+2024-02-18 19:41:30.832 INFO  [http-nio-8082-exec-6] logging - === Service method end ===
+2024-02-18 19:41:30.832 INFO  [http-nio-8082-exec-6] logging - Transaction Id: 67e5bf89-2776-4220-b246-575d7a8c9cec
+2024-02-18 19:41:30.832 INFO  [http-nio-8082-exec-6] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 21:41:30 UZT 2024, accessTokenIssuedAt=Sun Feb 18 19:41:30 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImI2NmQ4OTZlLTllOWItNGE4Zi1hZDViLTVkNWQyZDFmNGJmNiIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI3NDQ5MH0.9HibC8hojtb4xfOLYzyiMeUkjP1_GyzR28z9yQRMjelVLeibz5oD9eqm7fswNSBBzngCJt4cMt6dKdv-p9Fogw, refreshTokenExpiry=Tue Feb 20 19:41:30 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 19:41:30 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImM5NDc2ZDBjLTQwMTctNDZkZi05ZDJiLTY5MDZmNTE4MmNhYSIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0MDA5MH0.b0EZqKayCKbYqphszwEac3OGvoPKYMdn-mnZwPzZpQwNINf_uSdTaRgSZya64YtjEargAF5rqN0sPSGKqyGqGw],[]>
+2024-02-18 19:41:30.833 INFO  [http-nio-8082-exec-6] logging - ===== Transaction Ended =====
+2024-02-18 19:42:12.825 INFO  [http-nio-8082-exec-8] logging - === Service method boolean isBlocked started (Transaction Id: a2b81ea9-78c3-4570-8e2e-c2268fcce34d) ===
+2024-02-18 19:42:12.825 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 19:42:12.826 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-18 19:42:12.830 INFO  [http-nio-8082-exec-8] logging - Result: false
+2024-02-18 19:42:12.830 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Started: =====
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Transaction Id: e073e829-aef3-4ef1-9a54-f182477f4b7f
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Method: POST
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@4b8eb391
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Parameters: org.apache.catalina.util.ParameterMap@4471eec4
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@7e14f06c]
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Query String: null
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: e073e829-aef3-4ef1-9a54-f182477f4b7f) ===
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - trainingName: JavaXStackv33
+2024-02-18 19:42:12.917 INFO  [http-nio-8082-exec-8] logging - trainingDate: 2024-02-26
+2024-02-18 19:42:12.918 INFO  [http-nio-8082-exec-8] logging - trainingDuration: 75
+2024-02-18 19:42:12.918 INFO  [http-nio-8082-exec-8] logging - trainerUsername: John.Smith
+2024-02-18 19:42:12.918 INFO  [http-nio-8082-exec-8] logging - traineeUsername: John.Sena
+2024-02-18 19:42:12.963 INFO  [http-nio-8082-exec-8] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@5c61eaee
+2024-02-18 19:42:12.963 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Method: POST
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@7baa0683
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@2c0b8797
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@28625790]
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-02-18 19:42:13.166 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-02-18 19:42:13.167 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 19:42:13.172 INFO  [http-nio-8085-exec-1] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 19:42:13.172 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-02-18 19:42:13.172 INFO  [http-nio-8085-exec-1] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@28625790
+2024-02-18 19:42:13.195 INFO  [http-nio-8085-exec-1] logging - Result: null
+2024-02-18 19:42:13.195 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-02-18 19:42:13.201 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:42:13.201 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,[]>
+2024-02-18 19:42:13.201 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 19:42:13.211 INFO  [http-nio-8082-exec-8] logging - Transaction Id: e073e829-aef3-4ef1-9a54-f182477f4b7f
+2024-02-18 19:42:13.211 INFO  [http-nio-8082-exec-8] logging - Response: <201 CREATED Created,[]>
+2024-02-18 19:42:13.211 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Ended =====
+2024-02-18 19:45:47.326 INFO  [http-nio-8085-exec-5] logging - ===== Transaction Started: =====
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Transaction Id: null
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Request URL: http://localhost:8085/api/v1/monthly-summary
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Method: GET
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@1843756e
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Parameters: org.apache.catalina.util.ParameterMap@11f232eb
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Request body: [John.Smith]
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Query String: username=John.Smith
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary calculate started (Transaction Id: null) ===
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Parameters: 
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - username: John.Smith
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - === Service method interface java.util.List getAllByUsername started (Transaction Id: null) ===
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - Parameters: 
+2024-02-18 19:45:47.327 INFO  [http-nio-8085-exec-5] logging - username: John.Smith
+2024-02-18 19:45:47.409 INFO  [http-nio-8085-exec-5] logging - Result: [com.epamlearning.reportmicroservice.entities.TrainerWorkload@1abac4a0]
+2024-02-18 19:45:47.409 INFO  [http-nio-8085-exec-5] logging - === Service method end ===
+2024-02-18 19:45:47.412 INFO  [http-nio-8085-exec-5] logging - Result: com.epamlearning.reportmicroservice.entities.TrainerSummary@307a2e75
+2024-02-18 19:45:47.412 INFO  [http-nio-8085-exec-5] logging - === Service method end ===
+2024-02-18 19:45:47.412 INFO  [http-nio-8085-exec-5] logging - Transaction Id: null
+2024-02-18 19:45:47.412 INFO  [http-nio-8085-exec-5] logging - Response: <200 OK OK,com.epamlearning.reportmicroservice.entities.TrainerSummary@307a2e75,[]>
+2024-02-18 19:45:47.412 INFO  [http-nio-8085-exec-5] logging - ===== Transaction Ended =====
+2024-02-18 19:48:40.146 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 19:48:55.850 INFO  [restartedMain] logging - Application started
+2024-02-18 19:49:57.223 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: bc53178f-b950-4961-82f8-1b6074470a5b) ===
+2024-02-18 19:49:57.223 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 19:49:57.223 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 19:49:57.276 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 19:49:57.276 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 19:49:57.431 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 19:49:57.431 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 7152f6fa-8ba6-4641-8e82-4d6d88f65b1a
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@404ae28d
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@61ce1019
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@216977f2]
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: 7152f6fa-8ba6-4641-8e82-4d6d88f65b1a) ===
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv35
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-02-26
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 80
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-18 19:49:57.432 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-18 19:49:57.477 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@38eb502
+2024-02-18 19:49:57.477 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 19:49:57.730 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 7152f6fa-8ba6-4641-8e82-4d6d88f65b1a
+2024-02-18 19:49:57.730 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-18 19:49:57.730 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 19:56:35.069 INFO  [http-nio-8082-exec-3] logging - === Service method boolean isBlocked started (Transaction Id: 8e48539d-9304-49e7-a7a7-c12687d32022) ===
+2024-02-18 19:56:35.070 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 19:56:35.070 INFO  [http-nio-8082-exec-3] logging - username: John.Sena
+2024-02-18 19:56:35.089 INFO  [http-nio-8082-exec-3] logging - Result: false
+2024-02-18 19:56:35.089 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - ===== Transaction Started: =====
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Transaction Id: c2953c47-1180-426c-96e1-d0cd37605f44
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Method: POST
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@1c084038
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@436479d4
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@26ea67ac]
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - Query String: null
+2024-02-18 19:56:35.108 INFO  [http-nio-8082-exec-3] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: c2953c47-1180-426c-96e1-d0cd37605f44) ===
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - Parameters: 
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - trainingName: JavaXStackv35
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - trainingDate: 2024-03-26
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - trainingDuration: 80
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - trainerUsername: John.Smith
+2024-02-18 19:56:35.109 INFO  [http-nio-8082-exec-3] logging - traineeUsername: John.Sena
+2024-02-18 19:56:35.145 INFO  [http-nio-8082-exec-3] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@5010ffcb
+2024-02-18 19:56:35.145 INFO  [http-nio-8082-exec-3] logging - === Service method end ===
+2024-02-18 19:56:35.400 INFO  [http-nio-8082-exec-3] logging - Transaction Id: c2953c47-1180-426c-96e1-d0cd37605f44
+2024-02-18 19:56:35.400 INFO  [http-nio-8082-exec-3] logging - Response: <201 CREATED Created,[]>
+2024-02-18 19:56:35.400 INFO  [http-nio-8082-exec-3] logging - ===== Transaction Ended =====
+2024-02-18 21:52:01.246 INFO  [http-nio-8082-exec-7] logging - ===== Transaction Started: =====
+2024-02-18 21:52:01.247 INFO  [http-nio-8082-exec-7] logging - Transaction Id: 3ef47eb2-113e-4f06-bb4e-b4e76609a83b
+2024-02-18 21:52:01.247 INFO  [http-nio-8082-exec-7] logging - Request URL: http://localhost:8082/api/v1/auth/refresh
+2024-02-18 21:52:01.247 INFO  [http-nio-8082-exec-7] logging - Method: POST
+2024-02-18 21:52:01.247 INFO  [http-nio-8082-exec-7] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@3db34006
+2024-02-18 21:52:01.247 INFO  [http-nio-8082-exec-7] logging - Parameters: org.apache.catalina.util.ParameterMap@4b72c5ef
+2024-02-18 21:52:01.250 INFO  [http-nio-8082-exec-7] logging - Request body: [RefreshRequestDTO[refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImM5NDc2ZDBjLTQwMTctNDZkZi05ZDJiLTY5MDZmNTE4MmNhYSIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0MDA5MH0.b0EZqKayCKbYqphszwEac3OGvoPKYMdn-mnZwPzZpQwNINf_uSdTaRgSZya64YtjEargAF5rqN0sPSGKqyGqGw]]
+2024-02-18 21:52:01.250 INFO  [http-nio-8082-exec-7] logging - Query String: null
+2024-02-18 21:52:01.250 INFO  [http-nio-8082-exec-7] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 21:52:01.250 INFO  [http-nio-8082-exec-7] logging - Controller: com.epamlearning.controllers.AuthController.refresh
+2024-02-18 21:52:01.252 INFO  [http-nio-8082-exec-7] logging - === Service method class com.epamlearning.dtos.SessionDTO refreshToken started (Transaction Id: 3ef47eb2-113e-4f06-bb4e-b4e76609a83b) ===
+2024-02-18 21:52:01.252 INFO  [http-nio-8082-exec-7] logging - Parameters: 
+2024-02-18 21:52:01.252 INFO  [http-nio-8082-exec-7] logging - refreshRequestDTO: RefreshRequestDTO[refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImM5NDc2ZDBjLTQwMTctNDZkZi05ZDJiLTY5MDZmNTE4MmNhYSIsImlhdCI6MTcwODI2NzI5MCwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0MDA5MH0.b0EZqKayCKbYqphszwEac3OGvoPKYMdn-mnZwPzZpQwNINf_uSdTaRgSZya64YtjEargAF5rqN0sPSGKqyGqGw]
+2024-02-18 21:52:01.294 INFO  [http-nio-8082-exec-7] logging - Result: SessionDTO[accessTokenExpiry=Sun Feb 18 23:52:01 UZT 2024, accessTokenIssuedAt=Sun Feb 18 21:52:01 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImI1MThmODZhLWEzZGEtNDZjNi1hYzUwLWRhNThiYzE4NTZmYiIsImlhdCI6MTcwODI3NTEyMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI4MjMyMX0.olyqdII_5P8KxvVQ65rLPMfjww6dI7fj9RJNnaNwiR5kSck7wx5FtUSkPue_BfqNzbujm96Rkt7QARdYypASnQ, refreshTokenExpiry=Tue Feb 20 21:52:01 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 21:52:01 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjA4ODljZGVjLTU4ZTItNDY4OS05ZDY0LTViODU3YmM1ZTdkYSIsImlhdCI6MTcwODI3NTEyMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0NzkyMX0.ABepOHzUVgNFCKl7d4d0l_QSyucRS5307Wz7h3BMFs4WxkO_wK7E-CMIHDtP8K_SzP74GelnkiV6LaS_2DXMBw]
+2024-02-18 21:52:01.312 INFO  [http-nio-8082-exec-7] logging - === Service method end ===
+2024-02-18 21:52:01.313 INFO  [http-nio-8082-exec-7] logging - Transaction Id: 3ef47eb2-113e-4f06-bb4e-b4e76609a83b
+2024-02-18 21:52:01.313 INFO  [http-nio-8082-exec-7] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Sun Feb 18 23:52:01 UZT 2024, accessTokenIssuedAt=Sun Feb 18 21:52:01 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImI1MThmODZhLWEzZGEtNDZjNi1hYzUwLWRhNThiYzE4NTZmYiIsImlhdCI6MTcwODI3NTEyMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODI4MjMyMX0.olyqdII_5P8KxvVQ65rLPMfjww6dI7fj9RJNnaNwiR5kSck7wx5FtUSkPue_BfqNzbujm96Rkt7QARdYypASnQ, refreshTokenExpiry=Tue Feb 20 21:52:01 UZT 2024, refreshTokenIssuedAt=Sun Feb 18 21:52:01 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjA4ODljZGVjLTU4ZTItNDY4OS05ZDY0LTViODU3YmM1ZTdkYSIsImlhdCI6MTcwODI3NTEyMSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ0NzkyMX0.ABepOHzUVgNFCKl7d4d0l_QSyucRS5307Wz7h3BMFs4WxkO_wK7E-CMIHDtP8K_SzP74GelnkiV6LaS_2DXMBw],[]>
+2024-02-18 21:52:01.313 INFO  [http-nio-8082-exec-7] logging - ===== Transaction Ended =====
+2024-02-18 21:52:13.339 INFO  [http-nio-8082-exec-9] logging - === Service method boolean isBlocked started (Transaction Id: 1b50957f-dc09-4c34-af2e-8a3545a3ebd8) ===
+2024-02-18 21:52:13.339 INFO  [http-nio-8082-exec-9] logging - Parameters: 
+2024-02-18 21:52:13.339 INFO  [http-nio-8082-exec-9] logging - username: John.Sena
+2024-02-18 21:52:13.381 INFO  [http-nio-8082-exec-9] logging - Result: false
+2024-02-18 21:52:13.381 INFO  [http-nio-8082-exec-9] logging - === Service method end ===
+2024-02-18 21:52:13.417 INFO  [http-nio-8082-exec-9] logging - ===== Transaction Started: =====
+2024-02-18 21:52:13.417 INFO  [http-nio-8082-exec-9] logging - Transaction Id: 6a358218-ff32-4b7c-a671-c676c93bc295
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Method: POST
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@5d38e053
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Parameters: org.apache.catalina.util.ParameterMap@3b1aaf9a
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@5946e4d6]
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Query String: null
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 21:52:13.418 INFO  [http-nio-8082-exec-9] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: 6a358218-ff32-4b7c-a671-c676c93bc295) ===
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - Parameters: 
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - trainingName: JavaXStackv36
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - trainingDate: 2024-04-26
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - trainingDuration: 80
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - trainerUsername: John.Smith
+2024-02-18 21:52:13.419 INFO  [http-nio-8082-exec-9] logging - traineeUsername: John.Sena
+2024-02-18 21:52:13.475 INFO  [http-nio-8082-exec-9] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@54117525
+2024-02-18 21:52:13.475 INFO  [http-nio-8082-exec-9] logging - === Service method end ===
+2024-02-18 21:52:13.696 INFO  [http-nio-8082-exec-9] logging - Transaction Id: 6a358218-ff32-4b7c-a671-c676c93bc295
+2024-02-18 21:52:13.696 INFO  [http-nio-8082-exec-9] logging - Response: <201 CREATED Created,[]>
+2024-02-18 21:52:13.696 INFO  [http-nio-8082-exec-9] logging - ===== Transaction Ended =====
+2024-02-18 22:10:28.100 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 22:10:43.708 INFO  [restartedMain] logging - Application started
+2024-02-18 22:11:09.253 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: e8ef6c99-0dbf-40f3-a543-bf8eed338058) ===
+2024-02-18 22:11:09.253 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:11:09.253 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 22:11:09.298 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 22:11:09.298 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:11:09.429 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 22:11:09.429 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 5b746fba-dc44-436e-9c05-b45e21de8256
+2024-02-18 22:11:09.429 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 22:11:09.429 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 22:11:09.429 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@6ebc503c
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@6f2f4a42
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@17f59ecf]
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: 5b746fba-dc44-436e-9c05-b45e21de8256) ===
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv37
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-05-26
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 80
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-18 22:11:09.430 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-18 22:11:09.471 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@4d9ae1fc
+2024-02-18 22:11:09.471 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:11:09.566 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 5b746fba-dc44-436e-9c05-b45e21de8256
+2024-02-18 22:11:09.566 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-18 22:11:09.566 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 22:12:28.231 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 22:12:40.497 INFO  [restartedMain] logging - Application started
+2024-02-18 22:12:49.762 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 0b665114-0bce-4639-bfc0-646fe89f13b8) ===
+2024-02-18 22:12:49.762 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:12:49.762 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 22:12:49.803 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 22:12:49.804 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:12:49.920 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 22:12:49.920 INFO  [http-nio-8082-exec-1] logging - Transaction Id: a072e2fb-e0e8-4623-a338-30ac47acdc2c
+2024-02-18 22:12:49.920 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 22:12:49.920 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 22:12:49.920 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@47014eca
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@52fa2aef
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@4181db06]
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: a072e2fb-e0e8-4623-a338-30ac47acdc2c) ===
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv38
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-06-26
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 80
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-18 22:12:49.921 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-18 22:12:49.961 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@457600a2
+2024-02-18 22:12:49.961 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:12:49.998 INFO  [http-nio-8082-exec-1] logging - Transaction Id: a072e2fb-e0e8-4623-a338-30ac47acdc2c
+2024-02-18 22:12:49.998 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-18 22:12:49.998 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 22:14:36.994 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 22:14:51.155 INFO  [restartedMain] logging - Application started
+2024-02-18 22:15:16.190 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 73707816-a1df-4695-a7b2-2dfe57e7637c) ===
+2024-02-18 22:15:16.190 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:15:16.190 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 22:15:16.232 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 22:15:16.232 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:15:16.337 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 22:15:16.337 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 4e0c54d2-f1fb-47b4-ac84-6b3571686d9c
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@1be428d6
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@7e268a10
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@77ea4cc8]
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: 4e0c54d2-f1fb-47b4-ac84-6b3571686d9c) ===
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv39
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-07-26
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 80
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-18 22:15:16.338 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-18 22:15:16.388 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@3907a49
+2024-02-18 22:15:16.389 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:15:16.421 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 4e0c54d2-f1fb-47b4-ac84-6b3571686d9c
+2024-02-18 22:15:16.421 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-18 22:15:16.422 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 22:16:16.949 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-18 22:16:29.791 INFO  [restartedMain] logging - Application started
+2024-02-18 22:17:16.999 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 1dc564fe-486d-41b9-a9b9-8d02e28da7c8) ===
+2024-02-18 22:17:16.999 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:17:16.999 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-18 22:17:17.063 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-18 22:17:17.063 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:17:17.182 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Transaction Id: fa8f55d1-1755-4fa9-bd73-7b57753e722e
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@65be16d4
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@6675227c
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Request body: [com.epamlearning.dtos.training.request.TrainingAddRequestDTO@14350571]
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 22:17:17.183 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: fa8f55d1-1755-4fa9-bd73-7b57753e722e) ===
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv40
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-08-26
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 80
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-18 22:17:17.184 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-18 22:17:17.222 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@64b4ca4c
+2024-02-18 22:17:17.223 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-18 22:17:17.465 INFO  [http-nio-8082-exec-1] logging - Transaction Id: fa8f55d1-1755-4fa9-bd73-7b57753e722e
+2024-02-18 22:17:17.465 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-18 22:17:17.465 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 22:35:51.795 INFO  [restartedMain] logging - Application started
+2024-02-19 07:23:54.833 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Started: =====
+2024-02-19 07:23:54.834 INFO  [http-nio-8082-exec-8] logging - Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10
+2024-02-19 07:23:54.834 INFO  [http-nio-8082-exec-8] logging - Request URL: http://localhost:8082/api/v1/auth/login
+2024-02-19 07:23:54.834 INFO  [http-nio-8082-exec-8] logging - Method: POST
+2024-02-19 07:23:54.835 INFO  [http-nio-8082-exec-8] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@10b9776f
+2024-02-19 07:23:54.835 INFO  [http-nio-8082-exec-8] logging - Parameters: org.apache.catalina.util.ParameterMap@69ccbbc8
+2024-02-19 07:23:54.835 INFO  [http-nio-8082-exec-8] logging - Request body: [UserAuthDTO(username=John.Sena, password=new password)]
+2024-02-19 07:23:54.835 INFO  [http-nio-8082-exec-8] logging - Query String: null
+2024-02-19 07:23:54.835 INFO  [http-nio-8082-exec-8] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-19 07:23:54.837 INFO  [http-nio-8082-exec-8] logging - Controller: com.epamlearning.controllers.AuthController.login
+2024-02-19 07:23:54.838 INFO  [http-nio-8082-exec-8] logging - === Service method class com.epamlearning.dtos.SessionDTO authenticate started (Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10) ===
+2024-02-19 07:23:54.838 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-19 07:23:54.838 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-19 07:23:54.838 INFO  [http-nio-8082-exec-8] logging - password: new password
+2024-02-19 07:23:54.865 INFO  [http-nio-8082-exec-8] logging - === Service method boolean isBlocked started (Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10) ===
+2024-02-19 07:23:54.865 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-19 07:23:54.865 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-19 07:23:54.973 INFO  [http-nio-8082-exec-8] logging - Result: false
+2024-02-19 07:23:54.973 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-19 07:23:55.117 INFO  [http-nio-8082-exec-8] logging - === Service method boolean isBlocked started (Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10) ===
+2024-02-19 07:23:55.118 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-19 07:23:55.118 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-19 07:23:55.122 INFO  [http-nio-8082-exec-8] logging - Result: false
+2024-02-19 07:23:55.122 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-19 07:23:55.346 INFO  [http-nio-8082-exec-8] logging - === Service method void loginSucceeded started (Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10) ===
+2024-02-19 07:23:55.346 INFO  [http-nio-8082-exec-8] logging - Parameters: 
+2024-02-19 07:23:55.346 INFO  [http-nio-8082-exec-8] logging - username: John.Sena
+2024-02-19 07:23:55.356 INFO  [http-nio-8082-exec-8] logging - Result: null
+2024-02-19 07:23:55.356 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-19 07:23:55.427 INFO  [http-nio-8082-exec-8] logging - Result: SessionDTO[accessTokenExpiry=Mon Feb 19 09:23:55 UZT 2024, accessTokenIssuedAt=Mon Feb 19 07:23:55 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjUxZmIyMDgzLWY1MzEtNDFmMC1iMTk0LTVmMjRmYzE3NTliYSIsImlhdCI6MTcwODMwOTQzNSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODMxNjYzNX0.d4KABO2I5XLp-RE_yC9OXR9OmDHGIoyf9I4Y-7JoaDeZfRG1GGE-47Lb3yVjoLJgKpch1yFke-ovEvOXiAzFRw, refreshTokenExpiry=Wed Feb 21 07:23:55 UZT 2024, refreshTokenIssuedAt=Mon Feb 19 07:23:55 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImMwMTlhMjlhLWUxN2ItNDNjMi1hYmY3LWU0ZGY0ZTk3Y2QwNiIsImlhdCI6MTcwODMwOTQzNSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ4MjIzNX0.c2VeI7D_NmQBc8wpDJeBWBpC0_LD3VC237jqilWwf2Pe0mjMoltb8UsSoz0tZhB1OZZplCXdyQGKhi6leBJ3OA]
+2024-02-19 07:23:55.431 INFO  [http-nio-8082-exec-8] logging - === Service method end ===
+2024-02-19 07:23:55.431 INFO  [http-nio-8082-exec-8] logging - Transaction Id: 682e12e7-3ebb-4792-9ad7-7d23fec97f10
+2024-02-19 07:23:55.431 INFO  [http-nio-8082-exec-8] logging - Response: <200 OK OK,SessionDTO[accessTokenExpiry=Mon Feb 19 09:23:55 UZT 2024, accessTokenIssuedAt=Mon Feb 19 07:23:55 UZT 2024, accessToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6IjUxZmIyMDgzLWY1MzEtNDFmMC1iMTk0LTVmMjRmYzE3NTliYSIsImlhdCI6MTcwODMwOTQzNSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODMxNjYzNX0.d4KABO2I5XLp-RE_yC9OXR9OmDHGIoyf9I4Y-7JoaDeZfRG1GGE-47Lb3yVjoLJgKpch1yFke-ovEvOXiAzFRw, refreshTokenExpiry=Wed Feb 21 07:23:55 UZT 2024, refreshTokenIssuedAt=Mon Feb 19 07:23:55 UZT 2024, refreshToken=eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IkpvaG4uU2VuYSIsInN1YiI6InVzZXIgZGV0YWlscyIsImp0aSI6ImMwMTlhMjlhLWUxN2ItNDNjMi1hYmY3LWU0ZGY0ZTk3Y2QwNiIsImlhdCI6MTcwODMwOTQzNSwiaXNzIjoiZXBhbWxlYXJuaW5nLmNvbSIsImV4cCI6MTcwODQ4MjIzNX0.c2VeI7D_NmQBc8wpDJeBWBpC0_LD3VC237jqilWwf2Pe0mjMoltb8UsSoz0tZhB1OZZplCXdyQGKhi6leBJ3OA],[]>
+2024-02-19 07:23:55.432 INFO  [http-nio-8082-exec-8] logging - ===== Transaction Ended =====
+2024-02-19 07:25:06.082 INFO  [http-nio-8082-exec-4] logging - === Service method boolean isBlocked started (Transaction Id: d51765d4-d862-4a2b-aeeb-3f583b8a3e3d) ===
+2024-02-19 07:25:06.083 INFO  [http-nio-8082-exec-4] logging - Parameters: 
+2024-02-19 07:25:06.083 INFO  [http-nio-8082-exec-4] logging - username: John.Sena
+2024-02-19 07:25:06.088 INFO  [http-nio-8082-exec-4] logging - Result: false
+2024-02-19 07:25:06.088 INFO  [http-nio-8082-exec-4] logging - === Service method end ===
+2024-02-19 07:25:06.128 INFO  [http-nio-8082-exec-4] logging - ===== Transaction Started: =====
+2024-02-19 07:25:06.128 INFO  [http-nio-8082-exec-4] logging - Transaction Id: c35064f5-40c6-4d4d-843c-f66cc4fe282a
+2024-02-19 07:25:06.128 INFO  [http-nio-8082-exec-4] logging - Request URL: http://localhost:8082/api/v1/trainee/register
+2024-02-19 07:25:06.128 INFO  [http-nio-8082-exec-4] logging - Method: POST
+2024-02-19 07:25:06.129 INFO  [http-nio-8082-exec-4] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@19393924
+2024-02-19 07:25:06.129 INFO  [http-nio-8082-exec-4] logging - Parameters: org.apache.catalina.util.ParameterMap@37bab07f
+2024-02-19 07:25:06.130 INFO  [http-nio-8082-exec-4] logging - Request body: [TraineeRegistrationRequestDTO(firstName=John, lastName=Wick3, dateOfBirth=Fri Mar 19 05:00:00 UZT 2004, address=Some address)]
+2024-02-19 07:25:06.130 INFO  [http-nio-8082-exec-4] logging - Query String: null
+2024-02-19 07:25:06.130 INFO  [http-nio-8082-exec-4] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-19 07:25:06.130 INFO  [http-nio-8082-exec-4] logging - Controller: com.epamlearning.controllers.TraineeController.registerTrainee
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - === Service method class com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO createTrainee started (Transaction Id: c35064f5-40c6-4d4d-843c-f66cc4fe282a) ===
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - Parameters: 
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - firstName: John
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - lastName: Wick3
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - address: Some address
+2024-02-19 07:25:06.131 INFO  [http-nio-8082-exec-4] logging - dateOfBirth: Fri Mar 19 05:00:00 UZT 2004
+2024-02-19 07:25:06.287 INFO  [http-nio-8082-exec-4] logging - === Service method class com.epamlearning.entities.Role findByRoleName started (Transaction Id: c35064f5-40c6-4d4d-843c-f66cc4fe282a) ===
+2024-02-19 07:25:06.287 INFO  [http-nio-8082-exec-4] logging - Parameters: 
+2024-02-19 07:25:06.287 INFO  [http-nio-8082-exec-4] logging - name: ROLE_TRAINEE
+2024-02-19 07:25:06.291 INFO  [http-nio-8082-exec-4] logging - Result: com.epamlearning.entities.Role@42624594
+2024-02-19 07:25:06.291 INFO  [http-nio-8082-exec-4] logging - === Service method end ===
+2024-02-19 07:25:06.354 INFO  [http-nio-8082-exec-4] logging - Result: TraineeRegistrationResponseDTO(username=John.Wick3, password=nuhmX7OHtm)
+2024-02-19 07:25:06.354 INFO  [http-nio-8082-exec-4] logging - === Service method end ===
+2024-02-19 07:25:06.364 INFO  [http-nio-8082-exec-4] logging - Transaction Id: c35064f5-40c6-4d4d-843c-f66cc4fe282a
+2024-02-19 07:25:06.364 INFO  [http-nio-8082-exec-4] logging - Response: <201 CREATED Created,TraineeRegistrationResponseDTO(username=John.Wick3, password=nuhmX7OHtm),[]>
+2024-02-19 07:25:06.364 INFO  [http-nio-8082-exec-4] logging - ===== Transaction Ended =====
+2024-02-19 07:25:44.431 INFO  [http-nio-8082-exec-1] logging - === Service method boolean isBlocked started (Transaction Id: 9713b18f-d370-4de2-bc78-7bba4368c938) ===
+2024-02-19 07:25:44.433 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-19 07:25:44.433 INFO  [http-nio-8082-exec-1] logging - username: John.Sena
+2024-02-19 07:25:44.448 INFO  [http-nio-8082-exec-1] logging - Result: false
+2024-02-19 07:25:44.448 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-19 07:25:44.544 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Started: =====
+2024-02-19 07:25:44.544 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be
+2024-02-19 07:25:44.545 INFO  [http-nio-8082-exec-1] logging - Request URL: http://localhost:8082/api/v1/training
+2024-02-19 07:25:44.545 INFO  [http-nio-8082-exec-1] logging - Method: POST
+2024-02-19 07:25:44.545 INFO  [http-nio-8082-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@3728d977
+2024-02-19 07:25:44.545 INFO  [http-nio-8082-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@7719acdd
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - Request body: [TrainingAddRequestDTO(traineeUsername=John.Sena, trainerUsername=John.Smith, trainingName=JavaXStackv64, trainingDate=2024-03-26, trainingDuration=65)]
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - Query String: null
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - Controller: com.epamlearning.controllers.TrainingController.addTraining
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - === Service method class com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO createTraining started (Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be) ===
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - Parameters: 
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - trainingName: JavaXStackv64
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - trainingDate: 2024-03-26
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - trainingDuration: 65
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - trainerUsername: John.Smith
+2024-02-19 07:25:44.546 INFO  [http-nio-8082-exec-1] logging - traineeUsername: John.Sena
+2024-02-19 07:25:44.593 INFO  [http-nio-8082-exec-1] logging - Result: com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO@47ebc291
+2024-02-19 07:25:44.593 INFO  [http-nio-8082-exec-1] logging - === Service method end ===
+2024-02-19 07:25:45.790 INFO  [http-nio-8082-exec-1] logging - Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be
+2024-02-19 07:25:45.790 INFO  [http-nio-8082-exec-1] logging - Response: <201 CREATED Created,[]>
+2024-02-19 07:25:45.790 INFO  [http-nio-8082-exec-1] logging - ===== Transaction Ended =====
+2024-02-19 07:27:36.354 INFO  [Thread-5] logging - Application shutdown
+2024-02-19 07:27:47.975 INFO  [restartedMain] logging - Application started
+2024-02-19 07:27:48.956 INFO  [Thread-9] logging - Application shutdown
+2024-02-19 07:27:50.547 INFO  [Test worker] logging - Application started
+2024-02-19 07:27:53.374 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 07:28:03.281 INFO  [restartedMain] logging - Application started
+2024-02-19 07:35:17.581 INFO  [Thread-15] logging - Application shutdown
+2024-02-19 07:35:26.613 INFO  [restartedMain] logging - Application started
+2024-02-19 07:35:27.823 INFO  [Thread-21] logging - Application shutdown
+2024-02-19 07:35:36.729 INFO  [restartedMain] logging - Application started
+2024-02-19 07:35:48.515 INFO  [Thread-27] logging - Application shutdown
+2024-02-19 07:36:05.466 INFO  [restartedMain] logging - Application started
+2024-02-19 07:36:06.702 INFO  [Thread-33] logging - Application shutdown
+2024-02-19 07:36:18.113 INFO  [restartedMain] logging - Application started
+2024-02-19 07:50:52.662 INFO  [Test worker] logging - Application started
+2024-02-19 07:50:56.790 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 07:54:32.394 INFO  [Test worker] logging - Application started
+2024-02-19 07:54:35.675 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 07:57:27.753 INFO  [Test worker] logging - Application started
+2024-02-19 07:57:31.613 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 08:10:23.618 INFO  [Test worker] logging - Application started
+2024-02-19 08:10:38.062 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 22:39:28.519 INFO  [restartedMain] logging - Application started
+2024-02-19 23:07:37.121 INFO  [restartedMain] logging - Application started
+2024-02-19 23:16:46.065 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 23:31:12.949 INFO  [restartedMain] logging - Application started
+2024-02-19 23:31:12.968 INFO  [SpringApplicationShutdownHook] logging - Application shutdown

@@ -1,0 +1,50 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /api/v1
+spring:
+  application:
+    name: report-microservice
+  datasource:
+    url: jdbc:h2:mem:report_database
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "Report microservice"
+    description: "Responsible to manage reports for trainer/trainings."
+    version: "1.0.0"
+
+cors:
+  allowed-origins: "http://localhost:8082/api/v1/**"
+
+eureka:
+  client:
+    service-url:
+        defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+jwt:
+  secret: N0T_S3CR3T_B3C4USE_1T_1S_S3CR3T_TH4T_1S_4LL_Y0U_N33D
+
+#logging:
+#   level:
+#    org.zalando.logbook: TRACE

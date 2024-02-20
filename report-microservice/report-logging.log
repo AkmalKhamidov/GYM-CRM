@@ -1,0 +1,4 @@
+2024-02-19 07:55:52.628 INFO  [Test worker] logging - Application started
+2024-02-19 07:55:54.071 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 07:56:14.451 INFO  [Test worker] logging - Application started
+2024-02-19 07:56:16.274 INFO  [SpringApplicationShutdownHook] logging - Application shutdown

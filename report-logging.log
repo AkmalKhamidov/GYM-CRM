@@ -1,0 +1,169 @@
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - ===== Transaction Started: =====
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Transaction Id: null
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Request URL: http://localhost:8085/api/v1/monthly-summary
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Method: GET
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@68028bc9
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Parameters: org.apache.catalina.util.ParameterMap@42a8fe38
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Request body: [John.Smith]
+2024-02-18 19:47:43.579 INFO  [http-nio-8085-exec-2] logging - Query String: username=John.Smith
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - IP: 0:0:0:0:0:0:0:1
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary calculate started (Transaction Id: null) ===
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - Parameters: 
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - username: John.Smith
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - === Service method interface java.util.List getAllByUsername started (Transaction Id: null) ===
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - Parameters: 
+2024-02-18 19:47:43.580 INFO  [http-nio-8085-exec-2] logging - username: John.Smith
+2024-02-18 19:47:43.648 INFO  [http-nio-8085-exec-2] logging - Result: []
+2024-02-18 19:47:43.648 INFO  [http-nio-8085-exec-2] logging - === Service method end ===
+2024-02-18 19:47:43.649 ERROR [http-nio-8085-exec-2] logging - Failed with error: No trainer workload found for username to calculate summary: John.Smith
+2024-02-18 19:47:43.649 ERROR [http-nio-8085-exec-2] logging - Failed with error: No trainer workload found for username to calculate summary: John.Smith
+2024-02-18 19:49:57.681 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Method: POST
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@1e6d92f4
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@17eae0fd
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@6dc462e5]
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-02-18 19:49:57.682 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 19:49:57.687 INFO  [http-nio-8085-exec-1] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 19:49:57.687 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-02-18 19:49:57.687 INFO  [http-nio-8085-exec-1] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@6dc462e5
+2024-02-18 19:49:57.719 INFO  [http-nio-8085-exec-1] logging - Result: null
+2024-02-18 19:49:57.719 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-02-18 19:49:57.722 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:49:57.722 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,[]>
+2024-02-18 19:49:57.723 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Method: POST
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@46476d63
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@5878097e
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@363e7283]
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-02-18 19:56:35.360 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-02-18 19:56:35.361 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 19:56:35.365 INFO  [http-nio-8085-exec-1] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 19:56:35.365 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-02-18 19:56:35.365 INFO  [http-nio-8085-exec-1] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@363e7283
+2024-02-18 19:56:35.391 INFO  [http-nio-8085-exec-1] logging - Result: null
+2024-02-18 19:56:35.391 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-02-18 19:56:35.394 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 19:56:35.394 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,[]>
+2024-02-18 19:56:35.395 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-02-18 21:52:13.645 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Started: =====
+2024-02-18 21:52:13.645 INFO  [http-nio-8085-exec-3] logging - Transaction Id: null
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Method: POST
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@5cdefabd
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@6fadbd38
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@19dc77e2]
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Query String: null
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - IP: 127.0.0.1
+2024-02-18 21:52:13.646 INFO  [http-nio-8085-exec-3] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 21:52:13.652 INFO  [http-nio-8085-exec-3] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 21:52:13.652 INFO  [http-nio-8085-exec-3] logging - Parameters: 
+2024-02-18 21:52:13.652 INFO  [http-nio-8085-exec-3] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@19dc77e2
+2024-02-18 21:52:13.685 INFO  [http-nio-8085-exec-3] logging - Result: null
+2024-02-18 21:52:13.685 INFO  [http-nio-8085-exec-3] logging - === Service method end ===
+2024-02-18 21:52:13.687 INFO  [http-nio-8085-exec-3] logging - Transaction Id: null
+2024-02-18 21:52:13.687 INFO  [http-nio-8085-exec-3] logging - Response: <200 OK OK,[]>
+2024-02-18 21:52:13.687 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Ended =====
+2024-02-18 22:11:09.536 INFO  [http-nio-8085-exec-5] logging - ===== Transaction Started: =====
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Transaction Id: null
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Method: POST
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@223fb03d
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Parameters: org.apache.catalina.util.ParameterMap@673d3a1e
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@26003025]
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Query String: null
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - IP: 127.0.0.1
+2024-02-18 22:11:09.537 INFO  [http-nio-8085-exec-5] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 22:11:09.541 INFO  [http-nio-8085-exec-5] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 22:11:09.541 INFO  [http-nio-8085-exec-5] logging - Parameters: 
+2024-02-18 22:11:09.541 INFO  [http-nio-8085-exec-5] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@26003025
+2024-02-18 22:11:09.559 INFO  [http-nio-8085-exec-5] logging - Result: null
+2024-02-18 22:11:09.559 INFO  [http-nio-8085-exec-5] logging - === Service method end ===
+2024-02-18 22:11:09.560 INFO  [http-nio-8085-exec-5] logging - Transaction Id: null
+2024-02-18 22:11:09.560 INFO  [http-nio-8085-exec-5] logging - Response: <200 OK OK,[]>
+2024-02-18 22:11:09.560 INFO  [http-nio-8085-exec-5] logging - ===== Transaction Ended =====
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - ===== Transaction Started: =====
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Transaction Id: null
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Method: POST
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@3c12ab6b
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Parameters: org.apache.catalina.util.ParameterMap@7910328d
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@382d38b6]
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Query String: null
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - IP: 127.0.0.1
+2024-02-18 22:12:49.984 INFO  [http-nio-8085-exec-7] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 22:12:49.985 INFO  [http-nio-8085-exec-7] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 22:12:49.985 INFO  [http-nio-8085-exec-7] logging - Parameters: 
+2024-02-18 22:12:49.985 INFO  [http-nio-8085-exec-7] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@382d38b6
+2024-02-18 22:12:49.988 INFO  [http-nio-8085-exec-7] logging - Result: null
+2024-02-18 22:12:49.988 INFO  [http-nio-8085-exec-7] logging - === Service method end ===
+2024-02-18 22:12:49.989 INFO  [http-nio-8085-exec-7] logging - Transaction Id: null
+2024-02-18 22:12:49.989 INFO  [http-nio-8085-exec-7] logging - Response: <200 OK OK,[]>
+2024-02-18 22:12:49.989 INFO  [http-nio-8085-exec-7] logging - ===== Transaction Ended =====
+2024-02-18 22:15:16.411 INFO  [http-nio-8085-exec-9] logging - ===== Transaction Started: =====
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Transaction Id: null
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Method: POST
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@5a94baf7
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Parameters: org.apache.catalina.util.ParameterMap@1f962fc1
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@5eab25fa]
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Query String: null
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - IP: 127.0.0.1
+2024-02-18 22:15:16.412 INFO  [http-nio-8085-exec-9] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 22:15:16.413 INFO  [http-nio-8085-exec-9] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 22:15:16.413 INFO  [http-nio-8085-exec-9] logging - Parameters: 
+2024-02-18 22:15:16.413 INFO  [http-nio-8085-exec-9] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@5eab25fa
+2024-02-18 22:15:16.417 INFO  [http-nio-8085-exec-9] logging - Result: null
+2024-02-18 22:15:16.417 INFO  [http-nio-8085-exec-9] logging - === Service method end ===
+2024-02-18 22:15:16.417 INFO  [http-nio-8085-exec-9] logging - Transaction Id: null
+2024-02-18 22:15:16.417 INFO  [http-nio-8085-exec-9] logging - Response: <200 OK OK,[]>
+2024-02-18 22:15:16.418 INFO  [http-nio-8085-exec-9] logging - ===== Transaction Ended =====
+2024-02-18 22:17:17.411 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Transaction Id: fa8f55d1-1755-4fa9-bd73-7b57753e722e
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Method: POST
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@4de60453
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@47661773
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Request body: [com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@29e9e6c2]
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-02-18 22:17:17.412 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-02-18 22:17:17.413 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-18 22:17:17.417 INFO  [http-nio-8085-exec-1] logging - === Service method void manageTrainerWorkload started (Transaction Id: null) ===
+2024-02-18 22:17:17.417 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-02-18 22:17:17.417 INFO  [http-nio-8085-exec-1] logging - request: com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO@29e9e6c2
+2024-02-18 22:17:17.453 INFO  [http-nio-8085-exec-1] logging - Result: null
+2024-02-18 22:17:17.453 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-02-18 22:17:17.457 INFO  [http-nio-8085-exec-1] logging - Transaction Id: null
+2024-02-18 22:17:17.457 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,[]>
+2024-02-18 22:17:17.457 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-02-19 07:25:45.606 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-02-19 07:25:45.608 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be
+2024-02-19 07:25:45.609 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/trainer-workload
+2024-02-19 07:25:45.609 INFO  [http-nio-8085-exec-1] logging - Method: POST
+2024-02-19 07:25:45.609 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@2aa43b48
+2024-02-19 07:25:45.609 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@51d8bdca
+2024-02-19 07:25:45.621 INFO  [http-nio-8085-exec-1] logging - Request body: [TrainerWorkloadRequestDTO(username=John.Smith, firstName=John, lastName=Smith, isActive=true, trainingDate=2024-03-26, trainingDuration=65, actionType=ADD, traineeUsername=John.Sena)]
+2024-02-19 07:25:45.621 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-02-19 07:25:45.621 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-02-19 07:25:45.623 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerWorkloadController.manageTrainerWorkload
+2024-02-19 07:25:45.676 INFO  [http-nio-8085-exec-1] logging - === Service method void manageTrainerWorkload started (Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be) ===
+2024-02-19 07:25:45.677 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-02-19 07:25:45.677 INFO  [http-nio-8085-exec-1] logging - request: TrainerWorkloadRequestDTO(username=John.Smith, firstName=John, lastName=Smith, isActive=true, trainingDate=2024-03-26, trainingDuration=65, actionType=ADD, traineeUsername=John.Sena)
+2024-02-19 07:25:45.760 INFO  [http-nio-8085-exec-1] logging - Result: null
+2024-02-19 07:25:45.760 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-02-19 07:25:45.769 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 3758c909-c8ee-4871-bfc0-7b295ad851be
+2024-02-19 07:25:45.769 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,[]>
+2024-02-19 07:25:45.770 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-02-19 22:39:23.008 INFO  [main] logging - Application started
+2024-02-19 23:07:31.056 INFO  [main] logging - Application started
+2024-02-19 23:16:45.829 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-19 23:31:03.864 INFO  [main] logging - Application started
+2024-02-19 23:31:11.768 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
