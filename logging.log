@@ -808,3 +808,7 @@
 2024-02-19 23:16:46.065 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
 2024-02-19 23:31:12.949 INFO  [restartedMain] logging - Application started
 2024-02-19 23:31:12.968 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-20 22:58:18.312 INFO  [Test worker] logging - Application started
+2024-02-20 22:58:20.011 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-02-20 23:01:00.599 INFO  [Test worker] logging - Application started
+2024-02-20 23:01:03.442 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
