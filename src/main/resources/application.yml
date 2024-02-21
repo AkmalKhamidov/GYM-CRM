@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: main-microservice
+
+info:
+  app:
+    name: "Main microservice"
+    description: "Responsible to create user (roles: trainee and trainer) and modify them, create trainings."
+    version: "1.0.0"
+    profile: ${spring.profiles.active}
+
+server:
+  servlet:
+    context-path: /api/v1

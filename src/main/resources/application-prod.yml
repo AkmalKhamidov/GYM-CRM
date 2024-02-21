@@ -1,0 +1,52 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://postgres-prod:5432/gymcrm-prod
+    username: prod_user
+    password: prod_1125
+    driverClassName: org.postgresql.Driver
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+
+server:
+  port: 8082
+
+springdoc:
+  swagger-ui:
+    enabled: false
+
+cors:
+  allowed-origins: "http://report-microservice:8085/api/v1"
+
+microservices:
+  report:
+    url: http://report-microservice:8085/api/v1
+
+jwt:
+  secret: N0T_S3CR3T_B3C4USE_1T_1S_S3CR3T_TH4T_1S_4LL_Y0U_N33D
+  token:
+    access:
+      expiration: 7200000 # milliseconds -> 2 hours
+    refresh:
+      expiration: 172800000 # milliseconds -> 2 days
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true

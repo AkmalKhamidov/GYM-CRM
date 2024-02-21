@@ -1,0 +1,72 @@
+package com.epamlearning.reportmicroservice.controllers.exceptions;
+
+
+import com.epamlearning.reportmicroservice.exceptions.NotAuthenticated;
+import com.epamlearning.reportmicroservice.exceptions.NotAuthorized;
+import com.epamlearning.reportmicroservice.exceptions.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
+
+@RestControllerAdvice("com.epamlearning.reportmicroservice.controllers")
+public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger("logging");
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex, WebRequest request) {
+        logExceptionDetails(request, ex);
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NotAuthenticated.class)
+    public ResponseEntity<ErrorResponse> handleNotAuthenticatedException(NotAuthenticated ex, WebRequest request) {
+        logExceptionDetails(request, ex);
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NotAuthorized.class)
+    public ResponseEntity<ErrorResponse> handleNotAuthorizedException(NotAuthorized ex, WebRequest request) {
+        logExceptionDetails(request, ex);
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.FORBIDDEN);
+    }
+
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex, WebRequest request) {
+        logExceptionDetails(request, ex);
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
+        BindingResult result = ex.getBindingResult();
+        StringBuilder errorMessage = new StringBuilder("Validation error(s): ");
+
+        result.getFieldErrors().forEach(fieldError -> errorMessage.append(fieldError.getDefaultMessage()).append("; "));
+        logExceptionDetails(request, new Exception("MethodArgumentNotValidException" + errorMessage));
+        return new ResponseEntity<>(new ErrorResponse(errorMessage.toString()), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(HandlerMethodValidationException ex, WebRequest request) {
+        String errorMessage = "Validation error(s): " + ex.getMessage();
+
+        logExceptionDetails(request, new Exception("ConstraintViolationException: " + errorMessage));
+        return new ResponseEntity<>(new ErrorResponse(errorMessage), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    private void logExceptionDetails(WebRequest request, Exception ex) {
+        logger.error("Transaction ID: {}", request.getAttribute("transactionId", WebRequest.SCOPE_REQUEST));
+        logger.error("Exception occurred for URL: {}", request.getDescription(true));
+        logger.error("Exception message: {}", ex.getMessage());
+    }
+
+}

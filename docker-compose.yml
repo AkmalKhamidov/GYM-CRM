@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    container_name: gymcrm-eureka-server-container
+    build:
+      context: ./eureka-server
+    depends_on:
+      - postgres_dev
+      - postgres_prod
+    ports:
+      - "8761:8761"
+
+  report-microservice:
+    container_name: gymcrm-report-microservice-container
+    build:
+      context: ./report-microservice
+    depends_on:
+      - postgres_dev
+      - postgres_prod
+    ports:
+      - "8085:8085"
+
+  main-microservice:
+    container_name: gymcrm-main-microservice-container
+    build:
+      context: ./
+    environment:
+      SPRING_PROFILES_ACTIVE: "dev" # Change to "prod" for production
+
+      # For dev profile:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_dev:5432/gymcrm_dev"
+      SPRING_DATASOURCE_USERNAME: "dev_user"
+      SPRING_DATASOURCE_PASSWORD: "dev_1125"
+
+      # For prod profile:
+      # SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_prod:5432/gymcrm_prod"
+      # SPRING_DATASOURCE_USERNAME: "prod_user"
+      # SPRING_DATASOURCE_PASSWORD: "prod_1125"
+
+    depends_on:
+      - eureka-server
+      - postgres_dev
+      - postgres_prod
+    ports:
+      - "8082:8082"
+
+  postgres_dev:
+    container_name: gymcrm-postgres-dev-db-container
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_1125
+      POSTGRES_DB: gymcrm_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql/data
+
+  postgres_prod:
+    container_name: gymcrm-postgres-prod-db-container
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: prod_user
+      POSTGRES_PASSWORD: prod_1125
+      POSTGRES_DB: gymcrm_prod
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data-prod:/var/lib/postgresql/data
+
+volumes:
+  postgres-data-dev:
+  postgres-data-prod:
