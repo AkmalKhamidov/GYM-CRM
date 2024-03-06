@@ -6,7 +6,11 @@ import com.epamlearning.reportmicroservice.exceptions.NotFoundException;
 import com.epamlearning.reportmicroservice.mappers.TrainerWorkloadMapper;
 import com.epamlearning.reportmicroservice.repositories.TrainerWorkloadRepository;
 import com.epamlearning.reportmicroservice.services.TrainerWorkloadService;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

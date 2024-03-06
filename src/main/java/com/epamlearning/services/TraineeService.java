@@ -24,5 +24,5 @@ public interface TraineeService extends BaseService{
     List<TraineeProfileResponseDTO> findAll();
 
     // DELETE
-    TrainerWorkloadDTO deleteByUsername(String username);
+    void deleteByUsername(String username);
 }

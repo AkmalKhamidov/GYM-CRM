@@ -84,8 +84,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userToUpdate);
     }
 
-    @Override
-    public SessionDTO authenticate(String username, String password) {
+    public void authenticateValidation(String username, String password){
         if (username == null || username.isEmpty()) {
             log.warn("Username is null.");
             throw new NotFoundException("Username is null.");
@@ -98,6 +97,11 @@ public class UserServiceImpl implements UserService {
             log.warn("User is blocked.");
             throw new NotAuthenticated("User is blocked.");
         }
+    }
+
+    @Override
+    public SessionDTO authenticate(String username, String password) {
+        authenticateValidation(username, password);
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             loginAttemptService.loginSucceeded(username);

@@ -1,8 +1,8 @@
 package com.epamlearning.microservices.report;
 
 import com.epamlearning.microservices.report.dtos.TrainerSummaryDTO;
-import com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +11,9 @@ import org.springframework.stereotype.Component;
 public class ReportServiceClientFallback implements ReportServiceClient{
 
     @Override
-    public ResponseEntity<Void> manageTrainerWorkload(TrainerWorkloadDTO dto) {
-        log.warn("Report Service is not available");
-        throw new RuntimeException("Report Service is not available");
-    }
-
-    @Override
-    public ResponseEntity<TrainerSummaryDTO> calculate(String username) {
-        log.warn("Report Service is not available");
-        throw new RuntimeException("Report Service is not available");
+    public ResponseEntity<TrainerSummaryDTO> getByUsername(String username) {
+        log.error("Report Service is not available");
+        TrainerSummaryDTO fallbackTrainingSummary = new TrainerSummaryDTO(0L, username, null, null, false, null, null);
+        return new ResponseEntity<>(fallbackTrainingSummary, HttpStatus.SERVICE_UNAVAILABLE);
     }
 }

@@ -3,9 +3,14 @@ package com.epamlearning.contollers;
 import com.epamlearning.actuator.metrics.UserEngagementMetrics;
 import com.epamlearning.controllers.TrainingController;
 import com.epamlearning.dtos.training.request.TrainingAddRequestDTO;
+import com.epamlearning.entities.Trainee;
+import com.epamlearning.entities.Trainer;
+import com.epamlearning.entities.Training;
+import com.epamlearning.entities.User;
 import com.epamlearning.microservices.report.ActionType;
 import com.epamlearning.microservices.report.ReportServiceClient;
 import com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO;
+import com.epamlearning.producer.MessageProducer;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.epamlearning.services.impl.TrainerServiceImpl;
 import com.epamlearning.services.impl.TrainingServiceImpl;
@@ -49,6 +54,9 @@ class TrainingControllerTest {
     @Mock
     private UserEngagementMetrics metrics;
 
+    @Mock
+    private MessageProducer messageProducer;
+
     @InjectMocks
     private TrainingController trainingController;
 
@@ -69,14 +77,22 @@ class TrainingControllerTest {
         requestDTO.setTrainerUsername("John.Smith");
         requestDTO.setTraineeUsername("John.Doe");
 
-        TrainerWorkloadDTO trainerWorkloadDTO = new TrainerWorkloadDTO();
-        trainerWorkloadDTO.setUsername("John.Smith");
-        trainerWorkloadDTO.setTraineeUsername("John.Doe");
-        trainerWorkloadDTO.setTrainingDate(LocalDate.now());
-        trainerWorkloadDTO.setTrainingDuration(BigDecimal.valueOf(60));
-        trainerWorkloadDTO.setActionType(ActionType.ADD);
+        Training training = new Training();
+        User trainerUser = new User();
+        trainerUser.setUsername("John.Smith");
+        Trainer trainer = new Trainer();
+        trainer.setUser(trainerUser);
+
+        User traineeUser = new User();
+        Trainee trainee = new Trainee();
+        traineeUser.setUsername("John.Doe");
+        training.setTrainee(trainee);
+
+        training.setTrainingDate(LocalDate.now());
+        training.setTrainingDuration(BigDecimal.valueOf(60));
+
         // Mock service method
-        when(trainingService.createTraining(any(), any(), any(), any(), any())).thenReturn(trainerWorkloadDTO);
+        when(trainingService.createTraining(any(), any(), any(), any(), any())).thenReturn(training);
 
         // Configure ObjectMapper with JavaTimeModule
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());

@@ -1,6 +1,7 @@
 package com.epamlearning.services.impl;
 
 import com.epamlearning.dtos.trainee.request.UpdateTrainersOfTraineeRequestDTO;
+import com.epamlearning.dtos.training.request.TrainingAddRequestDTO;
 import com.epamlearning.dtos.training.response.TraineeTrainingsResponseDTO;
 import com.epamlearning.dtos.training.response.TrainerTrainingsResponseDTO;
 import com.epamlearning.entities.Trainee;
@@ -11,10 +12,14 @@ import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainingMapper;
 import com.epamlearning.microservices.report.ActionType;
 import com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO;
+import com.epamlearning.producer.MessageProducer;
 import com.epamlearning.repositories.TrainingRepository;
 import com.epamlearning.services.TrainingService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,14 +38,15 @@ public class TrainingServiceImpl implements TrainingService {
   private final TrainingRepository trainingRepository;
   private final TraineeServiceImpl traineeService;
   private final TrainerServiceImpl trainerService;
-
+  private final MessageProducer producer;
   @Autowired
   public TrainingServiceImpl(TrainingMapper trainingMapper, TrainingRepository trainingRepository,
-      TraineeServiceImpl traineeService, TrainerServiceImpl trainerService) {
+                             TraineeServiceImpl traineeService, TrainerServiceImpl trainerService, MessageProducer producer) {
     this.trainingMapper = trainingMapper;
     this.trainingRepository = trainingRepository;
     this.traineeService = traineeService;
     this.trainerService = trainerService;
+    this.producer = producer;
   }
 
   public Training findById(Long id) {
@@ -77,18 +83,7 @@ public class TrainingServiceImpl implements TrainingService {
 
   public Training update(Long id, Training training) {
 
-    if (training == null) {
-      log.warn("Training is null.");
-      throw new NotFoundException("Training is null.");
-    }
-    if (training.getTrainingDate() == null) {
-      log.warn("StartDate is null.");
-      throw new NotFoundException("StartDate is null.");
-    }
-    if (training.getTrainingDuration() == null) {
-      log.warn("TrainingDuration is null.");
-      throw new NotFoundException("TrainingDuration is null.");
-    }
+    updateValidation(training);
 
     Training trainingToUpdate = findById(id);
     trainingToUpdate.setTrainingType(training.getTrainingType());
@@ -117,6 +112,21 @@ public class TrainingServiceImpl implements TrainingService {
     }
     trainingToUpdate.setTrainer(training.getTrainer());
     return trainingRepository.save(trainingToUpdate);
+  }
+
+  public void updateValidation(Training training){
+    if (training == null) {
+      log.warn("Training is null.");
+      throw new NotFoundException("Training is null.");
+    }
+    if (training.getTrainingDate() == null) {
+      log.warn("StartDate is null.");
+      throw new NotFoundException("StartDate is null.");
+    }
+    if (training.getTrainingDuration() == null) {
+      log.warn("TrainingDuration is null.");
+      throw new NotFoundException("TrainingDuration is null.");
+    }
   }
 
   public void deleteById(Long id) {
@@ -185,9 +195,22 @@ public class TrainingServiceImpl implements TrainingService {
     }
   }
 
+  public void manageTrainerTrainee(Training training) {
+    if (!traineeService.hasTrainer(training.getTrainee().getUser().getUsername(),
+            training.getTrainer().getUser().getUsername())
+            && !existsTraineeAndTrainerInTrainings(training.getTrainee().getUser().getUsername(),
+            training.getTrainer().getUser().getUsername())) {
+      List<Trainer> traineeTrainers = new ArrayList<>(training.getTrainee().getTrainers());
+      traineeTrainers.add(training.getTrainer());
+      training.setTrainee(
+              traineeService.updateTrainersForTrainee(training.getTrainee().getUser().getUsername(),
+                      traineeTrainers));
+    }
+  }
+
   @Override
   @Transactional
-  public TrainerWorkloadDTO createTraining(String trainingName,
+  public Training createTraining(String trainingName,
       LocalDate trainingDate,
       BigDecimal trainingDuration,
       String trainerUsername,
@@ -206,19 +229,21 @@ public class TrainingServiceImpl implements TrainingService {
     training.setTrainee(trainee);
     training.setTrainingType(trainer.getSpecialization());
 
-    if (!traineeService.hasTrainer(training.getTrainee().getUser().getUsername(),
-        training.getTrainer().getUser().getUsername())
-        && !existsTraineeAndTrainerInTrainings(training.getTrainee().getUser().getUsername(),
-        training.getTrainer().getUser().getUsername())) {
-      List<Trainer> traineeTrainers = new ArrayList<>(training.getTrainee().getTrainers());
-      traineeTrainers.add(training.getTrainer());
-      training.setTrainee(
-          traineeService.updateTrainersForTrainee(training.getTrainee().getUser().getUsername(),
-              traineeTrainers));
-    }
-    TrainerWorkloadDTO trainerWorkloadDTO = trainingMapper.trainingToTrainerWorkloadDTO(trainingRepository.save(training));
-    trainerWorkloadDTO.setActionType(ActionType.ADD);
-    return trainerWorkloadDTO;
+    manageTrainerTrainee(training);
+    manageTrainerWorkload(training, ActionType.ADD);
+    return trainingRepository.save(training);
+  }
+
+  @CircuitBreaker(name = "cb-manage-trainer-workload", fallbackMethod = "fallbackManageTrainerWorkload")
+  public void manageTrainerWorkload(Training training, ActionType actionType) {
+    TrainerWorkloadDTO trainerWorkloadDTO = trainingMapper.trainingToTrainerWorkloadDTO(training);
+    trainerWorkloadDTO.setActionType(actionType);
+    producer.sendMessage("trainer-workload-queue", trainerWorkloadDTO);
+  }
+
+  private ResponseEntity<Void> fallbackManageTrainerWorkload(TrainingAddRequestDTO trainingAddDTO, ActionType actionType, Throwable e) {
+    log.info("AddTrainingFallback: Report Service is not available");
+    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 }

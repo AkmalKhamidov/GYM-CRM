@@ -5,6 +5,7 @@ import com.epamlearning.reportmicroservice.services.impl.TrainerWorkloadServiceI
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,8 @@ public class TrainerWorkloadController {
   }
 
   @PostMapping
-  public ResponseEntity<Void> manageTrainerWorkload(@RequestBody @Validated TrainerWorkloadRequestDTO request) {
+  public ResponseEntity<Void> manageTrainerWorkload(@RequestBody
+                                                      @Validated TrainerWorkloadRequestDTO request) {
     trainerWorkloadService.manageTrainerWorkload(request);
     return new ResponseEntity<>(HttpStatus.OK);
   }

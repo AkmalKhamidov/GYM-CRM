@@ -16,7 +16,28 @@ spring:
   h2:
     console:
       enabled: true
-
+  activemq:
+    broker-url: tcp://activemq:61616
+    user: admin
+    password: admin
+    pool:
+      block-if-full: true
+      block-if-full-timeout: -1
+      enabled: false
+      idle-timeout: 30000
+      max-connections: 1
+  jms:
+    listener:
+      auto-startup: true
+      max-concurrency: 10
+    pub-sub-domain: false
+    template:
+      default-destination:
+      delivery-mode: non_persistent
+      priority: 100
+      qos-enabled: true
+      receive-timeout: 1000
+      time-to-live: 36000
 management:
   endpoints:
     web:
@@ -33,7 +54,7 @@ info:
     version: "1.0.0"
 
 cors:
-  allowed-origins: "http://localhost:8082/api/v1/**"
+  allowed-origins: "http://main-microservice:8082/api/v1/**"
 
 eureka:
   client:
@@ -41,10 +62,7 @@ eureka:
         defaultZone: http://eureka-server:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
-
+  instance:
+    hostname: localhost
 jwt:
   secret: N0T_S3CR3T_B3C4USE_1T_1S_S3CR3T_TH4T_1S_4LL_Y0U_N33D
-
-#logging:
-#   level:
-#    org.zalando.logbook: TRACE
