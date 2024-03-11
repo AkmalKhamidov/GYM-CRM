@@ -1,9 +1,9 @@
-# GYM CRM - MICROSERVICES
+# GYM CRM - NOSQL
 Epam Learning - Spring Boot REST. GymCRM Project.
 
 This project is a Gym Customer Relationship Management (CRM) system implemented using the Spring framework. It provides functionality to manage trainees, trainers, and training sessions.
 
-Project: Spring Boot, JWT Authentication (JJWT), Swagger v3.0 (OpenAPI), Gradle (Groovy DSL), Spring Security, Eureka, OpenFeign
+Project: Spring Boot, JWT Authentication (JJWT), Swagger v3.0 (OpenAPI), Gradle (Groovy DSL), Spring Security, Eureka, OpenFeign, Async Messaging (JMS + ActiveMQ), MongoDB
 
 ## Microservices:
 eureka-server: http://localhost:8761/
@@ -40,14 +40,18 @@ The project is structured into the following packages:
 
 ## Instruction:
 
-1. Add database properties to application-prod.yml/application-dev.yml file to connect to your database.
+1. Add database properties to application-prod.yml/application-dev.yml file to connect to your database. (MAIN-MICROSERVICE
    (Tables will be created automatically for dev profile if there is no such tables in your database)
+   1.1 Add MongoDB database properties to application.yml. (REPORT-MICROSERVICE)
 2. Run the project.
 
 ## Actuator
 Added Spring Boot Actuator for monitoring and managing the application. Custom health checks added:
 - DatabaseHealthCheck
 - DownstreamServiceHealthCheck (for example, to check if the external service is available) URL is configurable in downstream-service.properties file.
+
+## Async Messaging
+- Manage Trainer Workload
 
 ## Metrics
 Added Spring Boot Metrics by using prometheus for monitoring and managing the application. Custom metrics added:
