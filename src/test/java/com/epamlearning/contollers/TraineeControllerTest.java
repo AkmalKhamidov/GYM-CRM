@@ -122,8 +122,7 @@ public class TraineeControllerTest {
     TrainerWorkloadDTO trainerWorkloadDTO = new TrainerWorkloadDTO();
     trainerWorkloadDTO.setTraineeUsername("John.Doe");
     trainerWorkloadDTO.setActionType(ActionType.DELETE);
-    when(traineeService.deleteByUsername(anyString())).thenReturn(trainerWorkloadDTO);
-
+    doNothing().when(traineeService).deleteByUsername(anyString());
     mockMvc.perform(delete("/trainee/John.Doe")
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());

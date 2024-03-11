@@ -100,8 +100,7 @@ public class TraineeController implements BaseController {
                                                     @NotNull(message = "Username cannot be null")
                                                     @NotBlank(message = "Username cannot be blank")
                                                     String username) {
-        TrainerWorkloadDTO trainerWorkloadDTO =  traineeService.deleteByUsername(username);
-        workloadClient.manageTrainerWorkload(trainerWorkloadDTO);
+        traineeService.deleteByUsername(username);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

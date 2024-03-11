@@ -1,13 +1,14 @@
 version: '3.8'
 
+
 services:
+
   eureka-server:
     container_name: gymcrm-eureka-server-container
     build:
       context: ./eureka-server
     depends_on:
-      - postgres_dev
-      - postgres_prod
+      - gymcrm-db
     ports:
       - "8761:8761"
 
@@ -16,8 +17,7 @@ services:
     build:
       context: ./report-microservice
     depends_on:
-      - postgres_dev
-      - postgres_prod
+      - gymcrm-db
     ports:
       - "8085:8085"
 
@@ -26,51 +26,32 @@ services:
     build:
       context: ./
     environment:
-      SPRING_PROFILES_ACTIVE: "dev" # Change to "prod" for production
-
-      # For dev profile:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_dev:5432/gymcrm_dev"
-      SPRING_DATASOURCE_USERNAME: "dev_user"
-      SPRING_DATASOURCE_PASSWORD: "dev_1125"
-
-      # For prod profile:
-      # SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres_prod:5432/gymcrm_prod"
-      # SPRING_DATASOURCE_USERNAME: "prod_user"
-      # SPRING_DATASOURCE_PASSWORD: "prod_1125"
-
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
     depends_on:
       - eureka-server
-      - postgres_dev
-      - postgres_prod
+      - gymcrm-db
     ports:
       - "8082:8082"
 
-  postgres_dev:
-    container_name: gymcrm-postgres-dev-db-container
+  gymcrm-db:
+    container_name: gymcrm-postgres-db-container
     image: postgres:14
     restart: always
     environment:
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_1125
-      POSTGRES_DB: gymcrm_dev
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data-dev:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
 
-  postgres_prod:
-    container_name: gymcrm-postgres-prod-db-container
-    image: postgres:14
-    restart: always
-    environment:
-      POSTGRES_USER: prod_user
-      POSTGRES_PASSWORD: prod_1125
-      POSTGRES_DB: gymcrm_prod
+  activemq:
+    container_name: gymcrm-activemq-container
+    image: apache/activemq-artemis:latest-alpine
     ports:
-      - "5433:5432"
-    volumes:
-      - postgres-data-prod:/var/lib/postgresql/data
+      - "8161:8161"
+      - "61616:61616"
 
 volumes:
-  postgres-data-dev:
-  postgres-data-prod:
+  postgres-data:

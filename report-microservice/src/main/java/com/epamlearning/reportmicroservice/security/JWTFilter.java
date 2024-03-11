@@ -27,7 +27,9 @@ import java.util.Base64;
 
 @Component
 @Slf4j
-public class JWTFilter extends OncePerRequestFilter {
+public class JWTFilter
+        extends OncePerRequestFilter
+{
 
     @Value("${jwt.secret}")
     private String secret;

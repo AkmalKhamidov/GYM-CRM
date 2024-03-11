@@ -7,6 +7,7 @@ import com.epamlearning.entities.enums.TrainingTypeName;
 import com.epamlearning.mapper.TrainingMapper;
 import com.epamlearning.microservices.report.ActionType;
 import com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO;
+import com.epamlearning.producer.MessageProducer;
 import com.epamlearning.repositories.TrainingRepository;
 import com.epamlearning.services.impl.TraineeServiceImpl;
 import com.epamlearning.services.impl.TrainerServiceImpl;
@@ -32,7 +33,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-//@MockitoSettings(strictness = Strictness.LENIENT)
 public class TrainingServiceImplTest {
 
     @Mock
@@ -46,6 +46,9 @@ public class TrainingServiceImplTest {
 
     @Mock
     private TrainingMapper trainingMapper;
+
+    @Mock
+    private MessageProducer messageProducer;
 
     @InjectMocks
     private TrainingServiceImpl trainingServiceImpl;
@@ -152,11 +155,9 @@ public class TrainingServiceImplTest {
         Authentication authentication = new UsernamePasswordAuthenticationToken(traineeUsername, "password");
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-
         TrainerWorkloadDTO trainerWorkloadDTO = new TrainerWorkloadDTO();
-        trainerWorkloadDTO.setTraineeUsername(traineeUsername);
+        trainerWorkloadDTO.setTraineeUsername("John.Doe");
         trainerWorkloadDTO.setActionType(ActionType.ADD);
-        trainerWorkloadDTO.setTrainingDuration(trainingDuration);
 
         // Arrange
         when(traineeServiceImpl.findByValidatedUsername(anyString())).thenReturn(sampleTraining.getTrainee());
@@ -165,11 +166,11 @@ public class TrainingServiceImplTest {
         when(trainingMapper.trainingToTrainerWorkloadDTO(any())).thenReturn(trainerWorkloadDTO);
         when(trainingRepository.save(any())).thenReturn(sampleTraining);
         // Act
-        TrainerWorkloadDTO trainerWorkloadDTOResult = trainingServiceImpl.createTraining(trainingName,trainingDate,trainingDuration,traineeUsername,trainerUsername);
+        Training newTraining = trainingServiceImpl.createTraining(trainingName,trainingDate,trainingDuration,traineeUsername,trainerUsername);
 
 
         // Assert
-        assertEquals(trainerWorkloadDTO, trainerWorkloadDTOResult);
+        assertEquals(sampleTraining, newTraining);
         verify(trainingRepository, times(1)).save(any());
     }
 

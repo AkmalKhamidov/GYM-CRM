@@ -5,10 +5,7 @@ import com.epamlearning.dtos.trainee.request.UpdateTrainersOfTraineeRequestDTO;
 import com.epamlearning.dtos.trainee.response.TraineeProfileResponseDTO;
 import com.epamlearning.dtos.trainee.response.TraineeRegistrationResponseDTO;
 import com.epamlearning.dtos.trainer.response.TrainerListResponseDTO;
-import com.epamlearning.entities.Role;
-import com.epamlearning.entities.Trainee;
-import com.epamlearning.entities.Trainer;
-import com.epamlearning.entities.User;
+import com.epamlearning.entities.*;
 import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TraineeMapper;
@@ -103,16 +100,16 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     @Transactional
-    public TrainerWorkloadDTO deleteByUsername(String username) {
+    public void deleteByUsername(String username) {
         Trainee trainee = findByValidatedUsername(username);
         trainingService.deleteTrainingsByTraineeUsername(trainee.getUser().getUsername());
         traineeRepository.delete(trainee);
         log.info("Trainee with username: {} was deleted.", username);
-        TrainerWorkloadDTO trainerWorkloadDTO = new TrainerWorkloadDTO();
-        trainerWorkloadDTO.setTraineeUsername(username);
-        trainerWorkloadDTO.setActionType(ActionType.DELETE);
-        return trainerWorkloadDTO;
+        Training training = new Training();
+        training.setTrainee(trainee);
+        trainingService.manageTrainerWorkload(training, ActionType.DELETE);
     }
+
 
     @Override
     @Transactional

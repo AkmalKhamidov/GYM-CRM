@@ -11,6 +11,8 @@ import com.epamlearning.entities.User;
 import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TrainerMapper;
+import com.epamlearning.microservices.report.ReportServiceClient;
+import com.epamlearning.microservices.report.dtos.TrainerSummaryDTO;
 import com.epamlearning.repositories.TrainerRepository;
 import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TrainerService;
@@ -36,15 +38,17 @@ public class TrainerServiceImpl implements TrainerService {
     private final TrainingTypeServiceImpl trainingTypeServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private final PasswordEncoder passwordEncoder;
+    private final ReportServiceClient reportServiceClient;
     private final RoleService roleService;
     @Autowired
-    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public TrainerServiceImpl(TrainerMapper trainerMapper, TrainerRepository trainerRepository, TraineeServiceImpl traineeServiceImpl, TrainingTypeServiceImpl trainingTypeServiceImpl, UserServiceImpl userServiceImpl, PasswordEncoder passwordEncoder, ReportServiceClient reportServiceClient, RoleService roleService) {
         this.trainerMapper = trainerMapper;
         this.trainerRepository = trainerRepository;
         this.traineeServiceImpl = traineeServiceImpl;
         this.trainingTypeServiceImpl = trainingTypeServiceImpl;
         this.userServiceImpl = userServiceImpl;
         this.passwordEncoder = passwordEncoder;
+        this.reportServiceClient = reportServiceClient;
         this.roleService = roleService;
     }
 
@@ -119,4 +123,10 @@ public class TrainerServiceImpl implements TrainerService {
         trainerRepository.save(trainer);
         return new TrainerRegistrationResponseDTO(user.getUsername(), initialPassword);
     }
+
+    public TrainerSummaryDTO getTrainerSummary(String username) {
+        findByValidatedUsername(username);                              // validation for trainer existence
+        return reportServiceClient.getByUsername(username).getBody();
+    }
+
 }

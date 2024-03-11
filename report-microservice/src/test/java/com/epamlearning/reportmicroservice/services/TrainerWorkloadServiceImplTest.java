@@ -33,7 +33,6 @@ class TrainerWorkloadServiceImplTest {
 
     @InjectMocks
     private TrainerWorkloadServiceImpl trainerWorkloadService;
-
     @Test
     void getAllTrainerWorkload() {
         // Arrange
