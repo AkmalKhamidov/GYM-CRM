@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface TrainerWorkloadRepository extends JpaRepository<TrainerWorkload, Long> {
 
-  boolean existsByUsername(String username);
-
   List<TrainerWorkload> findByUsername(String username);
 
   void deleteAllByTraineeUsername(String traineeUsername);

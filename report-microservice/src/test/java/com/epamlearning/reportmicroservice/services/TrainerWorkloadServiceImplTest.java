@@ -6,6 +6,7 @@ import com.epamlearning.reportmicroservice.entities.enums.ActionType;
 import com.epamlearning.reportmicroservice.exceptions.NotFoundException;
 import com.epamlearning.reportmicroservice.mappers.TrainerWorkloadMapper;
 import com.epamlearning.reportmicroservice.repositories.TrainerWorkloadRepository;
+import com.epamlearning.reportmicroservice.services.impl.TrainerSummaryServiceImpl;
 import com.epamlearning.reportmicroservice.services.impl.TrainerWorkloadServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,9 @@ class TrainerWorkloadServiceImplTest {
 
     @Mock
     private TrainerWorkloadMapper trainerWorkloadMapper;
+
+    @Mock
+    private TrainerSummaryServiceImpl trainerSummaryService;
 
     @Mock
     private TrainerWorkloadRepository trainerWorkloadRepository;

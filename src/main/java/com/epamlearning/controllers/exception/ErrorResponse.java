@@ -13,4 +13,9 @@ public class ErrorResponse {
         this.message = message;
         this.timestamp = System.currentTimeMillis();
     }
+
+    public ErrorResponse(String message, Long timestamp) {
+        this.message = message;
+        this.timestamp = timestamp;
+    }
 }

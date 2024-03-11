@@ -6,11 +6,7 @@ import com.epamlearning.reportmicroservice.exceptions.NotFoundException;
 import com.epamlearning.reportmicroservice.mappers.TrainerWorkloadMapper;
 import com.epamlearning.reportmicroservice.repositories.TrainerWorkloadRepository;
 import com.epamlearning.reportmicroservice.services.TrainerWorkloadService;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +17,14 @@ public class TrainerWorkloadServiceImpl implements TrainerWorkloadService {
 
   private final TrainerWorkloadMapper trainerWorkloadMapper;
   private final TrainerWorkloadRepository trainerWorkloadRepository;
+  private final TrainerSummaryServiceImpl trainerSummaryService;
 
   @Autowired
   public TrainerWorkloadServiceImpl(TrainerWorkloadMapper trainerWorkloadMapper,
-      TrainerWorkloadRepository trainerWorkloadRepository) {
+                                    TrainerWorkloadRepository trainerWorkloadRepository, TrainerSummaryServiceImpl trainerSummaryService) {
     this.trainerWorkloadMapper = trainerWorkloadMapper;
     this.trainerWorkloadRepository = trainerWorkloadRepository;
+    this.trainerSummaryService = trainerSummaryService;
   }
 
   public List<TrainerWorkload> getAllTrainerWorkload() {
@@ -48,6 +46,7 @@ public class TrainerWorkloadServiceImpl implements TrainerWorkloadService {
         case DELETE -> deleteTrainerWorkload(request);
         default -> throw new NotFoundException("Unsupported action type");
       }
+      trainerSummaryService.update(request);
   }
 
   public void addTrainerWorkload(TrainerWorkloadRequestDTO request) {

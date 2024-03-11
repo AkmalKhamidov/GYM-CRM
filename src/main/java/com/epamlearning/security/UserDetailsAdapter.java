@@ -15,7 +15,6 @@ public class UserDetailsAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        user.getRoles().forEach(role -> System.out.println(role.getName().name()));
         return user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .toList();

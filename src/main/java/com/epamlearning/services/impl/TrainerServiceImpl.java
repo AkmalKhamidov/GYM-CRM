@@ -124,9 +124,15 @@ public class TrainerServiceImpl implements TrainerService {
         return new TrainerRegistrationResponseDTO(user.getUsername(), initialPassword);
     }
 
-    public TrainerSummaryDTO getTrainerSummary(String username) {
+    public TrainerSummaryDTO getTrainerSummaryByUsername(String username) {
         findByValidatedUsername(username);                              // validation for trainer existence
         return reportServiceClient.getByUsername(username).getBody();
+    }
+
+    public List<TrainerSummaryDTO> getTrainerSummaryByFirstNameAndLastName(String firstName, String lastName) {
+        if(firstName == null || lastName == null || firstName.isBlank() || lastName.isBlank())
+            throw new NotFoundException("First name and last name cannot be null");
+        return reportServiceClient.getByFirstNameAndLastName(firstName, lastName).getBody();
     }
 
 }

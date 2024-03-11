@@ -8,21 +8,18 @@ import com.epamlearning.dtos.trainer.response.TrainerRegistrationResponseDTO;
 import com.epamlearning.dtos.training.request.TrainerTrainingsRequestDTO;
 import com.epamlearning.dtos.training.response.TrainerTrainingsResponseDTO;
 import com.epamlearning.microservices.report.dtos.TrainerSummaryDTO;
-import com.epamlearning.producer.MessageProducer;
 import com.epamlearning.services.impl.TrainerServiceImpl;
 import com.epamlearning.services.impl.TrainingServiceImpl;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -114,9 +111,14 @@ public class TrainerController implements BaseController {
                                                                                      @NotNull(message = "Username cannot be null")
                                                                                      @NotBlank(message = "Username cannot be blank")
                                                                                      String username) {
-
-        return new ResponseEntity<>(trainerServiceImpl.getTrainerSummary(username), HttpStatus.OK);
+        return new ResponseEntity<>(trainerServiceImpl.getTrainerSummaryByUsername(username), HttpStatus.OK);
     }
 
+    @Operation(summary = "Get trainer summary", description = "Getting trainer summary by username")
+    @GetMapping("/summary/search")
+    public ResponseEntity<List<TrainerSummaryDTO>> getTrainerSummary(@RequestParam("firstName") @Valid @NotNull @NotBlank String firstName,
+                                                               @RequestParam("lastName") @Valid @NotNull @NotBlank String lastName) {
+        return new ResponseEntity<>(trainerServiceImpl.getTrainerSummaryByFirstNameAndLastName(firstName, lastName), HttpStatus.OK);
+    }
 
 }

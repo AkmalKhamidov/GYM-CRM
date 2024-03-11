@@ -30,3 +30,5 @@
 2024-03-07 00:16:02.868 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
 2024-03-07 00:17:22.072 INFO  [Test worker] logging - Application started
 2024-03-07 00:17:23.285 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-10 00:21:58.056 INFO  [Test worker] logging - Application started
+2024-03-10 00:22:00.095 INFO  [SpringApplicationShutdownHook] logging - Application shutdown

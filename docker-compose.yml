@@ -46,6 +46,18 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
+  mongodb:
+    container_name: gymcrm-mongodb-container
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
   activemq:
     container_name: gymcrm-activemq-container
     image: apache/activemq-artemis:latest-alpine
@@ -55,3 +67,4 @@ services:
 
 volumes:
   postgres-data:
+  mongodb-data:
