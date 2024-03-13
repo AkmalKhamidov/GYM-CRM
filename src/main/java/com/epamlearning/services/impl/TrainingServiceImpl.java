@@ -155,6 +155,7 @@ public class TrainingServiceImpl implements TrainingService {
       traineeService.updateTrainersForTrainee(training.getTrainee().getUser().getUsername(),
           new UpdateTrainersOfTraineeRequestDTO(new ArrayList<>()));
       trainingRepository.deleteByTrainee(training.getTrainee());
+      manageTrainerWorkload(training, ActionType.DELETE);
     });
   }
 

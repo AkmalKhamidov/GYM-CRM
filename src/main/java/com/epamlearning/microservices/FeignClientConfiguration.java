@@ -25,11 +25,8 @@ public class FeignClientConfiguration implements RequestInterceptor {
         if (Objects.nonNull(requestAttributes)) {
             String authorizationHeader = requestAttributes.getRequest().getHeader(HttpHeaders.AUTHORIZATION);
             Matcher matcher = BEARER_TOKEN_HEADER_PATTERN.matcher(authorizationHeader);
-            System.out.println(requestAttributes.getRequest().getAttribute(transactionId).toString());
             if (matcher.matches()) {
-//                template.header(authorization);
                 template.header(authorization, authorizationHeader);
-//                template.header(transactionId);
                 template.header(transactionId, requestAttributes.getRequest().getAttribute(transactionId).toString());
             }
         }

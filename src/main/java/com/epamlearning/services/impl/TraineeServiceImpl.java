@@ -10,8 +10,6 @@ import com.epamlearning.entities.enums.RoleName;
 import com.epamlearning.exceptions.NotFoundException;
 import com.epamlearning.mapper.TraineeMapper;
 import com.epamlearning.mapper.TrainerMapper;
-import com.epamlearning.microservices.report.ActionType;
-import com.epamlearning.microservices.report.dtos.TrainerWorkloadDTO;
 import com.epamlearning.repositories.TraineeRepository;
 import com.epamlearning.services.RoleService;
 import com.epamlearning.services.TraineeService;
@@ -105,9 +103,6 @@ public class TraineeServiceImpl implements TraineeService {
         trainingService.deleteTrainingsByTraineeUsername(trainee.getUser().getUsername());
         traineeRepository.delete(trainee);
         log.info("Trainee with username: {} was deleted.", username);
-        Training training = new Training();
-        training.setTrainee(trainee);
-        trainingService.manageTrainerWorkload(training, ActionType.DELETE);
     }
 
 

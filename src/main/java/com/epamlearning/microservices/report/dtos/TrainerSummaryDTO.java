@@ -12,11 +12,10 @@ import java.util.Map;
 @AllArgsConstructor
 @ToString
 public class TrainerSummaryDTO {
-    private Long id;
+    private String id;
     private String username;
     private String firstName;
     private String lastName;
     private boolean status;
-    private List<Integer> years;
-    private Map<String, Map<String, BigDecimal>> monthlySummary;
+    private Map<Integer, Map<String, BigDecimal>> monthlySummary;
 }

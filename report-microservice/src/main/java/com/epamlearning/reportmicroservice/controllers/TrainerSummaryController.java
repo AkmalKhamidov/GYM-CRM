@@ -8,24 +8,29 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("monthly-summary")
 public class TrainerSummaryController {
-  private final TrainerSummaryServiceImpl trainerSummaryService;
+    private final TrainerSummaryServiceImpl trainerSummaryService;
 
-  @Autowired
-  public TrainerSummaryController(TrainerSummaryServiceImpl trainerSummaryService) {
-    this.trainerSummaryService = trainerSummaryService;
-  }
+    @Autowired
+    public TrainerSummaryController(TrainerSummaryServiceImpl trainerSummaryService) {
+        this.trainerSummaryService = trainerSummaryService;
+    }
 
-  @GetMapping
-  public ResponseEntity<TrainerSummary> getByUsername(@RequestParam @Valid @NotNull @NotBlank String username){
-    return new ResponseEntity<>(trainerSummaryService.calculate(username), HttpStatus.OK);
-  }
+    @GetMapping("/{username}")
+    public ResponseEntity<TrainerSummary> getByUsername(@PathVariable("username") @Valid @NotNull @NotBlank String username) {
+        return new ResponseEntity<>(trainerSummaryService.findByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<TrainerSummary>> getByFirstNameAndLastName(@RequestParam("firstName") @Valid @NotNull @NotBlank String firstName,
+                                                                          @RequestParam("lastName") @Valid @NotNull @NotBlank String lastName) {
+        return new ResponseEntity<>(trainerSummaryService.findByFirstNameAndLastName(firstName, lastName), HttpStatus.OK);
+    }
 
 }

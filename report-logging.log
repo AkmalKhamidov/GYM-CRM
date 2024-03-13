@@ -249,3 +249,321 @@
 2024-03-07 00:03:41.605 INFO  [http-nio-8085-exec-8] logging - Response: <200 OK OK,TrainerSummary(username=John.Smith, firstName=John, lastName=Smith, status=true, years=[2024], monthlySummary={2024={MARCH=75.00}}),[]>
 2024-03-07 00:03:41.605 INFO  [http-nio-8085-exec-8] logging - ===== Transaction Ended =====
 2024-03-07 00:15:03.538 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 13:42:28.134 INFO  [main] logging - Application started
+2024-03-09 13:42:55.540 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 13:43:27.750 INFO  [main] logging - Application started
+2024-03-09 13:59:38.656 INFO  [http-nio-8085-exec-8] logging - ===== Transaction Started: =====
+2024-03-09 13:59:38.658 INFO  [http-nio-8085-exec-8] logging - Transaction Id: cac1ca36-44ce-4bbf-aff0-87de228c3fb8
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Method: GET
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@15c9fd60
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Parameters: org.apache.catalina.util.ParameterMap@46580676
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Request body: [John.Smith]
+2024-03-09 13:59:38.659 INFO  [http-nio-8085-exec-8] logging - Query String: null
+2024-03-09 13:59:38.660 INFO  [http-nio-8085-exec-8] logging - IP: 127.0.0.1
+2024-03-09 13:59:38.662 INFO  [http-nio-8085-exec-8] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 13:59:38.663 INFO  [http-nio-8085-exec-8] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: cac1ca36-44ce-4bbf-aff0-87de228c3fb8) ===
+2024-03-09 13:59:38.663 INFO  [http-nio-8085-exec-8] logging - Parameters: 
+2024-03-09 13:59:38.663 INFO  [http-nio-8085-exec-8] logging - username: John.Smith
+2024-03-09 13:59:38.855 ERROR [http-nio-8085-exec-8] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 13:59:38.855 ERROR [http-nio-8085-exec-8] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 13:59:38.859 ERROR [http-nio-8085-exec-8] logging - Transaction ID: null
+2024-03-09 13:59:38.859 ERROR [http-nio-8085-exec-8] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 13:59:38.859 ERROR [http-nio-8085-exec-8] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:00:30.183 INFO  [http-nio-8085-exec-9] logging - ===== Transaction Started: =====
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Transaction Id: c61d56a6-7306-48f8-90c5-542595f4584b
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Method: GET
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@5b1d57a4
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Parameters: org.apache.catalina.util.ParameterMap@1e1fc2a3
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Request body: [John.Smith]
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Query String: null
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - IP: 127.0.0.1
+2024-03-09 14:00:30.184 INFO  [http-nio-8085-exec-9] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:00:30.185 INFO  [http-nio-8085-exec-9] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: c61d56a6-7306-48f8-90c5-542595f4584b) ===
+2024-03-09 14:00:30.185 INFO  [http-nio-8085-exec-9] logging - Parameters: 
+2024-03-09 14:00:30.185 INFO  [http-nio-8085-exec-9] logging - username: John.Smith
+2024-03-09 14:00:30.302 ERROR [http-nio-8085-exec-9] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:00:30.303 ERROR [http-nio-8085-exec-9] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:00:30.304 ERROR [http-nio-8085-exec-9] logging - Transaction ID: null
+2024-03-09 14:00:30.304 ERROR [http-nio-8085-exec-9] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:00:30.304 ERROR [http-nio-8085-exec-9] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:06:39.561 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-03-09 14:06:39.564 INFO  [http-nio-8085-exec-1] logging - Transaction Id: f30a7a24-a9e9-4a82-b4aa-5cc77ec0d0da
+2024-03-09 14:06:39.564 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:06:39.564 INFO  [http-nio-8085-exec-1] logging - Method: GET
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@772c1c45
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@4b7de442
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Request body: [John.Smith]
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: f30a7a24-a9e9-4a82-b4aa-5cc77ec0d0da) ===
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-03-09 14:06:39.565 INFO  [http-nio-8085-exec-1] logging - username: John.Smith
+2024-03-09 14:06:39.706 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:06:39.706 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:06:39.708 ERROR [http-nio-8085-exec-1] logging - Transaction ID: null
+2024-03-09 14:06:39.709 ERROR [http-nio-8085-exec-1] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:06:39.709 ERROR [http-nio-8085-exec-1] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:06:41.965 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Started: =====
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Transaction Id: f238dcc1-b989-43a4-bd6a-96ee7d333a1a
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Method: GET
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@428f9944
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@78d0f71
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Request body: [John.Smith]
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Query String: null
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - IP: 127.0.0.1
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: f238dcc1-b989-43a4-bd6a-96ee7d333a1a) ===
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - Parameters: 
+2024-03-09 14:06:41.966 INFO  [http-nio-8085-exec-3] logging - username: John.Smith
+2024-03-09 14:06:42.083 ERROR [http-nio-8085-exec-3] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:06:42.083 ERROR [http-nio-8085-exec-3] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:06:42.084 ERROR [http-nio-8085-exec-3] logging - Transaction ID: null
+2024-03-09 14:06:42.084 ERROR [http-nio-8085-exec-3] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:06:42.084 ERROR [http-nio-8085-exec-3] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:09:30.633 INFO  [http-nio-8085-exec-2] logging - ===== Transaction Started: =====
+2024-03-09 14:09:30.636 INFO  [http-nio-8085-exec-2] logging - Transaction Id: bbb9278b-f9bc-4eed-a9ff-40fd60b08815
+2024-03-09 14:09:30.636 INFO  [http-nio-8085-exec-2] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:09:30.636 INFO  [http-nio-8085-exec-2] logging - Method: GET
+2024-03-09 14:09:30.636 INFO  [http-nio-8085-exec-2] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@cd45006
+2024-03-09 14:09:30.636 INFO  [http-nio-8085-exec-2] logging - Parameters: org.apache.catalina.util.ParameterMap@49d6dff8
+2024-03-09 14:09:30.637 INFO  [http-nio-8085-exec-2] logging - Request body: [John.Smith]
+2024-03-09 14:09:30.637 INFO  [http-nio-8085-exec-2] logging - Query String: null
+2024-03-09 14:09:30.637 INFO  [http-nio-8085-exec-2] logging - IP: 127.0.0.1
+2024-03-09 14:09:30.638 INFO  [http-nio-8085-exec-2] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:09:30.639 INFO  [http-nio-8085-exec-2] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: bbb9278b-f9bc-4eed-a9ff-40fd60b08815) ===
+2024-03-09 14:09:30.639 INFO  [http-nio-8085-exec-2] logging - Parameters: 
+2024-03-09 14:09:30.640 INFO  [http-nio-8085-exec-2] logging - username: John.Smith
+2024-03-09 14:09:30.772 ERROR [http-nio-8085-exec-2] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:09:30.773 ERROR [http-nio-8085-exec-2] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:09:30.774 ERROR [http-nio-8085-exec-2] logging - Transaction ID: null
+2024-03-09 14:09:30.774 ERROR [http-nio-8085-exec-2] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:09:30.774 ERROR [http-nio-8085-exec-2] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:12:58.928 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:13:29.178 INFO  [main] logging - Application started
+2024-03-09 14:13:37.648 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-03-09 14:13:37.648 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 38c0d219-c814-47e4-8d9c-efc0ecfe06e0
+2024-03-09 14:13:37.648 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - Method: GET
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@f2f42b
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@6aa358f9
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - Request body: [John.Smith]
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-03-09 14:13:37.649 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-03-09 14:13:37.650 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:13:37.650 INFO  [http-nio-8085-exec-1] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: 38c0d219-c814-47e4-8d9c-efc0ecfe06e0) ===
+2024-03-09 14:13:37.650 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-03-09 14:13:37.650 INFO  [http-nio-8085-exec-1] logging - username: John.Smith
+2024-03-09 14:13:37.794 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:13:37.794 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:13:37.797 ERROR [http-nio-8085-exec-1] logging - Transaction ID: null
+2024-03-09 14:13:37.798 ERROR [http-nio-8085-exec-1] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:13:37.798 ERROR [http-nio-8085-exec-1] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:14:31.344 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Started: =====
+2024-03-09 14:14:31.345 INFO  [http-nio-8085-exec-3] logging - Transaction Id: cedbafd8-b0f7-4dd3-9d41-1e1b7ae3d3d3
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Method: GET
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@1db42d2d
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@58b6b0ff
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Request body: [John.Smith]
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Query String: null
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - IP: 127.0.0.1
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: cedbafd8-b0f7-4dd3-9d41-1e1b7ae3d3d3) ===
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - Parameters: 
+2024-03-09 14:14:31.346 INFO  [http-nio-8085-exec-3] logging - username: John.Smith
+2024-03-09 14:14:31.475 ERROR [http-nio-8085-exec-3] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:14:31.476 ERROR [http-nio-8085-exec-3] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:14:31.477 ERROR [http-nio-8085-exec-3] logging - Transaction ID: null
+2024-03-09 14:14:31.477 ERROR [http-nio-8085-exec-3] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:14:31.477 ERROR [http-nio-8085-exec-3] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:15:37.204 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:15:37.205 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:17:55.894 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:18:18.055 INFO  [main] logging - Application started
+2024-03-09 14:18:28.162 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Transaction Id: dc5ec944-20f0-4ecf-8e75-3cf0522aca60
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Method: GET
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@681cd9ea
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@50ab2a7f
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Request body: [John.Smith]
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-03-09 14:18:28.163 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-03-09 14:18:28.164 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:18:28.164 INFO  [http-nio-8085-exec-1] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: dc5ec944-20f0-4ecf-8e75-3cf0522aca60) ===
+2024-03-09 14:18:28.164 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-03-09 14:18:28.165 INFO  [http-nio-8085-exec-1] logging - username: John.Smith
+2024-03-09 14:18:28.305 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:18:28.305 ERROR [http-nio-8085-exec-1] logging - Failed with error: No trainer summary found for username: John.Smith
+2024-03-09 14:18:28.307 ERROR [http-nio-8085-exec-1] logging - Transaction ID: null
+2024-03-09 14:18:28.308 ERROR [http-nio-8085-exec-1] logging - Exception occurred for URL: uri=/api/v1/monthly-summary/John.Smith;client=127.0.0.1;user=user details
+2024-03-09 14:18:28.308 ERROR [http-nio-8085-exec-1] logging - Exception message: No trainer summary found for username: John.Smith
+2024-03-09 14:18:42.306 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:18:42.307 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:20:11.741 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:20:31.266 INFO  [main] logging - Application started
+2024-03-09 14:20:55.955 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:20:55.956 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:21:23.124 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:21:43.962 INFO  [main] logging - Application started
+2024-03-09 14:22:07.000 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:22:07.000 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:24:49.061 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 5f74040e-cde6-4333-8c8f-9b15f1199926
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Method: GET
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@63716153
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@2ced37dc
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Request body: [John.Smith]
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-03-09 14:24:49.062 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-03-09 14:24:49.064 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:24:49.064 INFO  [http-nio-8085-exec-1] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: 5f74040e-cde6-4333-8c8f-9b15f1199926) ===
+2024-03-09 14:24:49.064 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-03-09 14:24:49.064 INFO  [http-nio-8085-exec-1] logging - username: John.Smith
+2024-03-09 14:24:49.197 INFO  [http-nio-8085-exec-1] logging - Result: TrainerSummary(id=65ec2a9504ecda58b1169aa2, username=John.Smith, firstName=null, lastName=null, status=false, monthlySummary=null)
+2024-03-09 14:24:49.199 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-03-09 14:24:49.199 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 5f74040e-cde6-4333-8c8f-9b15f1199926
+2024-03-09 14:24:49.199 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,TrainerSummary(id=65ec2a9504ecda58b1169aa2, username=John.Smith, firstName=null, lastName=null, status=false, monthlySummary=null),[]>
+2024-03-09 14:24:49.199 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-03-09 14:27:51.712 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Started: =====
+2024-03-09 14:27:51.716 INFO  [http-nio-8085-exec-3] logging - Transaction Id: 1657a260-6a25-499e-a6a8-1df6c0a9c33b
+2024-03-09 14:27:51.716 INFO  [http-nio-8085-exec-3] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 14:27:51.716 INFO  [http-nio-8085-exec-3] logging - Method: GET
+2024-03-09 14:27:51.716 INFO  [http-nio-8085-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@61e97498
+2024-03-09 14:27:51.717 INFO  [http-nio-8085-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@24ebe6c1
+2024-03-09 14:27:51.717 INFO  [http-nio-8085-exec-3] logging - Request body: [John.Smith]
+2024-03-09 14:27:51.717 INFO  [http-nio-8085-exec-3] logging - Query String: null
+2024-03-09 14:27:51.717 INFO  [http-nio-8085-exec-3] logging - IP: 127.0.0.1
+2024-03-09 14:27:51.717 INFO  [http-nio-8085-exec-3] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 14:27:51.718 INFO  [http-nio-8085-exec-3] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: 1657a260-6a25-499e-a6a8-1df6c0a9c33b) ===
+2024-03-09 14:27:51.718 INFO  [http-nio-8085-exec-3] logging - Parameters: 
+2024-03-09 14:27:51.718 INFO  [http-nio-8085-exec-3] logging - username: John.Smith
+2024-03-09 14:27:51.852 INFO  [http-nio-8085-exec-3] logging - Result: TrainerSummary(id=65ec2a9504ecda58b1169aa2, username=John.Smith, firstName=null, lastName=null, status=false, monthlySummary=null)
+2024-03-09 14:27:51.853 INFO  [http-nio-8085-exec-3] logging - === Service method end ===
+2024-03-09 14:27:51.853 INFO  [http-nio-8085-exec-3] logging - Transaction Id: 1657a260-6a25-499e-a6a8-1df6c0a9c33b
+2024-03-09 14:27:51.853 INFO  [http-nio-8085-exec-3] logging - Response: <200 OK OK,TrainerSummary(id=65ec2a9504ecda58b1169aa2, username=John.Smith, firstName=null, lastName=null, status=false, monthlySummary=null),[]>
+2024-03-09 14:27:51.854 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Ended =====
+2024-03-09 14:29:16.049 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:29:16.049 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:34:21.337 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:36:06.086 INFO  [main] logging - Application started
+2024-03-09 14:36:16.811 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:36:16.811 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:38:13.419 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:38:35.619 INFO  [main] logging - Application started
+2024-03-09 14:38:41.069 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:38:41.070 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:39:08.252 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:39:24.767 INFO  [main] logging - Application started
+2024-03-09 14:39:30.723 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:39:30.724 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:40:08.906 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:40:38.764 INFO  [main] logging - Application started
+2024-03-09 14:40:41.840 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:40:58.610 INFO  [main] logging - Application started
+2024-03-09 14:41:16.390 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:41:16.391 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:42:15.728 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:42:34.639 INFO  [main] logging - Application started
+2024-03-09 14:42:46.441 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:42:46.441 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.computeIfAbsent(Object, java.util.function.Function)" because the return value of "com.epamlearning.reportmicroservice.entities.TrainerSummary.getMonthlySummary()" is null
+2024-03-09 14:43:14.631 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:43:31.475 INFO  [main] logging - Application started
+2024-03-09 14:43:36.345 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.values()" because "monthlySummary" is null
+2024-03-09 14:43:36.345 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.util.Map.values()" because "monthlySummary" is null
+2024-03-09 14:44:00.502 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:44:17.597 INFO  [main] logging - Application started
+2024-03-09 14:45:22.546 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:45:40.354 INFO  [main] logging - Application started
+2024-03-09 14:46:32.335 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:46:50.618 INFO  [main] logging - Application started
+2024-03-09 14:49:41.067 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 14:49:59.101 INFO  [main] logging - Application started
+2024-03-09 14:53:33.831 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.math.BigDecimal.negate()" because the return value of "com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO.getTrainingDuration()" is null
+2024-03-09 14:53:33.831 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.math.BigDecimal.negate()" because the return value of "com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO.getTrainingDuration()" is null
+2024-03-09 14:58:00.938 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.math.BigDecimal.negate()" because the return value of "com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO.getTrainingDuration()" is null
+2024-03-09 14:58:00.939 ERROR [org.springframework.jms.JmsListenerEndpointContainer#0-1] logging - Failed with error: Cannot invoke "java.math.BigDecimal.negate()" because the return value of "com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO.getTrainingDuration()" is null
+2024-03-09 23:18:59.236 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 23:19:28.820 INFO  [main] logging - Application started
+2024-03-09 23:33:11.548 INFO  [SpringApplicationShutdownHook] logging - Application shutdown
+2024-03-09 23:33:40.529 INFO  [main] logging - Application started
+2024-03-09 23:37:48.273 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Started: =====
+2024-03-09 23:37:48.273 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 25fc7321-600b-442d-bc5b-3fad5c0fbaa3
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Method: GET
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@67f501c7
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Parameters: org.apache.catalina.util.ParameterMap@444e6be
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Request body: [John.Smith]
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - Query String: null
+2024-03-09 23:37:48.274 INFO  [http-nio-8085-exec-1] logging - IP: 127.0.0.1
+2024-03-09 23:37:48.276 INFO  [http-nio-8085-exec-1] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 23:37:48.277 INFO  [http-nio-8085-exec-1] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: 25fc7321-600b-442d-bc5b-3fad5c0fbaa3) ===
+2024-03-09 23:37:48.277 INFO  [http-nio-8085-exec-1] logging - Parameters: 
+2024-03-09 23:37:48.277 INFO  [http-nio-8085-exec-1] logging - username: John.Smith
+2024-03-09 23:37:48.396 INFO  [http-nio-8085-exec-1] logging - Result: TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})
+2024-03-09 23:37:48.398 INFO  [http-nio-8085-exec-1] logging - === Service method end ===
+2024-03-09 23:37:48.398 INFO  [http-nio-8085-exec-1] logging - Transaction Id: 25fc7321-600b-442d-bc5b-3fad5c0fbaa3
+2024-03-09 23:37:48.398 INFO  [http-nio-8085-exec-1] logging - Response: <200 OK OK,TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}}),[]>
+2024-03-09 23:37:48.399 INFO  [http-nio-8085-exec-1] logging - ===== Transaction Ended =====
+2024-03-09 23:39:48.775 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Started: =====
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Transaction Id: eff18126-ff93-4746-9916-c1ea8ae867d6
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/John.Smith
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Method: GET
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@835c5b8
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Parameters: org.apache.catalina.util.ParameterMap@4d374ada
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Request body: [John.Smith]
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - Query String: null
+2024-03-09 23:39:48.777 INFO  [http-nio-8085-exec-3] logging - IP: 127.0.0.1
+2024-03-09 23:39:48.778 INFO  [http-nio-8085-exec-3] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByUsername
+2024-03-09 23:39:48.778 INFO  [http-nio-8085-exec-3] logging - === Service method class com.epamlearning.reportmicroservice.entities.TrainerSummary findByUsername started (Transaction Id: eff18126-ff93-4746-9916-c1ea8ae867d6) ===
+2024-03-09 23:39:48.778 INFO  [http-nio-8085-exec-3] logging - Parameters: 
+2024-03-09 23:39:48.779 INFO  [http-nio-8085-exec-3] logging - username: John.Smith
+2024-03-09 23:39:48.914 INFO  [http-nio-8085-exec-3] logging - Result: TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})
+2024-03-09 23:39:48.914 INFO  [http-nio-8085-exec-3] logging - === Service method end ===
+2024-03-09 23:39:48.915 INFO  [http-nio-8085-exec-3] logging - Transaction Id: eff18126-ff93-4746-9916-c1ea8ae867d6
+2024-03-09 23:39:48.915 INFO  [http-nio-8085-exec-3] logging - Response: <200 OK OK,TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}}),[]>
+2024-03-09 23:39:48.915 INFO  [http-nio-8085-exec-3] logging - ===== Transaction Ended =====
+2024-03-09 23:40:09.489 INFO  [http-nio-8085-exec-4] logging - ===== Transaction Started: =====
+2024-03-09 23:40:09.489 INFO  [http-nio-8085-exec-4] logging - Transaction Id: 8a50ec73-f232-4c5b-84b8-8157eb8b323d
+2024-03-09 23:40:09.489 INFO  [http-nio-8085-exec-4] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/search
+2024-03-09 23:40:09.489 INFO  [http-nio-8085-exec-4] logging - Method: GET
+2024-03-09 23:40:09.489 INFO  [http-nio-8085-exec-4] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@a7ae51
+2024-03-09 23:40:09.490 INFO  [http-nio-8085-exec-4] logging - Parameters: org.apache.catalina.util.ParameterMap@7084dfab
+2024-03-09 23:40:09.490 INFO  [http-nio-8085-exec-4] logging - Request body: [John, Smith]
+2024-03-09 23:40:09.490 INFO  [http-nio-8085-exec-4] logging - Query String: firstName=John&lastName=Smith
+2024-03-09 23:40:09.490 INFO  [http-nio-8085-exec-4] logging - IP: 127.0.0.1
+2024-03-09 23:40:09.490 INFO  [http-nio-8085-exec-4] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByFirstNameAndLastName
+2024-03-09 23:40:09.492 INFO  [http-nio-8085-exec-4] logging - === Service method interface java.util.List findByFirstNameAndLastName started (Transaction Id: 8a50ec73-f232-4c5b-84b8-8157eb8b323d) ===
+2024-03-09 23:40:09.492 INFO  [http-nio-8085-exec-4] logging - Parameters: 
+2024-03-09 23:40:09.492 INFO  [http-nio-8085-exec-4] logging - firstName: John
+2024-03-09 23:40:09.492 INFO  [http-nio-8085-exec-4] logging - lastName: Smith
+2024-03-09 23:40:09.615 INFO  [http-nio-8085-exec-4] logging - Result: [TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})]
+2024-03-09 23:40:09.615 INFO  [http-nio-8085-exec-4] logging - === Service method end ===
+2024-03-09 23:40:09.615 INFO  [http-nio-8085-exec-4] logging - Transaction Id: 8a50ec73-f232-4c5b-84b8-8157eb8b323d
+2024-03-09 23:40:09.615 INFO  [http-nio-8085-exec-4] logging - Response: <200 OK OK,[TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})],[]>
+2024-03-09 23:40:09.615 INFO  [http-nio-8085-exec-4] logging - ===== Transaction Ended =====
+2024-03-09 23:42:38.196 INFO  [http-nio-8085-exec-6] logging - ===== Transaction Started: =====
+2024-03-09 23:42:38.199 INFO  [http-nio-8085-exec-6] logging - Transaction Id: 0c529f9f-8fe8-4213-b13a-379e9b60196d
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Request URL: http://localhost:8085/api/v1/monthly-summary/search
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Method: GET
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Headers: org.springframework.security.web.firewall.StrictHttpFirewall$StrictFirewalledRequest$2@6d0fa925
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Parameters: org.apache.catalina.util.ParameterMap@65bbd17d
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Request body: [John, Smith]
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Query String: firstName=John&lastName=Smith
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - IP: 127.0.0.1
+2024-03-09 23:42:38.200 INFO  [http-nio-8085-exec-6] logging - Controller: com.epamlearning.reportmicroservice.controllers.TrainerSummaryController.getByFirstNameAndLastName
+2024-03-09 23:42:38.203 INFO  [http-nio-8085-exec-6] logging - === Service method interface java.util.List findByFirstNameAndLastName started (Transaction Id: 0c529f9f-8fe8-4213-b13a-379e9b60196d) ===
+2024-03-09 23:42:38.203 INFO  [http-nio-8085-exec-6] logging - Parameters: 
+2024-03-09 23:42:38.203 INFO  [http-nio-8085-exec-6] logging - firstName: John
+2024-03-09 23:42:38.203 INFO  [http-nio-8085-exec-6] logging - lastName: Smith
+2024-03-09 23:42:38.331 INFO  [http-nio-8085-exec-6] logging - Result: [TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})]
+2024-03-09 23:42:38.332 INFO  [http-nio-8085-exec-6] logging - === Service method end ===
+2024-03-09 23:42:38.332 INFO  [http-nio-8085-exec-6] logging - Transaction Id: 0c529f9f-8fe8-4213-b13a-379e9b60196d
+2024-03-09 23:42:38.332 INFO  [http-nio-8085-exec-6] logging - Response: <200 OK OK,[TrainerSummary(id=65ec3495f5bba814cd4f8dab, username=John.Smith, firstName=John, lastName=Smith, status=true, monthlySummary={2024={MARCH=50}})],[]>
+2024-03-09 23:42:38.332 INFO  [http-nio-8085-exec-6] logging - ===== Transaction Ended =====
+2024-03-10 11:42:22.668 INFO  [SpringApplicationShutdownHook] logging - Application shutdown

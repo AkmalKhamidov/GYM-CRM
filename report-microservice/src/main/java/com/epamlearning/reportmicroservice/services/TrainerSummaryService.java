@@ -1,9 +1,14 @@
 package com.epamlearning.reportmicroservice.services;
 
+import com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO;
 import com.epamlearning.reportmicroservice.entities.TrainerSummary;
-import org.springframework.jms.listener.adapter.JmsResponse;
-import org.springframework.messaging.Message;
+import com.epamlearning.reportmicroservice.entities.TrainerWorkload;
+import com.epamlearning.reportmicroservice.entities.enums.ActionType;
+
+import java.util.List;
 
 public interface TrainerSummaryService {
-  TrainerSummary calculate(String username);
+  List<TrainerSummary> findByFirstNameAndLastName(String firstName, String lastName);
+  TrainerSummary findByUsername(String username);
+  TrainerSummary update(TrainerWorkloadRequestDTO trainerWorkload);
 }

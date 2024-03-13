@@ -1,10 +1,11 @@
 package com.epamlearning.reportmicroservice.services;
 
+import com.epamlearning.reportmicroservice.dtos.TrainerWorkloadRequestDTO;
 import com.epamlearning.reportmicroservice.entities.TrainerSummary;
-import com.epamlearning.reportmicroservice.entities.TrainerWorkload;
+import com.epamlearning.reportmicroservice.entities.enums.ActionType;
 import com.epamlearning.reportmicroservice.exceptions.NotFoundException;
+import com.epamlearning.reportmicroservice.repositories.TrainerSummaryRepository;
 import com.epamlearning.reportmicroservice.services.impl.TrainerSummaryServiceImpl;
-import com.epamlearning.reportmicroservice.services.impl.TrainerWorkloadServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,16 +14,16 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import java.time.YearMonth;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class TrainerSummaryServiceImplTest {
+class TrainerSummaryServiceImplTest {
 
     @Mock
-    private TrainerWorkloadServiceImpl trainerWorkloadService;
+    private TrainerSummaryRepository trainerSummaryRepository;
 
     @InjectMocks
     private TrainerSummaryServiceImpl trainerSummaryService;
@@ -33,55 +34,124 @@ public class TrainerSummaryServiceImplTest {
     }
 
     @Test
-    void calculate_ValidUsername_ReturnsTrainerSummary() {
+    void findByFirstNameAndLastName_ValidInput_ReturnsTrainerSummaryList() {
         // Arrange
-        String username = "testUser";
-        LocalDate now = LocalDate.now();
-        TrainerWorkload workload1 = new TrainerWorkload();
-        workload1.setFirstName("John");
-        workload1.setLastName("Doe");
-        workload1.setUsername(username);
-        workload1.setActive(true);
-        workload1.setTrainingDate(now.minusMonths(1));
-        workload1.setTrainingDuration(BigDecimal.valueOf(1.5));
-
-        TrainerWorkload workload2 = new TrainerWorkload();
-        workload2.setFirstName("John");
-        workload2.setLastName("Doe");
-        workload2.setUsername(username);
-        workload2.setActive(true);
-        workload2.setTrainingDate(now.minusMonths(1));
-        workload2.setTrainingDuration(BigDecimal.valueOf(2.5));
-
-        List<TrainerWorkload> workloads = List.of(workload1, workload2);
-        when(trainerWorkloadService.getAllByUsername(username)).thenReturn(workloads);
+        String firstName = "John";
+        String lastName = "Doe";
+        List<TrainerSummary> expectedList = Collections.singletonList(new TrainerSummary());
+        when(trainerSummaryRepository.findByFirstNameAndLastName(firstName, lastName)).thenReturn(expectedList);
 
         // Act
-        TrainerSummary summary = trainerSummaryService.calculate(username);
+        List<TrainerSummary> resultList = trainerSummaryService.findByFirstNameAndLastName(firstName, lastName);
 
         // Assert
-        assertNotNull(summary);
-        assertEquals("John", summary.getFirstName());
-        assertEquals("Doe", summary.getLastName());
-        assertTrue(summary.isStatus());
-        assertEquals(username, summary.getUsername());
-
-        Map<String, Map<String, BigDecimal>> monthlySummary = summary.getMonthlySummary();
-        assertNotNull(monthlySummary);
-        assertTrue(monthlySummary.containsKey(String.valueOf(now.getYear())));
-        assertTrue(monthlySummary.get(String.valueOf(now.getYear())).containsKey(now.minusMonths(1).getMonth().toString()));
-
-        BigDecimal totalDuration = monthlySummary.get(String.valueOf(now.getYear())).get(now.minusMonths(1).getMonth().toString());
-        assertEquals(BigDecimal.valueOf(4.0), totalDuration);
+        assertEquals(expectedList, resultList);
     }
 
     @Test
-    void calculate_NoWorkloadFound_ThrowsNotFoundException() {
-        // Arrange
-        String username = "nonExistentUser";
-        when(trainerWorkloadService.getAllByUsername(username)).thenReturn(List.of());
-
+    void findByFirstNameAndLastName_NullInput_ThrowsNotFoundException() {
         // Act & Assert
-        assertThrows(NotFoundException.class, () -> trainerSummaryService.calculate(username));
+        assertThrows(NotFoundException.class, () -> trainerSummaryService.findByFirstNameAndLastName(null, null));
+    }
+
+    @Test
+    void findByUsername_ValidInput_ReturnsTrainerSummary() {
+        // Arrange
+        String username = "testUsername";
+        TrainerSummary expectedTrainerSummary = new TrainerSummary();
+        when(trainerSummaryRepository.findByUsername(username)).thenReturn(Optional.of(expectedTrainerSummary));
+
+        // Act
+        TrainerSummary resultTrainerSummary = trainerSummaryService.findByUsername(username);
+
+        // Assert
+        assertEquals(expectedTrainerSummary, resultTrainerSummary);
+    }
+
+    @Test
+    void findByUsername_NullInput_ThrowsNotFoundException() {
+        // Act & Assert
+        assertThrows(NotFoundException.class, () -> trainerSummaryService.findByUsername(null));
+    }
+
+    @Test
+    void update_AddAction_ReturnsUpdatedTrainerSummary() {
+        // Arrange
+        TrainerWorkloadRequestDTO requestDTO = new TrainerWorkloadRequestDTO();
+        requestDTO.setUsername("testUsername");
+        requestDTO.setFirstName("John");
+        requestDTO.setLastName("Doe");
+        requestDTO.setActive(true);
+        requestDTO.setTrainingDate(LocalDate.now());
+        requestDTO.setTrainingDuration(BigDecimal.TEN);
+        requestDTO.setActionType(ActionType.ADD);
+
+        TrainerSummary existingTrainerSummary = new TrainerSummary();
+        existingTrainerSummary.setUsername("testUsername");
+        Map<Integer, Map<String, BigDecimal>> monthlySummary = new HashMap<>();
+        monthlySummary.put(YearMonth.now().getYear(), new HashMap<>(Map.of(YearMonth.now().getMonth().toString(), BigDecimal.valueOf(20))));
+        existingTrainerSummary.setMonthlySummary(monthlySummary);
+
+        when(trainerSummaryRepository.findByUsername("testUsername")).thenReturn(Optional.of(existingTrainerSummary));
+        when(trainerSummaryRepository.save(any(TrainerSummary.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TrainerSummary updatedTrainerSummary = trainerSummaryService.update(requestDTO);
+
+        // Assert
+        assertNotNull(updatedTrainerSummary);
+        assertEquals(BigDecimal.valueOf(30), updatedTrainerSummary.getMonthlySummary().get(YearMonth.now().getYear()).get(YearMonth.now().getMonth().toString()));
+    }
+
+    @Test
+    void update_DeleteAction_ReturnsUpdatedTrainerSummary() {
+        // Arrange
+        TrainerWorkloadRequestDTO requestDTO = new TrainerWorkloadRequestDTO();
+        requestDTO.setUsername("testUsername");
+        requestDTO.setFirstName("John");
+        requestDTO.setLastName("Doe");
+        requestDTO.setActive(true);
+        requestDTO.setTrainingDate(LocalDate.now());
+        requestDTO.setTrainingDuration(BigDecimal.TEN);
+        requestDTO.setActionType(ActionType.DELETE);
+
+        TrainerSummary existingTrainerSummary = new TrainerSummary();
+        existingTrainerSummary.setUsername("testUsername");
+        Map<Integer, Map<String, BigDecimal>> monthlySummary = new HashMap<>();
+        monthlySummary.put(YearMonth.now().getYear(), new HashMap<>(Map.of(YearMonth.now().getMonth().toString(), BigDecimal.valueOf(20))));
+        existingTrainerSummary.setMonthlySummary(monthlySummary);
+
+        when(trainerSummaryRepository.findByUsername("testUsername")).thenReturn(Optional.of(existingTrainerSummary));
+        when(trainerSummaryRepository.save(any(TrainerSummary.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TrainerSummary updatedTrainerSummary = trainerSummaryService.update(requestDTO);
+
+        // Assert
+        assertNotNull(updatedTrainerSummary);
+        assertEquals(BigDecimal.TEN, updatedTrainerSummary.getMonthlySummary().get(YearMonth.now().getYear()).get(YearMonth.now().getMonth().toString()));
+    }
+
+    @Test
+    void update_NoExistingTrainerSummary_CreatesNewTrainerSummary() {
+        // Arrange
+        TrainerWorkloadRequestDTO requestDTO = new TrainerWorkloadRequestDTO();
+        requestDTO.setUsername("testUsername");
+        requestDTO.setFirstName("John");
+        requestDTO.setLastName("Doe");
+        requestDTO.setActive(true);
+        requestDTO.setTrainingDate(LocalDate.now());
+        requestDTO.setTrainingDuration(BigDecimal.TEN);
+        requestDTO.setActionType(ActionType.ADD);
+
+        when(trainerSummaryRepository.findByUsername("testUsername")).thenReturn(Optional.empty());
+        when(trainerSummaryRepository.save(any(TrainerSummary.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        TrainerSummary createdTrainerSummary = trainerSummaryService.update(requestDTO);
+
+        // Assert
+        assertNotNull(createdTrainerSummary);
+        assertEquals(BigDecimal.TEN, createdTrainerSummary.getMonthlySummary().get(YearMonth.now().getYear()).get(YearMonth.now().getMonth().toString()));
     }
 }
